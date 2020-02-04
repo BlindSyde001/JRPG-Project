@@ -12,7 +12,6 @@ public class BattleManager : MonoBehaviour
     public List<GameObject> heroPos;
     public List<GameObject> enemyPos;
     #endregion
-    public GameObject capsule;
 
     //UPDATES
     private void Awake()

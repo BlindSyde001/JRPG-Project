@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
     [SerializeField]
     public Transform referenceDirection;
     private CharacterController _cc;
+    private SystemInput _systemInput;
     public float slopeForceRayLength;
     public float slopeForce;
     #endregion
@@ -23,30 +24,35 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private float turnSpeed = 20;
 
-    private Vector3 input;
+    public Vector3 input;
     private float angle;
     private Quaternion targetRotation;
     private Quaternion refQuat;
     #endregion
+
     //UPDATES
     private void Start()
     {
+        _systemInput = FindObjectOfType<SystemInput>();
         cam = Camera.main.transform;
         _cc = this.GetComponent<CharacterController>();
     }
     private void FixedUpdate()
     {
-        if (FindObjectOfType<Interaction>().convoCont)                            //1. If talking, don't move
+        if (FindObjectOfType<Interaction>().convoCont)                            // 1. If talking, don't move
         {
             transform.LookAt(FindObjectOfType<Interaction>().NPC.transform);
             return;
         }
 
-        getInput();                                                               //2. Which input is being pressed
+        if (_systemInput.isMenuOpen == true)                                      // Also 1. If in menu, don't move
+            return;
+
+        //getInput();                                                             // 2. Which input is being pressed
         if (input.sqrMagnitude >= Mathf.Epsilon)
         {
-            calculateDirection();                                                 //3. Which way is character facing
-            rotate();                                                             //4. Spin to movement direction
+            calculateDirection();                                                 // 3. Which way is character facing
+            rotate();                                                             // 4. Spin to movement direction
             Move();
         }
         else
@@ -57,13 +63,6 @@ public class Movement : MonoBehaviour
 
     //METHODS
     #region Rotation & Movement Methods
-    void getInput()
-    {
-        input.x = Input.GetAxisRaw("Horizontal");
-        input.z = Input.GetAxisRaw("Vertical");
-        print(input);
-    }
-
     void calculateDirection()
     {
         input = refQuat * input;

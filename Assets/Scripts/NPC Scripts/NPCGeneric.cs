@@ -18,13 +18,18 @@ public class NPCGeneric : MonoBehaviour
     public List<Transform> patrolPoints;
     private int currentPos = 0;
     #endregion
+    #region Look Variables
+    private Quaternion _LookRotation;
+    private Vector3 _direction;
+    public float _RotationSpeed;
+    #endregion
 
     //UPDATES
     private void FixedUpdate()
     {
         if (FindObjectOfType<Interaction>().convoCont && inTalkingRange)          //1. If talking, don't move
         {
-            transform.LookAt(FindObjectOfType<Movement>().transform);
+            LookAt();
             return;
         }
         if (!coroutineLoop && patrolPoints.Count != 0)
@@ -43,6 +48,12 @@ public class NPCGeneric : MonoBehaviour
                 currentPos = 0;
             }
         }
+    }
+    private void LookAt()
+    {
+        _direction = (FindObjectOfType<Movement>().transform.position - transform.position).normalized;
+        _LookRotation = Quaternion.LookRotation(_direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, _LookRotation, Time.deltaTime * _RotationSpeed);
     }
     private void OnTriggerEnter(Collider other)
     {
