@@ -66,4 +66,9 @@ public class SystemInput : MonoBehaviour
             isMenuOpen = false;
         }
     }
+
+    public void MenuItemAnim(string x)
+    {
+        anim.SetBool(x, true);
+    }
 }

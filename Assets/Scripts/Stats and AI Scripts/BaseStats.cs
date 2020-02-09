@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class StatsPlayer : MonoBehaviour
+public class BaseStats : MonoBehaviour
 {
     //VARIABLES
+    public string CharacterName;
+    public List<Spells> spells;
+
     [Header("Level")]
     [Header("MAIN STATS")]
     public int level;                   //Level used to increase stats. range from 1 - 100
@@ -89,22 +92,42 @@ public class StatsPlayer : MonoBehaviour
     public bool dampen;                 //Decreases Magical Damage Taken
 
     //METHODS
-    #region Basic Commands
-    public void Attack()
+    #region Actions in Battle
+    public void Hurt(int amount)        //Damage taken by character
     {
-
+        int damageAmount = Random.Range(0, 1) * (amount - vitality);
+        currentHP = Mathf.Max(currentHP - damageAmount, 0);              // No going below 0 hp
+        if(currentHP == 0)
+        {
+            Die();
+        }
     }
-    public void Ability()
+    public void Heal(int amount)        // Healing taken by character
     {
-
+        int healAmount = amount;
+        currentHP = Mathf.Min(currentHP + healAmount, maxHP);   // No overhealing
     }
-    public void Magic()
+    public void Defend()               // Increase in defence for a turn
     {
-
+        vitality += (int)(vitality * .4f);
+        Debug.Log("Increased Defence");
     }
-    public void Item()
+    public bool CastSpell(Spells spell, BaseStats targetCharacter)
     {
+        bool successful = currentMP >= spell._SpellManaCost;   // Returns if you have enough mana to cast the spell
 
+        if (successful)
+        {
+            Spells spellToCast = Instantiate<Spells>(spell, transform.position, Quaternion.identity);     // Create Spell effect in game
+            currentMP -= spell._SpellManaCost;               // Because successful, take away mana cost
+            spellToCast.Cast(targetCharacter);
+        }
+
+        return successful;
+    }
+    public virtual void Die()                  // Go into die state
+    {
+        Destroy(this.gameObject);
     }
     #endregion
     #region Debuff

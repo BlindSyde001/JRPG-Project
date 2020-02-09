@@ -29,36 +29,38 @@ public class Movement : MonoBehaviour
     private Quaternion targetRotation;
     private Quaternion refQuat;
     #endregion
+    #region Look Variables
+    private Quaternion _LookRotation;
+    private Vector3 _direction;
+    public float _RotationSpeed;
+    #endregion
 
     //UPDATES
     private void Start()
     {
         _systemInput = FindObjectOfType<SystemInput>();
-        cam = Camera.main.transform;
         _cc = this.GetComponent<CharacterController>();
+        cam = Camera.main.transform;
     }
     private void FixedUpdate()
     {
         if (FindObjectOfType<Interaction>().convoCont)                            // 1. If talking, don't move
         {
-            transform.LookAt(FindObjectOfType<Interaction>().NPC.transform);
+            LookAt();
             return;
         }
 
         if (_systemInput.isMenuOpen == true)                                      // Also 1. If in menu, don't move
             return;
 
-        //getInput();                                                             // 2. Which input is being pressed
         if (input.sqrMagnitude >= Mathf.Epsilon)
         {
             calculateDirection();                                                 // 3. Which way is character facing
             rotate();                                                             // 4. Spin to movement direction
-            Move();
         }
         else
-        {
-            refQuat = referenceDirection.rotation;
-        }
+        { refQuat = referenceDirection.rotation; }
+        Move();
     }
 
     //METHODS
@@ -85,4 +87,11 @@ public class Movement : MonoBehaviour
         _cc.Move(new Vector3(input.x * velocity * Time.deltaTime, -1 * velocity * Time.deltaTime, input.z * velocity * Time.deltaTime));
     }
     #endregion
+    private void LookAt()
+    {
+        _direction = (FindObjectOfType<Interaction>().NPC.transform.position - transform.position).normalized;
+        _direction.y = 0;
+        _LookRotation = Quaternion.LookRotation(_direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, _LookRotation, Time.deltaTime * _RotationSpeed);
+    }
 }

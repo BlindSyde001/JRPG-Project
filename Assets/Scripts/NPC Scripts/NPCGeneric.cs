@@ -13,10 +13,10 @@ public class NPCGeneric : MonoBehaviour
     #region Patrol Variables
     [SerializeField]
     private float waitTime = 0;
-    private bool coroutineLoop = false;
     private bool inTalkingRange = false;
     public List<Transform> patrolPoints;
     private int currentPos = 0;
+    public float speed;
     #endregion
     #region Look Variables
     private Quaternion _LookRotation;
@@ -32,14 +32,13 @@ public class NPCGeneric : MonoBehaviour
             LookAt();
             return;
         }
-        if (!coroutineLoop && patrolPoints.Count != 0)
-            MovePattern();
+        //if (patrolPoints.Count != 0)
+        //    MovePattern();
     }
 
     //METHODS
     private void MovePattern()                                             //Moving between one point and another
     {
-        coroutineLoop = true;
         if(Vector3.Distance(transform.position, patrolPoints[currentPos].position) < 2)
         {
             currentPos++;
@@ -48,10 +47,16 @@ public class NPCGeneric : MonoBehaviour
                 currentPos = 0;
             }
         }
+        Vector3 _Pdirection = transform.position - patrolPoints[currentPos].position;
+        _Pdirection.y = 0;
+        Quaternion _PLookRotation = Quaternion.LookRotation(_Pdirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, _PLookRotation, Time.deltaTime * _RotationSpeed);
+        transform.position += transform.forward * Time.deltaTime * speed;
     }
     private void LookAt()
     {
         _direction = (FindObjectOfType<Movement>().transform.position - transform.position).normalized;
+        _direction.y = 0;
         _LookRotation = Quaternion.LookRotation(_direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, _LookRotation, Time.deltaTime * _RotationSpeed);
     }

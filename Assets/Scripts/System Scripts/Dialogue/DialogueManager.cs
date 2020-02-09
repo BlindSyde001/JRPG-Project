@@ -10,7 +10,6 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI chatText;
     public Queue<string> sentences;
-    public bool _TurnToFace = false;
 
     //UPDATES
     private void Start()
@@ -21,8 +20,6 @@ public class DialogueManager : MonoBehaviour
     //METHODS
     public void StartDialogue(NPCGeneric NPC)
     {
-        if(_TurnToFace)
-        { }
         nameText.text = NPC._name;                          // Set the name.
         sentences.Clear();                                  // Clear all sentence fields.
         foreach (string sentence in NPC.sentences)
@@ -55,10 +52,5 @@ public class DialogueManager : MonoBehaviour
     {
         FindObjectOfType<Interaction>().anim.SetBool("IsOpen", false);        // Play Message box close Anim.
         FindObjectOfType<Interaction>().convoCont = false;                    // Reset bool for next use.
-    }
-
-    public void FacePlayer()
-    {
-
     }
 }
