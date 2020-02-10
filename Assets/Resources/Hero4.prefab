@@ -110,22 +110,22 @@ MonoBehaviour:
   CharacterName: Abdullah
   spells:
   - {fileID: 256799025081099546, guid: a99b1e939b1f1e74ea3721aa438e788f, type: 3}
-  level: 0
-  currentXP: 0
-  nextLevelXP: 0
-  strength: 0
-  intellect: 0
-  piety: 0
-  maxHP: 0
-  maxMP: 0
-  currentHP: 0
-  currentMP: 0
-  vitality: 0
-  spirit: 0
-  accuracy: 0
-  evasion: 0
-  agility: 0
-  luck: 0
+  level: 8
+  currentXP: 22
+  nextLevelXP: 90
+  strength: 9
+  intellect: 9
+  piety: 7
+  maxHP: 150
+  maxMP: 70
+  currentHP: 144
+  currentMP: 46
+  vitality: 10
+  spirit: 10
+  accuracy: 23
+  evasion: 14
+  agility: 10
+  luck: 10
   fire: 0
   ice: 0
   lightning: 0
@@ -171,3 +171,5 @@ MonoBehaviour:
   mBarrier: 0
   shield: 0
   dampen: 0
+  characterPortrait: {fileID: 0}
+  currentLimit: 0

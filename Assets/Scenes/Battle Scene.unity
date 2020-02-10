@@ -359,7 +359,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 43030294}
-  - component: {fileID: 43030295}
   m_Layer: 0
   m_Name: Hero1B
   m_TagString: Untagged
@@ -375,24 +374,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43030293}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0.5, z: -3}
+  m_LocalPosition: {x: -2, y: 0.5, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 706411782}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &43030295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 43030293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6faffa673e6515b4088dd2f0a8e8d1fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &73658169
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,6 +389,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 73658170}
+  - component: {fileID: 73658172}
+  - component: {fileID: 73658171}
   m_Layer: 0
   m_Name: BATTLE DATA
   m_TagString: Untagged
@@ -423,6 +412,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &73658171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73658169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c164bf7a4e8be9145915732ca7becca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partyLineup:
+  - Hero1
+  - Hero2
+  - Hero3
+  - Hero4
+  enemyLineup:
+  - Cube
+  - Sphere
+  - Cube
+  - Cube
+  - Sphere
+  positionFront: 01000001
+--- !u!114 &73658172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73658169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0e771213ce41f4d89525b117709ad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CharacterPanels:
+  - {fileID: 348190095}
+  - {fileID: 840613039}
+  - {fileID: 209836075}
+  - {fileID: 138184465}
+  heroPosFront:
+  - {fileID: 2062387597}
+  - {fileID: 1693210248}
+  - {fileID: 1385755990}
+  - {fileID: 1549387700}
+  heroPosBack:
+  - {fileID: 43030293}
+  - {fileID: 295041190}
+  - {fileID: 1005627140}
+  - {fileID: 1244190091}
+  enemyPos:
+  - {fileID: 1155331078}
+  - {fileID: 2127993588}
+  - {fileID: 1093793481}
+  - {fileID: 747005678}
+  - {fileID: 1322273810}
 --- !u!1 &87409606
 GameObject:
   m_ObjectHideFlags: 0
@@ -2095,7 +2141,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 295041191}
-  - component: {fileID: 295041192}
   m_Layer: 0
   m_Name: Hero2B
   m_TagString: Untagged
@@ -2111,24 +2156,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295041190}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.5, z: -3}
+  m_LocalPosition: {x: 2, y: 0.5, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 706411782}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &295041192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 295041190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6faffa673e6515b4088dd2f0a8e8d1fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &305854975
 GameObject:
   m_ObjectHideFlags: 0
@@ -4590,7 +4623,7 @@ Transform:
   m_GameObject: {fileID: 688437096}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 609136824}
   m_RootOrder: 0
@@ -5041,7 +5074,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 747005678}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 0.5, z: 3}
+  m_LocalPosition: {x: 2.5, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 427536941}
@@ -5837,7 +5870,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1005627141}
-  - component: {fileID: 1005627142}
   m_Layer: 0
   m_Name: Hero3B
   m_TagString: Untagged
@@ -5853,24 +5885,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1005627140}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 0.5, z: -3}
+  m_LocalPosition: {x: -6, y: 0.5, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 706411782}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1005627142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1005627140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6faffa673e6515b4088dd2f0a8e8d1fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1009219091
 GameObject:
   m_ObjectHideFlags: 0
@@ -6478,7 +6498,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1093793481}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 0.5, z: 2}
+  m_LocalPosition: {x: -5, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 427536941}
@@ -6663,7 +6683,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1155331078}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 427536941}
@@ -7060,7 +7080,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1244190092}
-  - component: {fileID: 1244190093}
   m_Layer: 0
   m_Name: Hero4B
   m_TagString: Untagged
@@ -7076,24 +7095,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244190091}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 0.5, z: -3}
+  m_LocalPosition: {x: 6, y: 0.5, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 706411782}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1244190093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1244190091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6faffa673e6515b4088dd2f0a8e8d1fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1258294718
 GameObject:
   m_ObjectHideFlags: 0
@@ -7803,7 +7810,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322273810}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 0.5, z: 3}
+  m_LocalPosition: {x: -2.5, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 427536941}
@@ -8119,7 +8126,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1385755991}
-  - component: {fileID: 1385755992}
   m_Layer: 0
   m_Name: Hero3A
   m_TagString: Untagged
@@ -8135,24 +8141,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1385755990}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 0.5, z: -2}
+  m_LocalPosition: {x: -6, y: 0.5, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 706411782}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1385755992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385755990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6faffa673e6515b4088dd2f0a8e8d1fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1394290098
 GameObject:
   m_ObjectHideFlags: 0
@@ -9062,7 +9056,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1549387701}
-  - component: {fileID: 1549387702}
   m_Layer: 0
   m_Name: Hero4A
   m_TagString: Untagged
@@ -9078,24 +9071,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1549387700}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 0.5, z: -2}
+  m_LocalPosition: {x: 6, y: 0.5, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 706411782}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1549387702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1549387700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6faffa673e6515b4088dd2f0a8e8d1fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1571291786
 GameObject:
   m_ObjectHideFlags: 0
@@ -9939,7 +9920,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1693210249}
-  - component: {fileID: 1693210250}
   m_Layer: 0
   m_Name: Hero2A
   m_TagString: Untagged
@@ -9955,24 +9935,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693210248}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.5, z: -2}
+  m_LocalPosition: {x: 2, y: 0.5, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 706411782}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1693210250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1693210248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6faffa673e6515b4088dd2f0a8e8d1fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1720968370
 GameObject:
   m_ObjectHideFlags: 0
@@ -11897,7 +11865,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2062387598}
-  - component: {fileID: 2062387599}
   m_Layer: 0
   m_Name: Hero1A
   m_TagString: Untagged
@@ -11913,24 +11880,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062387597}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0.5, z: -2}
+  m_LocalPosition: {x: -2, y: 0.5, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 706411782}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2062387599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2062387597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6faffa673e6515b4088dd2f0a8e8d1fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2078995799
 GameObject:
   m_ObjectHideFlags: 0
@@ -12110,7 +12065,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127993588}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 0.5, z: 2}
+  m_LocalPosition: {x: 5, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 427536941}

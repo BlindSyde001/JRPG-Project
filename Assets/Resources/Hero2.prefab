@@ -111,22 +111,22 @@ MonoBehaviour:
   spells:
   - {fileID: 256799025081099546, guid: a99b1e939b1f1e74ea3721aa438e788f, type: 3}
   - {fileID: 9159507565868914965, guid: c25966651e373eb4f91cd7b27192947f, type: 3}
-  level: 0
-  currentXP: 0
-  nextLevelXP: 0
-  strength: 0
-  intellect: 0
-  piety: 0
-  maxHP: 0
-  maxMP: 0
-  currentHP: 0
-  currentMP: 0
-  vitality: 0
-  spirit: 0
-  accuracy: 0
-  evasion: 0
-  agility: 0
-  luck: 0
+  level: 12
+  currentXP: 30
+  nextLevelXP: 400
+  strength: 3
+  intellect: 15
+  piety: 9
+  maxHP: 100
+  maxMP: 200
+  currentHP: 80
+  currentMP: 150
+  vitality: 5
+  spirit: 16
+  accuracy: 20
+  evasion: 4
+  agility: 3
+  luck: 10
   fire: 0
   ice: 0
   lightning: 0
@@ -172,3 +172,5 @@ MonoBehaviour:
   mBarrier: 0
   shield: 0
   dampen: 0
+  characterPortrait: {fileID: 0}
+  currentLimit: 0

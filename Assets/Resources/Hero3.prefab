@@ -110,22 +110,22 @@ MonoBehaviour:
   CharacterName: Bob
   spells:
   - {fileID: 9159507565868914965, guid: c25966651e373eb4f91cd7b27192947f, type: 3}
-  level: 0
-  currentXP: 0
-  nextLevelXP: 0
-  strength: 0
-  intellect: 0
-  piety: 0
-  maxHP: 0
-  maxMP: 0
-  currentHP: 0
-  currentMP: 0
-  vitality: 0
-  spirit: 0
-  accuracy: 0
-  evasion: 0
-  agility: 0
-  luck: 0
+  level: 15
+  currentXP: 70
+  nextLevelXP: 650
+  strength: 22
+  intellect: 15
+  piety: 3
+  maxHP: 350
+  maxMP: 100
+  currentHP: 177
+  currentMP: 56
+  vitality: 22
+  spirit: 15
+  accuracy: 32
+  evasion: 15
+  agility: 22
+  luck: 18
   fire: 0
   ice: 0
   lightning: 0
@@ -171,3 +171,5 @@ MonoBehaviour:
   mBarrier: 0
   shield: 0
   dampen: 0
+  characterPortrait: {fileID: 0}
+  currentLimit: 0
