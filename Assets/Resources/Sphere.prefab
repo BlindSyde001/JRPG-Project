@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b5a018600148834fa4be321427f59f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterName: 
+  CharacterName: Bandit
   spells: []
   level: 0
   currentXP: 0

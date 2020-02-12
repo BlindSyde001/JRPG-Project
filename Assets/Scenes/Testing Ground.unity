@@ -6318,8 +6318,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c164bf7a4e8be9145915732ca7becca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partyLineup: []
+  partyLineup:
+  - 
+  - 
+  - 
+  - 
   enemyLineup: []
+  positionFront: 00000000
 --- !u!1 &783373231
 GameObject:
   m_ObjectHideFlags: 0
