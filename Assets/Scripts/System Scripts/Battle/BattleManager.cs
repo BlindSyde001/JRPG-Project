@@ -11,6 +11,7 @@ public class BattleManager : MonoBehaviour
     private GameManager _gameManager;
     public List<GameObject> _CharacterPanels;      // The UI components showing the stats of party members
     public List<PartyMember> _MembersInBattle;     // Stats scripts of whoever is currently in the battle
+    public List<Enemy> _EnemiesInBattle;           // Stats Scripts of The enemies currently in the battle
     #endregion
     #region Positions
     public List<GameObject> heroPosFront;
@@ -23,6 +24,7 @@ public class BattleManager : MonoBehaviour
     {
         _gameManager = FindObjectOfType<GameManager>();
     }
+
     private void Start()
     {
         if (_gameManager == null)
@@ -31,6 +33,10 @@ public class BattleManager : MonoBehaviour
         InstantiateUI();
     }
 
+    private void Update()
+    {
+
+    }
     //METHODS
     #region Start Of Game
     private void SpawnCharacters()
@@ -77,26 +83,29 @@ public class BattleManager : MonoBehaviour
             if(_gameManager.enemyLineup[i] != "")
             {
                 // Generate Enemy Model
-                Instantiate(Resources.Load(_gameManager.enemyLineup[i]) as GameObject,
+                GameObject instantiatedEnemy = Instantiate(Resources.Load(_gameManager.enemyLineup[i]) as GameObject,
                     new Vector3(enemyPos[i].transform.position.x,
                     enemyPos[i].transform.position.y + 0.5f,
                     enemyPos[i].transform.position.z),
                     enemyPos[i].transform.rotation);
+
+                // Add Enemies to active battle list
+                _EnemiesInBattle.Add(instantiatedEnemy.GetComponent<Enemy>());
+                print(_gameManager.enemyLineup[i] + " added!");
             }
         }
     }
     private void InstantiateUI()
     {
-        for(int i = 0; i < _gameManager.partyLineup.Count; i++)         // Cycle trhough Party List
+        // Set up the UI to represent the Active Party Members in the battle
+        for(int i = 0; i < _MembersInBattle.Count; i++)                   // Cycle trhough Party List
         {
-            if(_gameManager.partyLineup[i] != "")                       // If there is a party member
-            {
-                // Set Name CharacterPanels[i].Find("Hero Image").Sprite = 
+                _CharacterPanels[i].SetActive(true);                      // Turn on the UI Component
+                // Set Name
                 // Set Image
                 // Set HP UI text and visual
                 // Set MP Ui Text and visual
                 // Set Limit visual
-            }
         }
     }
     #endregion
