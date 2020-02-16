@@ -16,6 +16,12 @@ public class PartyMember : BaseStats
     #endregion
 
     //METHODS
+
+    public void Defend()                      // Increase in defence for a turn
+    {
+        vitality += (int)(vitality * .4f);
+        Debug.Log("Increased Defence");
+    }
     public override void Die()
     {
         base.Die();

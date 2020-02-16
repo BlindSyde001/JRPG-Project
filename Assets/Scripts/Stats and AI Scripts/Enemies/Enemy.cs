@@ -12,7 +12,7 @@ public class Enemy : BaseStats
         switch(dieRoll)
         {
             case 0:
-                Defend();
+                //Defend();
                 break;
 
             case 1:
@@ -21,7 +21,7 @@ public class Enemy : BaseStats
                 {
                     // Heal friendly enemy
                 }
-                if(!CastSpell(spellToCast, null))
+                if(!CastMagic(spellToCast, null))
                 {
                     //attack
                 }

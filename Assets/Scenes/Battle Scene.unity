@@ -268,6 +268,387 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18889709}
   m_CullTransparentMesh: 0
+--- !u!1 &41519102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 41519108}
+  - component: {fileID: 41519107}
+  - component: {fileID: 41519106}
+  - component: {fileID: 41519105}
+  - component: {fileID: 41519104}
+  - component: {fileID: 41519103}
+  m_Layer: 0
+  m_Name: Transferring Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &41519103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41519102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87693ce67cc1b749848e1421637ffb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterName: Hero3
+  spells:
+  - {fileID: 256799025081099546, guid: a99b1e939b1f1e74ea3721aa438e788f, type: 3}
+  _ActionCharge: 0
+  level: 8
+  currentXP: 22
+  nextLevelXP: 90
+  strength: 9
+  intellect: 9
+  piety: 7
+  maxHP: 150
+  maxMP: 70
+  currentHP: 144
+  currentMP: 46
+  vitality: 10
+  spirit: 10
+  accuracy: 23
+  evasion: 14
+  agility: 10
+  luck: 10
+  fire: 0
+  ice: 0
+  lightning: 0
+  water: 0
+  earth: 0
+  wind: 0
+  shadow: 0
+  holy: 0
+  fireResist: 0
+  iceResist: 0
+  lightningResist: 0
+  waterResist: 0
+  earthResist: 0
+  windResist: 0
+  shadowResist: 0
+  lightResist: 0
+  petrify: 0
+  taint: 0
+  slow: 0
+  stop: 0
+  frenzy: 0
+  confusion: 0
+  silence: 0
+  condemn: 0
+  poison: 0
+  paralyzed: 0
+  deathstrike: 0
+  petrificationResist: 0
+  taintResist: 0
+  slowResist: 0
+  stopResist: 0
+  frenzyResist: 0
+  confusionResist: 0
+  silenceResist: 0
+  condemnResist: 0
+  poisonResist: 0
+  paralysisResist: 0
+  deathstrikeResist: 0
+  zeal: 0
+  mastery: 0
+  haste: 0
+  barrier: 0
+  mBarrier: 0
+  shield: 0
+  dampen: 0
+  characterPortrait: {fileID: 21300000, guid: eb9aaa8acd367b64c988e72fac7b5e25, type: 3}
+  currentLimit: 0
+--- !u!114 &41519104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41519102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87693ce67cc1b749848e1421637ffb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterName: Hero2
+  spells:
+  - {fileID: 9159507565868914965, guid: c25966651e373eb4f91cd7b27192947f, type: 3}
+  _ActionCharge: 0
+  level: 15
+  currentXP: 70
+  nextLevelXP: 650
+  strength: 22
+  intellect: 15
+  piety: 3
+  maxHP: 350
+  maxMP: 100
+  currentHP: 177
+  currentMP: 56
+  vitality: 22
+  spirit: 15
+  accuracy: 32
+  evasion: 15
+  agility: 22
+  luck: 18
+  fire: 0
+  ice: 0
+  lightning: 0
+  water: 0
+  earth: 0
+  wind: 0
+  shadow: 0
+  holy: 0
+  fireResist: 0
+  iceResist: 0
+  lightningResist: 0
+  waterResist: 0
+  earthResist: 0
+  windResist: 0
+  shadowResist: 0
+  lightResist: 0
+  petrify: 0
+  taint: 0
+  slow: 0
+  stop: 0
+  frenzy: 0
+  confusion: 0
+  silence: 0
+  condemn: 0
+  poison: 0
+  paralyzed: 0
+  deathstrike: 0
+  petrificationResist: 0
+  taintResist: 0
+  slowResist: 0
+  stopResist: 0
+  frenzyResist: 0
+  confusionResist: 0
+  silenceResist: 0
+  condemnResist: 0
+  poisonResist: 0
+  paralysisResist: 0
+  deathstrikeResist: 0
+  zeal: 0
+  mastery: 0
+  haste: 0
+  barrier: 0
+  mBarrier: 0
+  shield: 0
+  dampen: 0
+  characterPortrait: {fileID: 21300000, guid: 35496bef0ea47b348b43482aedc2d176, type: 3}
+  currentLimit: 0
+--- !u!114 &41519105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41519102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87693ce67cc1b749848e1421637ffb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterName: Hero1
+  spells:
+  - {fileID: 256799025081099546, guid: a99b1e939b1f1e74ea3721aa438e788f, type: 3}
+  - {fileID: 9159507565868914965, guid: c25966651e373eb4f91cd7b27192947f, type: 3}
+  _ActionCharge: 0
+  level: 12
+  currentXP: 30
+  nextLevelXP: 400
+  strength: 3
+  intellect: 15
+  piety: 9
+  maxHP: 100
+  maxMP: 200
+  currentHP: 80
+  currentMP: 150
+  vitality: 5
+  spirit: 16
+  accuracy: 20
+  evasion: 4
+  agility: 3
+  luck: 10
+  fire: 0
+  ice: 0
+  lightning: 0
+  water: 0
+  earth: 0
+  wind: 0
+  shadow: 0
+  holy: 0
+  fireResist: 0
+  iceResist: 0
+  lightningResist: 0
+  waterResist: 0
+  earthResist: 0
+  windResist: 0
+  shadowResist: 0
+  lightResist: 0
+  petrify: 0
+  taint: 0
+  slow: 0
+  stop: 0
+  frenzy: 0
+  confusion: 0
+  silence: 0
+  condemn: 0
+  poison: 0
+  paralyzed: 0
+  deathstrike: 0
+  petrificationResist: 0
+  taintResist: 0
+  slowResist: 0
+  stopResist: 0
+  frenzyResist: 0
+  confusionResist: 0
+  silenceResist: 0
+  condemnResist: 0
+  poisonResist: 0
+  paralysisResist: 0
+  deathstrikeResist: 0
+  zeal: 0
+  mastery: 0
+  haste: 0
+  barrier: 0
+  mBarrier: 0
+  shield: 0
+  dampen: 0
+  characterPortrait: {fileID: 21300000, guid: 785325e73bdb6434286be5f65b4d6521, type: 3}
+  currentLimit: 0
+--- !u!114 &41519106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41519102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87693ce67cc1b749848e1421637ffb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterName: Hero4
+  spells:
+  - {fileID: 256799025081099546, guid: a99b1e939b1f1e74ea3721aa438e788f, type: 3}
+  _ActionCharge: 0
+  level: 7
+  currentXP: 15
+  nextLevelXP: 100
+  strength: 12
+  intellect: 4
+  piety: 2
+  maxHP: 200
+  maxMP: 30
+  currentHP: 200
+  currentMP: 20
+  vitality: 10
+  spirit: 7
+  accuracy: 22
+  evasion: 10
+  agility: 15
+  luck: 5
+  fire: 0
+  ice: 0
+  lightning: 0
+  water: 0
+  earth: 0
+  wind: 0
+  shadow: 0
+  holy: 0
+  fireResist: 0
+  iceResist: 0
+  lightningResist: 0
+  waterResist: 0
+  earthResist: 0
+  windResist: 0
+  shadowResist: 0
+  lightResist: 0
+  petrify: 0
+  taint: 0
+  slow: 0
+  stop: 0
+  frenzy: 0
+  confusion: 0
+  silence: 0
+  condemn: 0
+  poison: 0
+  paralyzed: 0
+  deathstrike: 0
+  petrificationResist: 0
+  taintResist: 0
+  slowResist: 0
+  stopResist: 0
+  frenzyResist: 0
+  confusionResist: 0
+  silenceResist: 0
+  condemnResist: 0
+  poisonResist: 0
+  paralysisResist: 0
+  deathstrikeResist: 0
+  zeal: 0
+  mastery: 0
+  haste: 0
+  barrier: 0
+  mBarrier: 0
+  shield: 0
+  dampen: 0
+  characterPortrait: {fileID: 21300000, guid: 11a050d0f53cbc749842b8a9d59d6c24, type: 3}
+  currentLimit: 50
+--- !u!114 &41519107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41519102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c164bf7a4e8be9145915732ca7becca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partyLineup:
+  - Hero4
+  - Hero2
+  - Hero1
+  - Hero3
+  enemyLineup:
+  - Cube
+  - Sphere
+  - Cube
+  - Cube
+  - Sphere
+  positionFront: 01000001
+  _PartyMembers:
+  - {fileID: 41519106}
+  - {fileID: 41519105}
+  - {fileID: 41519104}
+  - {fileID: 41519103}
+--- !u!4 &41519108
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41519102}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 643.02686, y: 105.997734, z: 3.5544739}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &41734014
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,11 +844,6 @@ GameObject:
   m_Component:
   - component: {fileID: 73658170}
   - component: {fileID: 73658172}
-  - component: {fileID: 73658171}
-  - component: {fileID: 73658176}
-  - component: {fileID: 73658175}
-  - component: {fileID: 73658174}
-  - component: {fileID: 73658173}
   m_Layer: 0
   m_Name: BATTLE DATA
   m_TagString: Untagged
@@ -487,37 +863,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &73658171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73658169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c164bf7a4e8be9145915732ca7becca5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  partyLineup:
-  - Hero4
-  - Hero2
-  - Hero1
-  - Hero3
-  enemyLineup:
-  - Cube
-  - Sphere
-  - Cube
-  - Cube
-  - Sphere
-  positionFront: 01000001
-  _PartyMembers:
-  - {fileID: 73658176}
-  - {fileID: 73658175}
-  - {fileID: 73658174}
-  - {fileID: 73658173}
 --- !u!114 &73658172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,319 +900,6 @@ MonoBehaviour:
   - {fileID: 1093793481}
   - {fileID: 747005678}
   - {fileID: 1322273810}
---- !u!114 &73658173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73658169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c87693ce67cc1b749848e1421637ffb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CharacterName: Hero3
-  spells:
-  - {fileID: 256799025081099546, guid: a99b1e939b1f1e74ea3721aa438e788f, type: 3}
-  level: 8
-  currentXP: 22
-  nextLevelXP: 90
-  strength: 9
-  intellect: 9
-  piety: 7
-  maxHP: 150
-  maxMP: 70
-  currentHP: 144
-  currentMP: 46
-  vitality: 10
-  spirit: 10
-  accuracy: 23
-  evasion: 14
-  agility: 10
-  luck: 10
-  fire: 0
-  ice: 0
-  lightning: 0
-  water: 0
-  earth: 0
-  wind: 0
-  shadow: 0
-  holy: 0
-  fireResist: 0
-  iceResist: 0
-  lightningResist: 0
-  waterResist: 0
-  earthResist: 0
-  windResist: 0
-  shadowResist: 0
-  lightResist: 0
-  petrify: 0
-  taint: 0
-  slow: 0
-  stop: 0
-  frenzy: 0
-  confusion: 0
-  silence: 0
-  condemn: 0
-  poison: 0
-  paralyzed: 0
-  deathstrike: 0
-  petrificationResist: 0
-  taintResist: 0
-  slowResist: 0
-  stopResist: 0
-  frenzyResist: 0
-  confusionResist: 0
-  silenceResist: 0
-  condemnResist: 0
-  poisonResist: 0
-  paralysisResist: 0
-  deathstrikeResist: 0
-  zeal: 0
-  mastery: 0
-  haste: 0
-  barrier: 0
-  mBarrier: 0
-  shield: 0
-  dampen: 0
-  characterPortrait: {fileID: 0}
-  currentLimit: 0
---- !u!114 &73658174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73658169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c87693ce67cc1b749848e1421637ffb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CharacterName: Hero2
-  spells:
-  - {fileID: 9159507565868914965, guid: c25966651e373eb4f91cd7b27192947f, type: 3}
-  level: 15
-  currentXP: 70
-  nextLevelXP: 650
-  strength: 22
-  intellect: 15
-  piety: 3
-  maxHP: 350
-  maxMP: 100
-  currentHP: 177
-  currentMP: 56
-  vitality: 22
-  spirit: 15
-  accuracy: 32
-  evasion: 15
-  agility: 22
-  luck: 18
-  fire: 0
-  ice: 0
-  lightning: 0
-  water: 0
-  earth: 0
-  wind: 0
-  shadow: 0
-  holy: 0
-  fireResist: 0
-  iceResist: 0
-  lightningResist: 0
-  waterResist: 0
-  earthResist: 0
-  windResist: 0
-  shadowResist: 0
-  lightResist: 0
-  petrify: 0
-  taint: 0
-  slow: 0
-  stop: 0
-  frenzy: 0
-  confusion: 0
-  silence: 0
-  condemn: 0
-  poison: 0
-  paralyzed: 0
-  deathstrike: 0
-  petrificationResist: 0
-  taintResist: 0
-  slowResist: 0
-  stopResist: 0
-  frenzyResist: 0
-  confusionResist: 0
-  silenceResist: 0
-  condemnResist: 0
-  poisonResist: 0
-  paralysisResist: 0
-  deathstrikeResist: 0
-  zeal: 0
-  mastery: 0
-  haste: 0
-  barrier: 0
-  mBarrier: 0
-  shield: 0
-  dampen: 0
-  characterPortrait: {fileID: 0}
-  currentLimit: 0
---- !u!114 &73658175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73658169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c87693ce67cc1b749848e1421637ffb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CharacterName: Hero1
-  spells:
-  - {fileID: 256799025081099546, guid: a99b1e939b1f1e74ea3721aa438e788f, type: 3}
-  - {fileID: 9159507565868914965, guid: c25966651e373eb4f91cd7b27192947f, type: 3}
-  level: 12
-  currentXP: 30
-  nextLevelXP: 400
-  strength: 3
-  intellect: 15
-  piety: 9
-  maxHP: 100
-  maxMP: 200
-  currentHP: 80
-  currentMP: 150
-  vitality: 5
-  spirit: 16
-  accuracy: 20
-  evasion: 4
-  agility: 3
-  luck: 10
-  fire: 0
-  ice: 0
-  lightning: 0
-  water: 0
-  earth: 0
-  wind: 0
-  shadow: 0
-  holy: 0
-  fireResist: 0
-  iceResist: 0
-  lightningResist: 0
-  waterResist: 0
-  earthResist: 0
-  windResist: 0
-  shadowResist: 0
-  lightResist: 0
-  petrify: 0
-  taint: 0
-  slow: 0
-  stop: 0
-  frenzy: 0
-  confusion: 0
-  silence: 0
-  condemn: 0
-  poison: 0
-  paralyzed: 0
-  deathstrike: 0
-  petrificationResist: 0
-  taintResist: 0
-  slowResist: 0
-  stopResist: 0
-  frenzyResist: 0
-  confusionResist: 0
-  silenceResist: 0
-  condemnResist: 0
-  poisonResist: 0
-  paralysisResist: 0
-  deathstrikeResist: 0
-  zeal: 0
-  mastery: 0
-  haste: 0
-  barrier: 0
-  mBarrier: 0
-  shield: 0
-  dampen: 0
-  characterPortrait: {fileID: 0}
-  currentLimit: 0
---- !u!114 &73658176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73658169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c87693ce67cc1b749848e1421637ffb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CharacterName: Hero4
-  spells:
-  - {fileID: 256799025081099546, guid: a99b1e939b1f1e74ea3721aa438e788f, type: 3}
-  level: 7
-  currentXP: 15
-  nextLevelXP: 100
-  strength: 12
-  intellect: 4
-  piety: 2
-  maxHP: 200
-  maxMP: 30
-  currentHP: 200
-  currentMP: 20
-  vitality: 10
-  spirit: 7
-  accuracy: 22
-  evasion: 10
-  agility: 15
-  luck: 5
-  fire: 0
-  ice: 0
-  lightning: 0
-  water: 0
-  earth: 0
-  wind: 0
-  shadow: 0
-  holy: 0
-  fireResist: 0
-  iceResist: 0
-  lightningResist: 0
-  waterResist: 0
-  earthResist: 0
-  windResist: 0
-  shadowResist: 0
-  lightResist: 0
-  petrify: 0
-  taint: 0
-  slow: 0
-  stop: 0
-  frenzy: 0
-  confusion: 0
-  silence: 0
-  condemn: 0
-  poison: 0
-  paralyzed: 0
-  deathstrike: 0
-  petrificationResist: 0
-  taintResist: 0
-  slowResist: 0
-  stopResist: 0
-  frenzyResist: 0
-  confusionResist: 0
-  silenceResist: 0
-  condemnResist: 0
-  poisonResist: 0
-  paralysisResist: 0
-  deathstrikeResist: 0
-  zeal: 0
-  mastery: 0
-  haste: 0
-  barrier: 0
-  mBarrier: 0
-  shield: 0
-  dampen: 0
-  characterPortrait: {fileID: 21300000, guid: 11a050d0f53cbc749842b8a9d59d6c24, type: 3}
-  currentLimit: 50
 --- !u!1 &87409606
 GameObject:
   m_ObjectHideFlags: 0
@@ -2656,8 +2690,8 @@ RectTransform:
   - {fileID: 1571291787}
   - {fileID: 253068719}
   - {fileID: 969485390}
-  - {fileID: 567352345}
   - {fileID: 1781471442}
+  - {fileID: 567352345}
   m_Father: {fileID: 91056277}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3036,7 +3070,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427536940}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3045,8 +3079,8 @@ Transform:
   - {fileID: 1093793482}
   - {fileID: 747005679}
   - {fileID: 1322273811}
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 1177955454}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &441769129
 GameObject:
@@ -3600,6 +3634,7 @@ RectTransform:
   - {fileID: 535531162}
   - {fileID: 1590169792}
   - {fileID: 91056277}
+  - {fileID: 848620839}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3716,7 +3751,7 @@ RectTransform:
   - {fileID: 1520091620}
   - {fileID: 118547102}
   m_Father: {fileID: 348190096}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3905,7 +3940,7 @@ Transform:
   m_Children:
   - {fileID: 688437100}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619906222
 GameObject:
@@ -4155,8 +4190,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1818206360}
+  m_Children: []
   m_Father: {fileID: 1261621201}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4589,7 +4623,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706411781}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4601,8 +4635,8 @@ Transform:
   - {fileID: 295041191}
   - {fileID: 1005627141}
   - {fileID: 1244190092}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1177955454}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &712967370
 GameObject:
@@ -5244,6 +5278,80 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840613039}
+  m_CullTransparentMesh: 0
+--- !u!1 &848620838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 848620839}
+  - component: {fileID: 848620842}
+  - component: {fileID: 848620841}
+  m_Layer: 5
+  m_Name: Magic Scroll
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &848620839
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848620838}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1229881836}
+  m_Father: {fileID: 500677554}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -315}
+  m_SizeDelta: {x: 900, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &848620841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848620838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &848620842
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848620838}
   m_CullTransparentMesh: 0
 --- !u!1 &888373826
 GameObject:
@@ -6458,6 +6566,38 @@ Transform:
   m_Father: {fileID: 427536941}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1177955453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1177955454}
+  m_Layer: 0
+  m_Name: POSITIONS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1177955454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177955453}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 706411782}
+  - {fileID: 427536941}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1195303945
 GameObject:
   m_ObjectHideFlags: 0
@@ -6685,6 +6825,104 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1197229718}
   m_CullTransparentMesh: 0
+--- !u!1 &1229881835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1229881836}
+  - component: {fileID: 1229881838}
+  - component: {fileID: 1229881837}
+  - component: {fileID: 1229881839}
+  m_Layer: 5
+  m_Name: Inner Colour
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1229881836
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229881835}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 848620839}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 890, y: 290}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1229881837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229881835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.17644125, b: 0.4433962, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1229881838
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229881835}
+  m_CullTransparentMesh: 0
+--- !u!114 &1229881839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229881835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 296, y: 96}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &1244190091
 GameObject:
   m_ObjectHideFlags: 0
@@ -6818,6 +7056,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 635676895}
+  - {fileID: 1818206360}
   m_Father: {fileID: 1590169792}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9582,7 +9821,7 @@ RectTransform:
   - {fileID: 135544095}
   - {fileID: 1195303946}
   m_Father: {fileID: 348190096}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9881,16 +10120,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818206359}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 635676895}
-  m_RootOrder: 0
+  m_Father: {fileID: 1261621201}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 15.1}
+  m_AnchoredPosition: {x: 0.000071368755, y: 15.099929}
   m_SizeDelta: {x: 390, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1818206361

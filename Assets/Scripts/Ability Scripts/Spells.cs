@@ -11,39 +11,17 @@ public class Spells : MonoBehaviour
     public enum SpellType { Attack, Heal}; // Category/type of spell
     public SpellType _SpellType;
 
-    private Vector3 targetPosition;        // Point where the spell anim is cast
-    public float _SpellAnimSpeed;
-    public float _SpellEndAnimSpeed;
-
-    //UPDATES
-    private void Update()
-    {
-        if (targetPosition != Vector3.zero)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, _SpellAnimSpeed);
-            if(Vector3.Distance(transform.position, targetPosition) < .25f)
-            {
-                Destroy(this.gameObject, _SpellEndAnimSpeed);
-            }
-        } else
-        {
-            Destroy(this.gameObject);
-        }
-
-    }
-
     //METHODS
     public void Cast(BaseStats target)
     {
-        targetPosition = target.transform.position;
-        Debug.Log(_SpellName + " Was Cast On " + target.name);
+        Debug.Log(_SpellName + " Was Cast On " + target.CharacterName);
         if(_SpellType == SpellType.Attack)
         {
-            target.Hurt(_SpellPower);                          // Damage Character
+            target.TakeDamage(_SpellPower, true);                    // Damage Character  of type magical(true)
         }
         else if(_SpellType == SpellType.Heal)
         {
-            target.Heal(_SpellPower);                          // Heal Character
+            target.HealDamage(_SpellPower);                          // Heal Character
         }
     }
 }

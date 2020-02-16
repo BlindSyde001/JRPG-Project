@@ -9,11 +9,13 @@ public class BattleManager : MonoBehaviour
     //VARIABLES
     #region Reference Variables
     private GameManager _gameManager;
+    [Header("Reference Variables")]
     public List<GameObject> _CharacterPanels;      // The UI components showing the stats of party members
     public List<PartyMember> _MembersInBattle;     // Stats scripts of whoever is currently in the battle
     public List<Enemy> _EnemiesInBattle;           // Stats Scripts of The enemies currently in the battle
     #endregion
     #region Positions
+    [Header("Positions")]
     public List<GameObject> heroPosFront;
     public List<GameObject> heroPosBack;
     public List<GameObject> enemyPos;
@@ -24,19 +26,15 @@ public class BattleManager : MonoBehaviour
     {
         _gameManager = FindObjectOfType<GameManager>();
     }
-
     private void Start()
     {
         if (_gameManager == null)
             return;
         SpawnCharacters();
         InstantiateUI();
+        StartActionBar();
     }
 
-    private void Update()
-    {
-
-    }
     //METHODS
     #region Start Of Game
     private void SpawnCharacters()
@@ -98,14 +96,26 @@ public class BattleManager : MonoBehaviour
     private void InstantiateUI()
     {
         // Set up the UI to represent the Active Party Members in the battle
-        for(int i = 0; i < _MembersInBattle.Count; i++)                   // Cycle trhough Party List
+        for(int i = 0; i < _MembersInBattle.Count; i++)                   // Cycle through Party List
         {
-                _CharacterPanels[i].SetActive(true);                      // Turn on the UI Component
-                // Set Name
-                // Set Image
-                // Set HP UI text and visual
-                // Set MP Ui Text and visual
-                // Set Limit visual
+            _CharacterPanels[i].SetActive(true); // Turn on UI
+            // Character Portrait
+            _CharacterPanels[i].transform.GetChild(0).GetComponent<Image>().sprite = _MembersInBattle[i].characterPortrait;
+            // Character Name
+            _CharacterPanels[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _MembersInBattle[i].CharacterName;
+            // Start HP
+            _CharacterPanels[i].transform.GetChild(2).GetChild(3).GetComponent<TextMeshProUGUI>().text = 
+                _MembersInBattle[i].currentHP.ToString() + " / " + _MembersInBattle[i].maxHP.ToString();
+            // Start MP
+            _CharacterPanels[i].transform.GetChild(3).GetChild(3).GetComponent<TextMeshProUGUI>().text =
+                _MembersInBattle[i].currentMP.ToString() + " / " + _MembersInBattle[i].maxMP.ToString();
+        }
+    }
+    private void StartActionBar()
+    {
+        foreach (PartyMember x in _MembersInBattle)
+        {
+            x._ActionCharge = x.agility + x.level;
         }
     }
     #endregion

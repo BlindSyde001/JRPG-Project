@@ -8,6 +8,7 @@ public class BaseStats : MonoBehaviour
     //VARIABLES
     public string CharacterName;
     public List<Spells> spells;
+    public float _ActionCharge;
 
     [Header("Level")]
     [Header("MAIN STATS")]
@@ -31,8 +32,8 @@ public class BaseStats : MonoBehaviour
     [Header("Other")]
     public int accuracy;                //Increases chance of landing a successful Physical Attack
     public int evasion;                 //Decreases chance of being hit by a Physical Attack
-    public int agility;                 //Increases speed of Action Bar being charged
-    public int luck;                    //Increases chance of Damaging abilities Critically Striking
+    public int agility;                 //Increases speed of Action Bar being charged as well as initial Action Bar charge amount
+    public int luck;                    //Increases chance of Physical Attacks & Damage Abilities Critically Striking
     
     [Header("Elemental")]
     [Header("ELEMENTAL STATS")]
@@ -92,42 +93,62 @@ public class BaseStats : MonoBehaviour
     public bool dampen;                 //Decreases Magical Damage Taken
 
     //METHODS
-    #region Actions in Battle
-    public void Hurt(int amount)        //Damage taken by character
+    #region Actions
+    public bool Attack(BaseStats targetCharacter)
     {
-        int damageAmount = Random.Range(0, 1) * (amount - vitality);
-        currentHP = Mathf.Max(currentHP - damageAmount, 0);              // No going below 0 hp
-        if(currentHP == 0)
+        // Did it hit? Calculate dodge
+        int chance;
+        chance = accuracy - targetCharacter.evasion;
+        bool successful = (Random.Range(0, 100) < chance);
+
+        if(successful)
         {
-            Die();
+            bool crit;
+            if (Random.Range(0, 100) < luck)
+                crit = true;
+            else
+                crit = false;
+
+            int damage = (int)(strength * (zeal ? 1.2 : 1) * (crit ? 1.75 : 1)); // Strength, buff, crit.
+            targetCharacter.TakeDamage(damage, false);
         }
+        return successful;
     }
-    public void Heal(int amount)        // Healing taken by character
-    {
-        int healAmount = amount;
-        currentHP = Mathf.Min(currentHP + healAmount, maxHP);   // No overhealing
-    }
-    public void Defend()               // Increase in defence for a turn
-    {
-        vitality += (int)(vitality * .4f);
-        Debug.Log("Increased Defence");
-    }
-    public bool CastSpell(Spells spell, BaseStats targetCharacter)
+    public bool CastMagic(Spells spell, BaseStats targetCharacter)
     {
         bool successful = currentMP >= spell._SpellManaCost;   // Returns if you have enough mana to cast the spell
 
         if (successful)
         {
-            Spells spellToCast = Instantiate<Spells>(spell, transform.position, Quaternion.identity);     // Create Spell effect in game
             currentMP -= spell._SpellManaCost;               // Because successful, take away mana cost
-            spellToCast.Cast(targetCharacter);
+            spell.Cast(targetCharacter);
         }
-
         return successful;
     }
-    public virtual void Die()                  // Go into die state
+    public virtual void Die()                 // Go into die state
     {
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+    }
+    #endregion
+
+    #region Receiver Methods
+    public void TakeDamage(int amount, bool magical)        //Damage taken by character
+    {
+        int damageAmount = (int)(amount - (5 * (magical ? spirit : vitality)) );
+        print(damageAmount + " Taken!");
+        currentHP = Mathf.Max(currentHP - damageAmount, 0);              // No going below 0 hp
+        print("Reduced to " + currentHP);
+        if(currentHP == 0)
+        {
+            Die();
+        }
+    }
+    public void HealDamage(int amount)        // Healing taken by character
+    {
+        int healAmount = amount;
+        print(amount + " Healed!");
+        currentHP = Mathf.Min(currentHP + healAmount, maxHP);   // No overhealing
+        print("Added to " + currentHP);
     }
     #endregion
     #region Debuff
