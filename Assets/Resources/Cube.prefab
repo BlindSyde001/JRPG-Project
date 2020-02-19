@@ -108,22 +108,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: Wolf
   spells: []
-  level: 0
-  currentXP: 0
-  nextLevelXP: 0
-  strength: 0
-  intellect: 0
-  piety: 0
-  maxHP: 0
-  maxMP: 0
-  currentHP: 0
-  currentMP: 0
-  vitality: 0
-  spirit: 0
-  accuracy: 0
-  evasion: 0
-  agility: 0
-  luck: 0
+  inBattle: 0
+  _BM: {fileID: 0}
+  _ActionBarAmount: 0
+  _ActionBarRechargeAmount: 10
+  level: 1
+  currentXP: 1
+  nextLevelXP: 1
+  strength: 80
+  intellect: 1
+  piety: 1
+  maxHP: 1
+  maxMP: 1
+  currentHP: 1
+  currentMP: 1
+  vitality: 1
+  spirit: 1
+  accuracy: 50
+  evasion: 1
+  agility: 1
+  luck: 1
   fire: 0
   ice: 0
   lightning: 0

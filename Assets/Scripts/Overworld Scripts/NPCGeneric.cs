@@ -12,7 +12,7 @@ public class NPCGeneric : MonoBehaviour
 
     #region Patrol Variables
     [SerializeField]
-    private float waitTime = 0;
+    //private float waitTime = 0;
     private bool inTalkingRange = false;
     public List<Transform> patrolPoints;
     private int currentPos = 0;

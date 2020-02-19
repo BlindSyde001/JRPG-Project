@@ -9,9 +9,4 @@ public class GameManager : MonoBehaviour
     public List<string> enemyLineup;        // Stored variable on which enemy is in the battle
     public List<bool> positionFront;        // For positions of party members
     public List<PartyMember> _PartyMembers; // Stored variables of all Playable Characters
-
-    //public void Attack(Spells chosenSpell, BaseStats targetEnemy)
-    //{
-
-    //}
 }

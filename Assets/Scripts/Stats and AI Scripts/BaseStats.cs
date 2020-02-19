@@ -8,8 +8,14 @@ public class BaseStats : MonoBehaviour
     //VARIABLES
     public string CharacterName;
     public List<Spells> spells;
-    public float _ActionCharge;
+    public bool inBattle;
+    public BattleManager _BM;
 
+    #region ATB Variables
+    public float _ActionBarAmount;                 // Current Charge amount of ATB Gauge
+    public float _ActionBarRechargeAmount;         // Current recharge amount specific to player
+    #endregion
+    #region Stats Sheet
     [Header("Level")]
     [Header("MAIN STATS")]
     public int level;                   //Level used to increase stats. range from 1 - 100
@@ -91,6 +97,21 @@ public class BaseStats : MonoBehaviour
     public int mBarrier;                //Gains a Magical Damage Shield
     public bool shield;                 //Decreases Physical Damage Taken
     public bool dampen;                 //Decreases Magical Damage Taken
+    #endregion
+
+    //UPDATES
+    public virtual void Awake()
+    {
+        _BM = FindObjectOfType<BattleManager>();
+    }
+    public virtual void Update()
+    {
+        if (inBattle)
+        {
+            _ActionBarAmount += _ActionBarRechargeAmount * Time.deltaTime;          // Recharge your action bar so you can take a turn
+            _ActionBarAmount = Mathf.Clamp(_ActionBarAmount, 0, 100);
+        }
+    }
 
     //METHODS
     #region Actions
@@ -111,7 +132,9 @@ public class BaseStats : MonoBehaviour
 
             int damage = (int)(strength * (zeal ? 1.2 : 1) * (crit ? 1.75 : 1)); // Strength, buff, crit.
             targetCharacter.TakeDamage(damage, false);
-        }
+            print("Attack connected!");
+        } else
+        { print("Attack Failed!"); }
         return successful;
     }
     public bool CastMagic(Spells spell, BaseStats targetCharacter)
@@ -125,16 +148,28 @@ public class BaseStats : MonoBehaviour
         }
         return successful;
     }
+    public void Defend()                      // Increase in defence for a turn
+    {
+        vitality += (int)(vitality * .4f);
+        Debug.Log("Increased Defence");
+    }
+    public void UseItem(Items item, BaseStats targetCharacter)
+    {
+
+    }
     public virtual void Die()                 // Go into die state
     {
         //Destroy(this.gameObject);
     }
     #endregion
-
     #region Receiver Methods
     public void TakeDamage(int amount, bool magical)        //Damage taken by character
     {
         int damageAmount = (int)(amount - (5 * (magical ? spirit : vitality)) );
+        if(damageAmount < 0)
+        {
+            damageAmount = 0;
+        }
         print(damageAmount + " Taken!");
         currentHP = Mathf.Max(currentHP - damageAmount, 0);              // No going below 0 hp
         print("Reduced to " + currentHP);
@@ -143,12 +178,16 @@ public class BaseStats : MonoBehaviour
             Die();
         }
     }
-    public void HealDamage(int amount)        // Healing taken by character
+    public void HealDamage(int amount)                      // Healing taken by character
     {
         int healAmount = amount;
         print(amount + " Healed!");
         currentHP = Mathf.Min(currentHP + healAmount, maxHP);   // No overhealing
         print("Added to " + currentHP);
+    }
+    public void InitiateATB()                               // For characters in battle, start charging their ATB gauges
+    {
+        inBattle = true;
     }
     #endregion
     #region Debuff
@@ -263,6 +302,13 @@ public class BaseStats : MonoBehaviour
             currentHP = 0;
             deathstrike = false;
         }
+    }
+    #endregion
+    #region Normalized Values
+    // Used for the UI component to display amount in graphic representation
+    public float ActionBarNormalized()
+    {
+        return _ActionBarAmount / 100;
     }
     #endregion
 }
