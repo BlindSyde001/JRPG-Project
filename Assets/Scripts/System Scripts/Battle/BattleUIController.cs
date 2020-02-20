@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class BattleUIController : MonoBehaviour
 {
     //VARIABLES
     public BattleManager _BM;
+    #region Instantiate UI Elements
     public Transform panel;                       // Currently opened panel to create the appropriate buttons
     public GameObject button;                     // button prefab to be instantiated per UI
+    #endregion
+    #region Navigate UI Variables
+    public GameObject _CommandPanel;              // Panel which contains all the player input commands
     public PartyMember chosenHero;                // Currently selected hero, to control actions
     public int cycleButtonInput;
+    #endregion
 
     //UPDATES
     private void Awake()
@@ -30,7 +36,7 @@ public class BattleUIController : MonoBehaviour
     //METHODS
     public void CreateButtons()
     {
-        foreach (Spells spell in _BM._MembersInBattle[0].spells)
+        foreach (Spells spell in chosenHero.spells)
         {
             Instantiate(button, panel);
         }
