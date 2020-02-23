@@ -28,20 +28,11 @@ public class Enemy : BaseStats
 
             case 1:
                 print(CharacterName + " Casted a spell!");
-                //Spells spellToCast = GetRandomSpell();
-                //if(spellToCast._SpellType == Spells.SpellType.Heal)
-                //{
-                //    // Heal friendly enemy
-                //}
-                //if(!CastMagic(spellToCast, null))
-                //{
-                //    //attack
-                //}
                 break;
 
             case 2:
-                int x = Random.Range(0, _BM._MembersInBattle.Count - 1);
-                BaseStats targetCharacter = _BM._MembersInBattle[x];
+                int x = Random.Range(0, _BM._ActivePartyMembers.Count - 1);
+                BaseStats targetCharacter = _BM._ActivePartyMembers[x];
 
                 Attack(targetCharacter);
                 print(CharacterName + " Attacked " + targetCharacter.CharacterName);
@@ -54,6 +45,13 @@ public class Enemy : BaseStats
     }
     public override void Die()
     {
-        base.Die();
+        _BM._ActiveEnemies.Remove(this);       // Remove from targetting list
+        _BM._DownedEnemies.Add(this);          // Add to downed list (for XP tally/revives, etc)
+        _BUI.SetEnemyTargets();
+        Destroy(this.gameObject);
+        if(_BM._ActiveEnemies.Count == 0)   // Win if no more enemies
+        {
+            _BM.VictoryState();
+        }
     }
 }

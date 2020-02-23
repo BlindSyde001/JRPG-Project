@@ -10,6 +10,7 @@ public class BaseStats : MonoBehaviour
     public List<Spells> spells;
     public bool inBattle;
     public BattleManager _BM;
+    public BattleUIController _BUI;
 
     #region ATB Variables
     public float _ActionBarAmount;                 // Current Charge amount of ATB Gauge
@@ -103,6 +104,7 @@ public class BaseStats : MonoBehaviour
     public virtual void Awake()
     {
         _BM = FindObjectOfType<BattleManager>();
+        _BUI = FindObjectOfType<BattleUIController>();
     }
     public virtual void Update()
     {
@@ -146,6 +148,7 @@ public class BaseStats : MonoBehaviour
             currentMP -= spell._SpellManaCost;               // Because successful, take away mana cost
             spell.Cast(targetCharacter);
         }
+        _BM.UpdatePartyVariables();
         return successful;
     }
     public void Defend()                      // Increase in defence for a turn
@@ -159,7 +162,7 @@ public class BaseStats : MonoBehaviour
     }
     public virtual void Die()                 // Go into die state
     {
-        //Destroy(this.gameObject);
+
     }
     #endregion
     #region Receiver Methods
@@ -173,10 +176,12 @@ public class BaseStats : MonoBehaviour
         print(damageAmount + " Taken!");
         currentHP = Mathf.Max(currentHP - damageAmount, 0);              // No going below 0 hp
         print("Reduced to " + currentHP);
+        _BM.UpdatePartyVariables();
         if(currentHP == 0)
         {
             Die();
         }
+
     }
     public void HealDamage(int amount)                      // Healing taken by character
     {
@@ -184,6 +189,7 @@ public class BaseStats : MonoBehaviour
         print(amount + " Healed!");
         currentHP = Mathf.Min(currentHP + healAmount, maxHP);   // No overhealing
         print("Added to " + currentHP);
+        _BM.UpdatePartyVariables();
     }
     public void InitiateATB()                               // For characters in battle, start charging their ATB gauges
     {

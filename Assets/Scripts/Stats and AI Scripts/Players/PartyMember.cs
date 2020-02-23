@@ -11,10 +11,21 @@ public class PartyMember : BaseStats
     public Sprite characterPortrait;                   // Portrait image displayed in UI
     public int currentLimit;                           // Limit amount of charge for special move
     #endregion
+    public bool isAlive = true;                        // Check to see if player has not died in battle
+
+    //UPDATES
+    new void Update()
+    {
+        if(isAlive)
+        base.Update();
+    }
 
     //METHODS
     public override void Die()
     {
-        base.Die();
+        isAlive = false;
+        _BM._ActivePartyMembers.Remove(this);
+        _BM._DownedMembers.Add(this);
+        _BM.UpdatePartyAliveStatus();
     }
 }
