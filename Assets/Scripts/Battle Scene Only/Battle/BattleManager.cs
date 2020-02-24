@@ -13,14 +13,14 @@ public class BattleManager : MonoBehaviour
     public List<GameObject> _CharacterPanels;      // The UI components showing the stats of party members
 
     [Header("Reference Variables")]
-    public List<PartyMember> _PartyMembersInBattle;   // List of current Party Members who have entered the battle
-    public List<Enemy> _EnemiesInBattle;              // List of current Enemies who have entered battle
+    public List<BasePartyMember> _PartyMembersInBattle;   // List of current Party Members who have entered the battle
+    public List<BaseEnemy> _EnemiesInBattle;              // List of current Enemies who have entered battle
     [Space]
-    public List<PartyMember> _ActivePartyMembers;     // List of Active Members in battle; Targettable
-    public List<Enemy> _ActiveEnemies;                // List of Active Enemies in battle; Targettable
+    public List<BasePartyMember> _ActivePartyMembers;     // List of Active Members in battle; Targettable
+    public List<BaseEnemy> _ActiveEnemies;                // List of Active Enemies in battle; Targettable
     [Space]
-    public List<PartyMember> _DownedMembers;          // List of Downed Party Members; Non Targettable except for ressurection
-    public List<Enemy> _DownedEnemies;                // List of Downed Enemies; Non Targettable except for ressurection
+    public List<BasePartyMember> _DownedMembers;          // List of Downed Party Members; Non Targettable except for ressurection
+    public List<BaseEnemy> _DownedEnemies;                // List of Downed Enemies; Non Targettable except for ressurection
     #endregion
     #region Positions
     [Header("Positions")]
@@ -117,8 +117,8 @@ public class BattleManager : MonoBehaviour
                     enemyPos[i].transform.rotation);
 
                 // Add Enemies to overall List and Active List
-                _EnemiesInBattle.Add(instantiatedEnemy.GetComponent<Enemy>());
-                _ActiveEnemies.Add(instantiatedEnemy.GetComponent<Enemy>());
+                _EnemiesInBattle.Add(instantiatedEnemy.GetComponent<BaseEnemy>());
+                _ActiveEnemies.Add(instantiatedEnemy.GetComponent<BaseEnemy>());
             }
         }
     }
@@ -136,12 +136,12 @@ public class BattleManager : MonoBehaviour
     }
     private void StartActionBar()
     {
-        foreach (PartyMember x in _ActivePartyMembers)
+        foreach (BasePartyMember x in _ActivePartyMembers)
         {
             x._ActionBarAmount = x.agility + x.level;
             x.InitiateATB();
         }
-        foreach (Enemy y in _ActiveEnemies)
+        foreach (BaseEnemy y in _ActiveEnemies)
         {
             y._ActionBarAmount = y.agility + y.level;
             y.InitiateATB();

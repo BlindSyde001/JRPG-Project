@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : BaseStats
+public class BaseEnemy : BaseStats
 {
     //UPDATES
     new void Update()
@@ -22,8 +22,8 @@ public class Enemy : BaseStats
         switch(dieRoll)
         {
             case 0:
-                Defend();
                 print(CharacterName + " Defended!");
+                Defend();
                 break;
 
             case 1:
@@ -34,8 +34,8 @@ public class Enemy : BaseStats
                 int x = Random.Range(0, _BM._ActivePartyMembers.Count - 1);
                 BaseStats targetCharacter = _BM._ActivePartyMembers[x];
 
-                Attack(targetCharacter);
                 print(CharacterName + " Attacked " + targetCharacter.CharacterName);
+                Attack(targetCharacter);
                 break;
         }
     }

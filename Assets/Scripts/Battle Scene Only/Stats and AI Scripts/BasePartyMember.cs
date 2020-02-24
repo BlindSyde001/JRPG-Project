@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class PartyMember : BaseStats
+public class BasePartyMember : BaseStats
 {
     //VARIABLES
     #region In Battle UI Variables 
@@ -18,6 +18,10 @@ public class PartyMember : BaseStats
     {
         if(isAlive)
         base.Update();
+
+        if (_ActionBarAmount >= 100)
+        { // able to take Action
+        }
     }
 
     //METHODS

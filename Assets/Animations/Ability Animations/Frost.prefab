@@ -46,11 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _SpellName: Frost
+  _SpellID: 2
   _SpellPower: 5
   _SpellManaCost: 3
   _SpellType: 0
-  _SpellAnimSpeed: 1
-  _SpellEndAnimSpeed: 1
 --- !u!198 &7624820164783582057
 ParticleSystem:
   m_ObjectHideFlags: 0

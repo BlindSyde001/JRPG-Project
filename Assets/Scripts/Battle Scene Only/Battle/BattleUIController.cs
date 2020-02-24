@@ -19,13 +19,15 @@ public class BattleUIController : MonoBehaviour
     #region Navigate UI Variables
     public GameObject _CommandPanel;              // Panel which contains all the player input commands
     public List<GameObject> EnemyUIButton;        // List of the buttons used to target enemies in battle
-    public PartyMember chosenHero;                // Currently selected hero, to control actions
+    public BasePartyMember chosenHero;                // Currently selected hero, to control actions
     public int cycleButtonInput;
 
     public string action;
+    public int _SpellID;
     public BaseStats targetForAction;
     #endregion
-
+    [SerializeField]
+    private List<GameObject> buttonPanels;
     //UPDATES
     private void Awake()
     {
@@ -45,11 +47,6 @@ public class BattleUIController : MonoBehaviour
     }
 
     //METHODS
-    public void MessageOnScreen(string text)           // Display a message
-    {
-        messageBox.SetActive(true);
-        messageText.text = text;
-    }
     public void CycleThroughHeroes()
     {
         if (Input.GetButtonDown("Cycle"))
@@ -69,6 +66,12 @@ public class BattleUIController : MonoBehaviour
             _BM._CharacterPanels[cycleButtonInput].transform.GetChild(0).gameObject.SetActive(true);   // Turn on new select
             Debug.Log(chosenHero.CharacterName + " Is Selected");
         }
+    }
+    #region Test
+    public void MessageOnScreen(string text)           // Display a message
+    {
+        messageBox.SetActive(true);
+        messageText.text = text;
     }
     public void SetEnemyTargets()
     {
@@ -91,6 +94,10 @@ public class BattleUIController : MonoBehaviour
         targetForAction = _BM._ActiveEnemies[enemy];
         PerformAction(action, targetForAction);
     }
+    public void SpellID(int id)
+    {
+        _SpellID = id;
+    }
     public void PerformAction(string action, BaseStats target)
     {
         if(action == "Attack")
@@ -100,6 +107,9 @@ public class BattleUIController : MonoBehaviour
         }
         else if(action == "Cast Magic")
         {
+            Debug.Log("Magic Cast!");
+            Spells spellToCast = chosenHero.spells[_SpellID];
+            chosenHero.CastMagic(spellToCast, target);
             chosenHero._ActionBarAmount = 0;
         }
         else if (action == "Ability")
@@ -111,4 +121,5 @@ public class BattleUIController : MonoBehaviour
             chosenHero._ActionBarAmount = 0;
         }
     }
+    #endregion
 }

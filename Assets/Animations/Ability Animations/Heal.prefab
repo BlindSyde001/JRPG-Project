@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7452285076900137086}
   - component: {fileID: 110481871149463790}
   m_Layer: 0
-  m_Name: Blaze
+  m_Name: Heal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d100de906ca4cb541960e09586d37b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _SpellName: Blaze
-  _SpellID: 1
+  _SpellName: Heal
+  _SpellID: 0
   _SpellPower: 5
   _SpellManaCost: 3
-  _SpellType: 0
+  _SpellType: 1
 --- !u!198 &7452285076900137086
 ParticleSystem:
   m_ObjectHideFlags: 0

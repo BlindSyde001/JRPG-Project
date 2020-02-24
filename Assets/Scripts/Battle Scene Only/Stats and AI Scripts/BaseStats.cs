@@ -126,15 +126,14 @@ public class BaseStats : MonoBehaviour
 
         if(successful)
         {
+            print("Attack connected!");
             bool crit;
             if (Random.Range(0, 100) < luck)
                 crit = true;
             else
                 crit = false;
-
             int damage = (int)(strength * (zeal ? 1.2 : 1) * (crit ? 1.75 : 1)); // Strength, buff, crit.
             targetCharacter.TakeDamage(damage, false);
-            print("Attack connected!");
         } else
         { print("Attack Failed!"); }
         return successful;
@@ -175,7 +174,6 @@ public class BaseStats : MonoBehaviour
         }
         print(damageAmount + " Taken!");
         currentHP = Mathf.Max(currentHP - damageAmount, 0);              // No going below 0 hp
-        print("Reduced to " + currentHP);
         _BM.UpdatePartyVariables();
         if(currentHP == 0)
         {
