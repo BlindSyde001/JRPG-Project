@@ -10,7 +10,7 @@ public class BattleManager : MonoBehaviour
     #region Reference Variables
     private GameManager _gameManager;
     private BattleUIController _BUI;
-    public List<GameObject> _CharacterPanels;      // The UI components showing the stats of party members
+    public List<GameObject> _CharacterPanels;             // The UI components showing the stats of party members
 
     [Header("Reference Variables")]
     public List<BasePartyMember> _PartyMembersInBattle;   // List of current Party Members who have entered the battle
@@ -49,7 +49,7 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < _PartyMembersInBattle.Count; i++)
         {
             // ATB Gauge
-            _CharacterPanels[i].transform.GetChild(5).GetChild(1).GetComponent<Image>().fillAmount 
+            _CharacterPanels[i].transform.Find("ATB Bar").Find("ATB Colour").GetComponent<Image>().fillAmount 
                 = _PartyMembersInBattle[i].ActionBarNormalized();
         }
     }
@@ -129,9 +129,9 @@ public class BattleManager : MonoBehaviour
         {
             _CharacterPanels[i].SetActive(true); // Turn on UI
             // Character Portrait
-            _CharacterPanels[i].transform.GetChild(1).GetComponent<Image>().sprite = _PartyMembersInBattle[i].characterPortrait;
+            _CharacterPanels[i].transform.Find("Hero Image").Find("Mask").Find("Graphic").GetComponent<Image>().sprite = _PartyMembersInBattle[i].characterPortrait;
             // Character Name
-            _CharacterPanels[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = _PartyMembersInBattle[i].CharacterName;
+            _CharacterPanels[i].transform.Find("Hero Name").GetComponent<TextMeshProUGUI>().text = _PartyMembersInBattle[i].CharacterName;
         }
     }
     private void StartActionBar()
@@ -169,25 +169,28 @@ public class BattleManager : MonoBehaviour
         {
             #region HP UI
             // HP
-            _CharacterPanels[i].transform.GetChild(3).GetChild(3).GetComponent<TextMeshProUGUI>().text =
-                _PartyMembersInBattle[i].currentHP.ToString() + " / " + _PartyMembersInBattle[i].maxHP.ToString();
+            _CharacterPanels[i].transform.Find("HP Bar").Find("Current HP Value").GetComponent<TextMeshProUGUI>().text =
+                _PartyMembersInBattle[i].currentHP.ToString();
+            _CharacterPanels[i].transform.Find("HP Bar").Find("Max HP Value").GetComponent<TextMeshProUGUI>().text = 
+               "/" + _PartyMembersInBattle[i].maxHP.ToString();
 
             // HP Gauge
-            _CharacterPanels[i].transform.GetChild(3).GetChild(1).GetComponent<Image>().fillAmount =
+            _CharacterPanels[i].transform.Find("HP Bar").Find("HP Colour").GetComponent<Image>().fillAmount =
               (float)_PartyMembersInBattle[i].currentHP / _PartyMembersInBattle[i].maxHP;
             #endregion
             #region MP UI
             // MP
-            _CharacterPanels[i].transform.GetChild(4).GetChild(3).GetComponent<TextMeshProUGUI>().text =
-                _PartyMembersInBattle[i].currentMP.ToString() + " / " + _PartyMembersInBattle[i].maxMP.ToString();
+            _CharacterPanels[i].transform.Find("MP Bar").Find("MP Value").GetComponent<TextMeshProUGUI>().text =
+                _PartyMembersInBattle[i].currentMP.ToString();
+            //+ " / " + _PartyMembersInBattle[i].maxMP.ToString();
 
             // MP Gauge
-            _CharacterPanels[i].transform.GetChild(4).GetChild(1).GetComponent<Image>().fillAmount =
+            _CharacterPanels[i].transform.Find("MP Bar").Find("MP Colour").GetComponent<Image>().fillAmount =
                 (float)_PartyMembersInBattle[i].currentMP / _PartyMembersInBattle[i].maxMP;
             #endregion
 
             // Limit Gauge
-            _CharacterPanels[i].transform.GetChild(6).GetChild(1).GetComponent<Image>().fillAmount
+            _CharacterPanels[i].transform.Find("Limit Bar").Find("Limit Colour").GetComponent<Image>().fillAmount
                 = (float)_PartyMembersInBattle[i].currentLimit / 100;
         }
     }

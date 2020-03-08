@@ -17,15 +17,14 @@ public class BattleUIController : MonoBehaviour
     #region Navigate UI Variables
     public GameObject _CommandPanel;              // Panel which contains all the player input commands
     public List<GameObject> EnemyUIButton;        // List of the buttons used to target enemies in battle
-    public BasePartyMember chosenHero;                // Currently selected hero, to control actions
+    public BasePartyMember chosenHero;            // Currently selected hero, to control actions
     public int cycleButtonInput;
 
     public string action;
     public int _SpellID;
     public BaseStats targetForAction;
     #endregion
-    [SerializeField]
-    private List<GameObject> buttonPanels;
+
     //UPDATES
     private void Awake()
     {
@@ -36,7 +35,7 @@ public class BattleUIController : MonoBehaviour
     {
         messageBox.SetActive(false);                               // turned on only when needed
         chosenHero = _BM._ActivePartyMembers[0];                   // Set first hero to control through UI
-        _BM._CharacterPanels[0].transform.GetChild(0).gameObject.SetActive(true);
+        _BM._CharacterPanels[0].transform.Find("Selected Panel").gameObject.SetActive(true);
         SetEnemyTargets();                                         // Set UI for enemies you can target
     }
     private void LateUpdate()
@@ -49,7 +48,7 @@ public class BattleUIController : MonoBehaviour
     {
         if (Input.GetButtonDown("Cycle"))
         {
-            _BM._CharacterPanels[cycleButtonInput].transform.GetChild(0).gameObject.SetActive(false);  // turn off current select
+            _BM._CharacterPanels[cycleButtonInput].transform.Find("Selected Panel").gameObject.SetActive(false);  // turn off current select
 
             cycleButtonInput += (int)Input.GetAxisRaw("Cycle");                                        // find new Select
             if (cycleButtonInput < 0)
@@ -61,7 +60,7 @@ public class BattleUIController : MonoBehaviour
                 cycleButtonInput = 0;
             }
             chosenHero = _BM._ActivePartyMembers[cycleButtonInput];
-            _BM._CharacterPanels[cycleButtonInput].transform.GetChild(0).gameObject.SetActive(true);   // Turn on new select
+            _BM._CharacterPanels[cycleButtonInput].transform.Find("Selected Panel").gameObject.SetActive(true);   // Turn on new select
             Debug.Log(chosenHero.CharacterName + " Is Selected");
         }
     }

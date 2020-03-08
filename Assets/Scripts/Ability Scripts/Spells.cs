@@ -13,4 +13,5 @@ public class Spells : ScriptableObject
     public int _SpellPower;
     public int _SpellManaCost;
     public SpellType _SpellType;
+    public string _SpellDescription;
 }

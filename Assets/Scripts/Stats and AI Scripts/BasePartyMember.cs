@@ -18,11 +18,6 @@ public class BasePartyMember : BaseStats
     {
         if(isAlive)
         base.Update();
-
-        if (_ActionBarAmount >= 100)
-        { 
-            // able to take Action
-        }
     }
 
     //METHODS
