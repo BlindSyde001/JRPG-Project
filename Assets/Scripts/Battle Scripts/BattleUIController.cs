@@ -38,6 +38,16 @@ public class BattleUIController : MonoBehaviour
         _BM._CharacterPanels[0].transform.Find("Selected Panel").gameObject.SetActive(true);
         SetEnemyTargets();                                         // Set UI for enemies you can target
     }
+    private void Update()
+    {
+        if(chosenHero._ActionBarAmount >= 100)
+        {
+            // Can use UI to input commands
+        } else
+        {
+            // Cannot use UI to input commands
+        }
+    }
     private void LateUpdate()
     {
         CycleThroughHeroes();    // Press cycle buttons to switch between heroes, so that the UI represents that hero's action pool
