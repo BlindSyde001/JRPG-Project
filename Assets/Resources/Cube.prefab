@@ -107,9 +107,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterName: Wolf
-  spells: []
+  availableSpells: []
   inBattle: 0
   _BM: {fileID: 0}
+  _BUI: {fileID: 0}
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 10
   level: 1

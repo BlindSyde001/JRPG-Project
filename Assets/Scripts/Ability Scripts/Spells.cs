@@ -14,4 +14,23 @@ public class Spells : ScriptableObject
     public int _SpellManaCost;
     public SpellType _SpellType;
     public string _SpellDescription;
+
+    public void ModulatedSpell(BaseStats target)
+    {
+        if(_SpellType == SpellType.Attack)
+        {
+            int damageAmount;
+
+            damageAmount = (_SpellPower * 10);
+            target.TakeDamage(damageAmount, true);
+        }
+        if(_SpellType == SpellType.Heal)
+        {
+            Debug.Log("Heal from " + _SpellName);
+        }
+        if(_SpellType == SpellType.Other)
+        {
+            Debug.Log("?? from " + _SpellName);
+        }
+    }
 }

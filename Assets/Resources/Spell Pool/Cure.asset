@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cure
   m_EditorClassIdentifier: 
   _SpellName: Cure
-  _SpellID: 4
+  _SpellID: 3
   _SpellPower: 5
   _SpellManaCost: 3
   _SpellType: 1

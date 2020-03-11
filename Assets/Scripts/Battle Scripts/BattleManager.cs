@@ -82,21 +82,21 @@ public class BattleManager : MonoBehaviour
                         heroPosBack[i].transform.rotation);
                 }
                 // Find script with the hero's name and add it to the members in battle list
-                for (int j = 0; j < _gameManager._PartyMembers.Count; j++)
+                for (int j = 0; j < _gameManager._AllPartyMembers.Count; j++)
                 {
-                    if (_gameManager._PartyMembers[j].CharacterName == _gameManager.partyLineup[i])
+                    if (_gameManager._AllPartyMembers[j].CharacterName == _gameManager.partyLineup[i])
                     {
-                        _PartyMembersInBattle.Add(_gameManager._PartyMembers[j]);      // Add to current fighting list
+                        _PartyMembersInBattle.Add(_gameManager._AllPartyMembers[j]);      // Add to current fighting list
 
                         // Check status then add to appropriate list
-                        if(_gameManager._PartyMembers[j].currentHP == 0)               
+                        if(_gameManager._AllPartyMembers[j].currentHP == 0)               
                         {
-                            _DownedMembers.Add(_gameManager._PartyMembers[j]);
+                            _DownedMembers.Add(_gameManager._AllPartyMembers[j]);
                             break;
                         }
                         else                                                           
                         {
-                            _ActivePartyMembers.Add(_gameManager._PartyMembers[j]);
+                            _ActivePartyMembers.Add(_gameManager._AllPartyMembers[j]);
                             break;
                         }
                     }
@@ -182,7 +182,6 @@ public class BattleManager : MonoBehaviour
             // MP
             _CharacterPanels[i].transform.Find("MP Bar").Find("MP Value").GetComponent<TextMeshProUGUI>().text =
                 _PartyMembersInBattle[i].currentMP.ToString();
-            //+ " / " + _PartyMembersInBattle[i].maxMP.ToString();
 
             // MP Gauge
             _CharacterPanels[i].transform.Find("MP Bar").Find("MP Colour").GetComponent<Image>().fillAmount =

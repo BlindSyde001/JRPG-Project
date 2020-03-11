@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ice 3
   m_EditorClassIdentifier: 
   _SpellName: Ice 3
-  _SpellID: 9
+  _SpellID: 8
   _SpellPower: 28
   _SpellManaCost: 36
   _SpellType: 0

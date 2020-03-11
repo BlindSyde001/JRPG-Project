@@ -10,6 +10,7 @@ public class SpellButton : MonoBehaviour
     public TextMeshProUGUI spellName;
     public TextMeshProUGUI spellCost;
     public TextMeshProUGUI spellDescription;
+    public int spellID;
 
     private void Start()
     {
@@ -26,9 +27,6 @@ public class SpellButton : MonoBehaviour
         spellName.text = thisSpell._SpellName;
         spellCost.text = thisSpell._SpellManaCost.ToString();
         spellDescription.text = thisSpell._SpellDescription;
-    }
-    public void CastSpell()
-    {
-        Debug.Log(thisSpell._SpellName + " Was Cast");
+        spellID = thisSpell._SpellID;
     }
 }

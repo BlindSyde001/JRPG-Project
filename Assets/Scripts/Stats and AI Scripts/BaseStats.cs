@@ -140,39 +140,44 @@ public class BaseStats : MonoBehaviour
     }
     public bool CastMagic(Spells spell, BaseStats targetCharacter)
     {
-        bool successful = currentMP >= spell._SpellManaCost;   // Returns if you have enough mana to cast the spell
+        bool successful = currentMP >= spell._SpellManaCost && !silence;   // Returns if you have enough mana to cast the spell
 
         if (successful)
         {
             currentMP -= spell._SpellManaCost;               // Because successful, take away mana cost
-            //spell.Cast(targetCharacter);
+            spell.ModulatedSpell(targetCharacter);
+            _ActionBarAmount = 0;
+        }
+        else
+        {
+            _BUI.MessageOnScreen("Not Enough MP!");
         }
         _BM.UpdatePartyVariables();
         return successful;
     }
-    public void Defend()                      // Increase in defence for a turn
+    public void Defend()
     {
         vitality += (int)(vitality * .4f);
         Debug.Log("Increased Defence");
-    }
+    }                                             // Increase in defence for a turn
     public void UseItem(Items item, BaseStats targetCharacter)
     {
 
     }
-    public virtual void Die()                 // Go into die state
+    public virtual void Die()
     {
 
-    }
+    }                                        // Go into die state
     #endregion
     #region Receiver Methods
-    public void TakeDamage(int amount, bool magical)        //Damage taken by character
+    public void TakeDamage(int amount, bool magical)
     {
         int damageAmount = (int)(amount - (5 * (magical ? spirit : vitality)) );
         if(damageAmount < 0)
         {
             damageAmount = 0;
         }
-        print(damageAmount + " Taken!");
+        print(CharacterName + " has taken " + damageAmount + "!");
         currentHP = Mathf.Max(currentHP - damageAmount, 0);              // No going below 0 hp
         _BM.UpdatePartyVariables();
         if(currentHP == 0)
@@ -180,19 +185,19 @@ public class BaseStats : MonoBehaviour
             Die();
         }
 
-    }
-    public void HealDamage(int amount)                      // Healing taken by character
+    }                // Damage taken by character
+    public void HealDamage(int amount)
     {
         int healAmount = amount;
         print(amount + " Healed!");
         currentHP = Mathf.Min(currentHP + healAmount, maxHP);   // No overhealing
         print("Added to " + currentHP);
         _BM.UpdatePartyVariables();
-    }
-    public void InitiateATB()                               // For characters in battle, start charging their ATB gauges
+    }                              // Healing taken by character
+    public void InitiateATB()
     {
         inBattle = true;
-    }
+    }                                       // For characters in battle, start charging their ATB gauges
     #endregion
     #region Debuff
     public void Petrify()

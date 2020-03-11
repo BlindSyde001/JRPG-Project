@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fire 3
   m_EditorClassIdentifier: 
   _SpellName: Fire 3
-  _SpellID: 3
+  _SpellID: 2
   _SpellPower: 28
   _SpellManaCost: 36
   _SpellType: 0

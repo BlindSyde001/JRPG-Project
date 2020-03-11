@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lightning
   m_EditorClassIdentifier: 
   _SpellName: Lightning
-  _SpellID: 10
+  _SpellID: 9
   _SpellPower: 5
   _SpellManaCost: 3
   _SpellType: 0

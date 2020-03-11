@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wind 2
   m_EditorClassIdentifier: 
   _SpellName: Wind 2
-  _SpellID: 14
+  _SpellID: 13
   _SpellPower: 16
   _SpellManaCost: 12
   _SpellType: 0
