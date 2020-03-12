@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [System.Serializable]
 public class BaseStats : MonoBehaviour
@@ -11,6 +12,7 @@ public class BaseStats : MonoBehaviour
     public bool inBattle;
     public BattleManager _BM;
     public BattleUIController _BUI;
+    public TextMeshProUGUI damageDisplay;
 
     #region ATB Variables
     public float _ActionBarAmount;                 // Current Charge amount of ATB Gauge
@@ -180,6 +182,7 @@ public class BaseStats : MonoBehaviour
         print(CharacterName + " has taken " + damageAmount + "!");
         currentHP = Mathf.Max(currentHP - damageAmount, 0);              // No going below 0 hp
         _BM.UpdatePartyVariables();
+        StartCoroutine(DisplayDamageAmount(damageAmount));
         if(currentHP == 0)
         {
             Die();
@@ -198,6 +201,19 @@ public class BaseStats : MonoBehaviour
     {
         inBattle = true;
     }                                       // For characters in battle, start charging their ATB gauges
+    #endregion
+    #region UI Display
+    IEnumerator DisplayDamageAmount(int amountTodisplay)
+    {
+        damageDisplay.text = "";
+        string a = amountTodisplay.ToString();
+        foreach(char letter in a)
+        {
+            damageDisplay.text += letter;
+        }
+        yield return new WaitForSeconds(3);
+        damageDisplay.text = "";
+    }
     #endregion
     #region Debuff
     public void Petrify()
@@ -313,11 +329,9 @@ public class BaseStats : MonoBehaviour
         }
     }
     #endregion
-    #region Normalized Values
     // Used for the UI component to display amount in graphic representation
     public float ActionBarNormalized()
     {
         return _ActionBarAmount / 100;
     }
-    #endregion
 }

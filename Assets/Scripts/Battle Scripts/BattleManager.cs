@@ -21,6 +21,9 @@ public class BattleManager : MonoBehaviour
     [Space]
     public List<BasePartyMember> _DownedMembers;          // List of Downed Party Members; Non Targettable except for ressurection
     public List<BaseEnemy> _DownedEnemies;                // List of Downed Enemies; Non Targettable except for ressurection
+    [Space]
+    public List<GameObject> _PartyMemberModels;           // In game character model
+    public List<GameObject> _EnemyModels;                 // In game character model
     #endregion
     #region Positions
     [Header("Positions")]
@@ -62,24 +65,26 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < _gameManager.partyLineup.Count; i++)      // Cycle through party member list
         {
             if (_gameManager.partyLineup[i] != "")                    // Check if there is a party member in that slot
-            {                                                        // Check their position in the lineup. Is it front or back
+            {                                                         // Check their position in the lineup. Is it front or back
                 if (_gameManager.positionFront[i] == true)
                 {
                     // Generate Hero Model
-                    Instantiate(Resources.Load(_gameManager.partyLineup[i]) as GameObject,
+                    GameObject instantiatedHero = Instantiate(Resources.Load(_gameManager.partyLineup[i]) as GameObject,
                         new Vector3(heroPosFront[i].transform.position.x,
                         heroPosFront[i].transform.position.y + 0.5f,
                         heroPosFront[i].transform.position.z),
                         heroPosFront[i].transform.rotation);
+                    _PartyMemberModels.Add(instantiatedHero); // Add character model
                 }
                 else if (_gameManager.positionFront[i] == false)
                 {
                     // Generate Hero Model
-                    Instantiate(Resources.Load(_gameManager.partyLineup[i]) as GameObject,
+                    GameObject instantiatedHero = Instantiate(Resources.Load(_gameManager.partyLineup[i]) as GameObject,
                         new Vector3(heroPosBack[i].transform.position.x,
                         heroPosBack[i].transform.position.y + 0.5f,
                         heroPosBack[i].transform.position.z),
                         heroPosBack[i].transform.rotation);
+                    _PartyMemberModels.Add(instantiatedHero);
                 }
                 // Find script with the hero's name and add it to the members in battle list
                 for (int j = 0; j < _gameManager._AllPartyMembers.Count; j++)
@@ -119,6 +124,7 @@ public class BattleManager : MonoBehaviour
                 // Add Enemies to overall List and Active List
                 _EnemiesInBattle.Add(instantiatedEnemy.GetComponent<BaseEnemy>());
                 _ActiveEnemies.Add(instantiatedEnemy.GetComponent<BaseEnemy>());
+                _EnemyModels.Add(instantiatedEnemy); // Add enemy model
             }
         }
     }
@@ -127,11 +133,26 @@ public class BattleManager : MonoBehaviour
         // Set up the UI to represent All the Party Members in the battle Active and Downed
         for (int i = 0; i < _PartyMembersInBattle.Count; i++)                   // Cycle through Party List
         {
-            _CharacterPanels[i].SetActive(true); // Turn on UI
+            // Attach damage display
+            _PartyMembersInBattle[i].damageDisplay = 
+                _PartyMemberModels[i].transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+            // Reset Damage display
+            _PartyMembersInBattle[i].damageDisplay.text = "";
+            // Turn on UI
+            _CharacterPanels[i].SetActive(true);
             // Character Portrait
-            _CharacterPanels[i].transform.Find("Hero Image").Find("Mask").Find("Graphic").GetComponent<Image>().sprite = _PartyMembersInBattle[i].characterPortrait;
+            _CharacterPanels[i].transform.Find("Hero Image").Find("Mask").Find("Graphic").GetComponent<Image>().sprite = 
+                _PartyMembersInBattle[i].characterPortrait;
             // Character Name
-            _CharacterPanels[i].transform.Find("Hero Name").GetComponent<TextMeshProUGUI>().text = _PartyMembersInBattle[i].CharacterName;
+            _CharacterPanels[i].transform.Find("Hero Name").GetComponent<TextMeshProUGUI>().text = 
+                _PartyMembersInBattle[i].CharacterName;
+        }
+        for(int i = 0; i <_EnemyModels.Count; i++)
+        {
+            // Attach and reset damage display
+            _EnemiesInBattle[i].damageDisplay =
+                _EnemyModels[i].transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+            _EnemiesInBattle[i].damageDisplay.text = "";
         }
     }
     private void StartActionBar()
