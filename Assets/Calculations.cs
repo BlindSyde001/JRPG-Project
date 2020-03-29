@@ -1,41 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
-public class BasePartyMember : BaseStats
+public class Calculations : BaseStats
 {
-    //VARIABLES
-    #region In Battle UI Variables 
-    public Sprite characterPortrait;                   // Portrait image displayed in UI
-    public int currentLimit;                           // Limit amount of charge for special move
-    #endregion
-    public bool isAlive = true;                        // Check to see if player has not died in battle
+    float baseHP;
+    float baseMP;
+
+    float baseStr;
+    float baseInt;
+    float basePty;
+
+    float baseVit;
+    float baseSpr;
+
+    float baseAcc;
+    float baseEva;
+    float baseAgi;
+    float baseLck;
+
+    float growthRateHyper = 0.5f;
+    float growthRateStrong = 0.3f;
+    float growthRateAverage = 0.2f;
+    float growthRateWeak = 0.1f;
     
-    public int baseHP = 50;
-    public int baseMP = 20;
-
-    public int baseStr = 5;
-    public int baseInt = 5;
-    public int basePty = 5;
-
-    public int baseVit = 5;
-    public int baseSpr = 5;
-
-    public int baseAcc = 5;
-    public int baseEva = 5;
-    public int baseAgi = 5;
-    public int baseLck = 5;
-
-    float growthRateHyper = 4.5f;                      // Assigned to the Hero's Strongest stat
-    float growthRateStrong = 0.3f;                     // Assigned to the Hero's Secondary stat
-    float growthRateAverage = 0.2f;                    // Assigned to the Hero's Averaging stat
-    float growthRateWeak = 0.1f;                       // Assigned to the Hero's Weakest stat
-
-    //UPDATES
-    private void Start()
+    public TextMeshProUGUI word;
+    private void Update()
     {
+        if (level > 100)
+            level = 100;
+
+        if (level < 1)
+            level = 1;
+        
         #region Stat Growth Per Character
         switch (CharacterName)
         {
@@ -59,6 +57,22 @@ public class BasePartyMember : BaseStats
             #endregion
             #region Templar
             case "Hero2":
+
+                baseHP = 50;
+                baseMP = .1f;
+
+                baseStr = 1.4f;
+                baseInt = 1f;
+                basePty = 1f;
+
+                baseVit = 1.4f;
+                baseSpr = 1f;
+
+                baseAcc = 1f;
+                baseEva = 1f;
+                baseAgi = 1f;
+                baseLck = 1f;
+
                 strength = (int)(baseStr * (1 + growthRateStrong) * level);
                 intellect = (int)(baseInt * (1 + growthRateWeak) * level);
                 piety = (int)(basePty * (1 + growthRateAverage) * level);
@@ -71,8 +85,8 @@ public class BasePartyMember : BaseStats
                 agility = (int)(baseAgi * (1 + growthRateWeak) * level);
                 luck = (int)(baseLck * (1 + growthRateAverage) * level);
 
-                maxHP = (int)(baseHP * (1 + growthRateHyper) * level) + (strength * level);
-                maxMP = (int)(baseMP * (1 + growthRateWeak) * level) + (intellect * level);
+                maxHP = (int)((baseHP * (1 + growthRateHyper) * level) + (strength/8 + vitality) * level);
+                maxMP = (int)(baseMP * (1 + growthRateWeak) * level) + (intellect);
                 break;
             #endregion
             #region Shaman
@@ -185,19 +199,18 @@ public class BasePartyMember : BaseStats
                 #endregion
         }
         #endregion
-    }
-    new void Update()
-    {
-        if(isAlive)
-        base.Update();
-    }
-
-    //METHODS
-    public override void Die()
-    {
-        isAlive = false;
-        _BM._ActivePartyMembers.Remove(this);
-        _BM._DownedMembers.Add(this);
-        _BM.UpdatePartyAliveStatus();
+        word.text = CharacterName
+            + "\n\nLevel = " + level
+            + "\nHP = " + maxHP
+            + "\nMP = " + maxMP
+            + "\n\nStr = " + strength
+            + "\nInt = " + intellect
+            + "\nPty = " + piety
+            + "\nVit = " + vitality
+            + "\nSpr = " + spirit
+            + "\nAcc = " + accuracy
+            + "\nEva = " + evasion
+            + "\nAgi = " + agility
+            + "\nLck = " + luck;
     }
 }
