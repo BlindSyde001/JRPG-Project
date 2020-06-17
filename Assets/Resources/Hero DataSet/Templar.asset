@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c339e1ee530b46647b9f43ee96dba46e, type: 3}
+  m_Name: Templar
+  m_EditorClassIdentifier: 
+  ID: Templar
+  _characterType: 0
+  level: 12
+  totalXP: 3891
+  baseHP: 50
+  baseMP: 5
+  baseAtkPwr: 30
+  baseMagAtkPwr: 30
+  baseDef: 30
+  baseMagDef: 30
+  baseStr: 1.5
+  baseMnd: 1
+  baseVit: 1.4
+  baseSpr: 1.45
+  baseSpd: 10
+  baseLck: 5
+  actionBarRecharge: 20

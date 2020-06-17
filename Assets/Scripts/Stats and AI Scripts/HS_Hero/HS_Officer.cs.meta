@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: fca0ef1b22b30e74ea9f4b5edd48fa26
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _BM: {instanceID: 0}
+  - _BUI: {instanceID: 0}
+  - damageDisplay: {instanceID: 0}
+  - characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
+      type: 3}
+  - thisChara: {fileID: 11400000, guid: 91fb544bf8bfb1c429a895cd2feef069, type: 2}
+  - characterPortrait: {fileID: 21300000, guid: 35496bef0ea47b348b43482aedc2d176,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

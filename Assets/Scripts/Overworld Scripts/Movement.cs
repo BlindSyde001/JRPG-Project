@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -14,13 +15,13 @@ public class Movement : MonoBehaviour
     public Transform referenceDirection;
     private CharacterController _cc;
     private SystemInput _systemInput;
-    public float slopeForceRayLength;
-    public float slopeForce;
+    public float slopeForceRayLength = 2f;
+    public float slopeForce = 4f;
     #endregion
     #region Movement & Rotation
     [Header("MOVEMENT & ROTATION")]
     [SerializeField]
-    private float velocity = 5f;
+    private float velocity = 8f;
     [SerializeField]
     private float turnSpeed = 20;
 
@@ -41,6 +42,7 @@ public class Movement : MonoBehaviour
         _systemInput = FindObjectOfType<SystemInput>();
         _cc = this.GetComponent<CharacterController>();
         cam = Camera.main.transform;
+        referenceDirection = GameObject.Find("Movement Reference").transform;
     }
     private void FixedUpdate()
     {
@@ -71,12 +73,11 @@ public class Movement : MonoBehaviour
         input.y = 0F;
 
         if (input.magnitude > 1F)
-            input.Normalize();                 //Normalize so movement in all directions is same speed
+            input.Normalize();                 // Normalize so movement in all directions is same speed
 
         angle = Mathf.Atan2(input.x, input.z);
         angle = Mathf.Rad2Deg * angle;
     }
-
     void rotate()
     {
         targetRotation = Quaternion.Euler(0, angle, 0);
@@ -94,4 +95,24 @@ public class Movement : MonoBehaviour
         _LookRotation = Quaternion.LookRotation(_direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, _LookRotation, Time.deltaTime * _RotationSpeed);
     }
+    #region Level Changing
+    //private void OnEnable()
+    //{
+    //    SceneManager.sceneLoaded += OnNewSceneLoaded;
+    //}
+    //private void OnDisable()
+    //{
+    //    SceneManager.sceneLoaded -= OnNewSceneLoaded;
+    //}
+    //private void OnNewSceneLoaded(Scene scene, LoadSceneMode mode)
+    //{
+    //    if(scene.name != "Battle Scene")
+    //    {
+    //    _systemInput = FindObjectOfType<SystemInput>();
+    //    _cc = this.GetComponent<CharacterController>();
+    //    cam = Camera.main.transform;
+    //    referenceDirection = GameObject.Find("Movement Reference").transform;
+    //    }
+    //}
+    #endregion
 }

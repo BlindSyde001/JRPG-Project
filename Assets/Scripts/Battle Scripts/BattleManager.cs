@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class BattleManager : MonoBehaviour
@@ -64,12 +65,12 @@ public class BattleManager : MonoBehaviour
         // Instantiate selected heroes in party lineup
         for (int i = 0; i < _gameManager.partyLineup.Count; i++)      // Cycle through party member list
         {
-            if (_gameManager.partyLineup[i] != "")                    // Check if there is a party member in that slot
+            if (_gameManager.partyLineup[i] != null)                  // Check if there is a party member in that slot
             {                                                         // Check their position in the lineup. Is it front or back
                 if (_gameManager.positionFront[i] == true)
                 {
                     // Generate Hero Model
-                    GameObject instantiatedHero = Instantiate(Resources.Load(_gameManager.partyLineup[i]) as GameObject,
+                    GameObject instantiatedHero = Instantiate((_gameManager.partyLineup[i].characterModel) as GameObject,
                         new Vector3(heroPosFront[i].transform.position.x,
                         heroPosFront[i].transform.position.y + 0.5f,
                         heroPosFront[i].transform.position.z),
@@ -79,7 +80,7 @@ public class BattleManager : MonoBehaviour
                 else if (_gameManager.positionFront[i] == false)
                 {
                     // Generate Hero Model
-                    GameObject instantiatedHero = Instantiate(Resources.Load(_gameManager.partyLineup[i]) as GameObject,
+                    GameObject instantiatedHero = Instantiate((_gameManager.partyLineup[i].characterModel) as GameObject,
                         new Vector3(heroPosBack[i].transform.position.x,
                         heroPosBack[i].transform.position.y + 0.5f,
                         heroPosBack[i].transform.position.z),
@@ -89,7 +90,7 @@ public class BattleManager : MonoBehaviour
                 // Find script with the hero's name and add it to the members in battle list
                 for (int j = 0; j < _gameManager._AllPartyMembers.Count; j++)
                 {
-                    if (_gameManager._AllPartyMembers[j].CharacterName == _gameManager.partyLineup[i])
+                    if (_gameManager._AllPartyMembers[j].thisChara.ID == _gameManager.partyLineup[i].CharacterName)
                     {
                         _PartyMembersInBattle.Add(_gameManager._AllPartyMembers[j]);      // Add to current fighting list
 
@@ -112,18 +113,18 @@ public class BattleManager : MonoBehaviour
         // Instantiate Enemies into lineup positions
         for (int i = 0; i < _gameManager.enemyLineup.Count; i++)
         {
-            if (_gameManager.enemyLineup[i] != "")
+            if (_gameManager.enemyLineup[i] != null)
             {
                 // Generate Enemy Model
-                GameObject instantiatedEnemy = Instantiate(Resources.Load(_gameManager.enemyLineup[i]) as GameObject,
+                GameObject instantiatedEnemy = Instantiate((_gameManager.enemyLineup[i].characterModel) as GameObject,
                     new Vector3(enemyPos[i].transform.position.x,
                     enemyPos[i].transform.position.y + 0.5f,
                     enemyPos[i].transform.position.z),
                     enemyPos[i].transform.rotation);
 
                 // Add Enemies to overall List and Active List
-                _EnemiesInBattle.Add(instantiatedEnemy.GetComponent<BaseEnemy>());
-                _ActiveEnemies.Add(instantiatedEnemy.GetComponent<BaseEnemy>());
+                _EnemiesInBattle.Add(_gameManager.enemyLineup[i]);
+                _ActiveEnemies.Add(_gameManager.enemyLineup[i]);
                 _EnemyModels.Add(instantiatedEnemy); // Add enemy model
             }
         }
@@ -159,12 +160,12 @@ public class BattleManager : MonoBehaviour
     {
         foreach (BasePartyMember x in _ActivePartyMembers)
         {
-            x._ActionBarAmount = x.agility + x.level;
+            x._ActionBarAmount = x.speed + x.level;
             x.InitiateATB();
         }
         foreach (BaseEnemy y in _ActiveEnemies)
         {
-            y._ActionBarAmount = y.agility + y.level;
+            y._ActionBarAmount = y.speed + y.level;
             y.InitiateATB();
         }
     }
@@ -173,6 +174,8 @@ public class BattleManager : MonoBehaviour
     public void VictoryState()
     {
         _BUI.MessageOnScreen("Victory!");
+        Destroy(FindObjectOfType<EnemyInfoScript>().gameObject);
+        SceneManager.LoadScene(_gameManager.currentScene);
     }
     public void GameOverState()
     {

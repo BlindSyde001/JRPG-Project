@@ -50,7 +50,7 @@ public class DialogueManager : MonoBehaviour
     }
     public void EndDialogue()
     {
-        FindObjectOfType<Interaction>().anim.SetBool("IsOpen", false);        // Play Message box close Anim.
+        FindObjectOfType<Interaction>().msgBoxAnim.SetBool("IsOpen", false);        // Play Message box close Anim.
         FindObjectOfType<Interaction>().convoCont = false;                    // Reset bool for next use.
     }
 }

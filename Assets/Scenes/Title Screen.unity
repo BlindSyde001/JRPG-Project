@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -457,7 +458,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &774205094
 GameObject:
@@ -1454,8 +1455,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1481846784}
   - component: {fileID: 1481846786}
+  - component: {fileID: 1481846785}
   m_Layer: 0
-  m_Name: Data Transfer
+  m_Name: DATA TRANSFER
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1473,8 +1475,54 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1481846785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481846783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693b282244a008445beff31ae8ae7b9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterName: 
+  availableSpells: []
+  inBattle: 0
+  _BM: {fileID: 0}
+  _BUI: {fileID: 0}
+  damageDisplay: {fileID: 0}
+  characterModel: {fileID: 0}
+  _ActionBarAmount: 0
+  _ActionBarRechargeAmount: 0
+  level: 0
+  currentXP: 0
+  nextLevelXP: 0
+  attackPower: 0
+  magAttackPower: 0
+  defense: 0
+  magDefense: 0
+  strength: 0
+  mind: 0
+  vitality: 0
+  spirit: 0
+  speed: 0
+  luck: 0
+  maxHP: 0
+  maxMP: 0
+  currentHP: 0
+  currentMP: 0
+  isAlive: 1
+  thisChara: {fileID: 11400000, guid: 776ce631b157a7742b46541635f32a6f, type: 2}
+  characterPortrait: {fileID: 21300000, guid: 11a050d0f53cbc749842b8a9d59d6c24, type: 3}
+  currentLimit: 0
+  growthRateHyper: 0.5
+  growthRateStrong: 0.3
+  growthRateAverage: 0.2
+  growthRateWeak: 0.1
 --- !u!114 &1481846786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1488,20 +1536,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partyLineup:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   enemyLineup:
-  - 
-  - 
-  - 
-  - 
-  - 
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  positionFront: 
+  _AllPartyMembers: []
+  _SpellsPool: []
+  currentScene: 
 --- !u!1 &1508625216
 GameObject:
   m_ObjectHideFlags: 0
@@ -1527,8 +1579,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1508625216}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10

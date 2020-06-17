@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c339e1ee530b46647b9f43ee96dba46e, type: 3}
+  m_Name: Machinist
+  m_EditorClassIdentifier: 
+  ID: Machinist
+  _characterType: 0
+  level: 7
+  baseHP: 50
+  baseMP: 1
+  baseAtkPwr: 0
+  baseMagAtkPwr: 0
+  baseDef: 0
+  baseMagDef: 0
+  baseStr: 1
+  baseMnd: 0
+  baseVit: 1
+  baseSpr: 1
+  baseSpd: 0
+  baseLck: 1
+  actionBarRecharge: 0
