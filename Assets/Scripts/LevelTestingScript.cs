@@ -14,6 +14,7 @@ public class LevelTestingScript : MonoBehaviour
 
     void Update()
     {
+        Test();
         Reset();
         addXP();
         NextLevel();
@@ -24,7 +25,14 @@ public class LevelTestingScript : MonoBehaviour
             + "\n"+ "Difference: " + (nextLvlXP - totalXP);
 
     }
-
+    private void Test()
+    {
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            GameObject DPSer = Instantiate(Resources.Load("Prefabs/CriticalDamageText") as GameObject, new Vector3(0, 0, 0), new Quaternion(0,0,0,0));
+            DPSer.GetComponent<DamageNumbers>().damageToDisplay = Random.Range(1, 1000);
+        }
+    }
     private void NextLevel()
     {
         nextLvlXP = (int)(baseXP * Mathf.Pow(level, exponential) + (baseXP * level));

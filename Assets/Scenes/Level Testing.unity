@@ -630,6 +630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4626b6546b0c7fa42a011d532a867c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dps: {fileID: 1346250175591736288, guid: 6fe631926dd6c5e489940a980aee99dc, type: 3}
   text: {fileID: 687770925}
   level: 7
   totalXP: 1014
@@ -687,7 +688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

@@ -13,8 +13,11 @@ public class BaseStats : MonoBehaviour
     public bool inBattle;
     public BattleManager _BM;
     public BattleUIController _BUI;
-    public TextMeshProUGUI damageDisplay;
+    public GameObject _DPSSpawnPoint;
     public GameObject characterModel;
+
+    private bool _CounterReady;                  // Is character able to counter physical attacks
+    private bool _MCounterReady;                 // Is character able to counter magical attacks
 
     #region ATB Variables
     public float _ActionBarAmount;                 // Current Charge amount of ATB Gauge
@@ -58,7 +61,7 @@ public class BaseStats : MonoBehaviour
     }
     public virtual void Update()
     {
-        if (inBattle)
+        if (inBattle && !_BUI.endOfFight)
         {
             _ActionBarAmount += _ActionBarRechargeAmount * Time.deltaTime;          // Recharge your action bar so you can take a turn
             _ActionBarAmount = Mathf.Clamp(_ActionBarAmount, 0, 100);
@@ -76,18 +79,16 @@ public class BaseStats : MonoBehaviour
 
         if(successful)
         {
-            print("Attack connected!");
             bool crit;
-            if (Random.Range(0, 100) < luck)
+            if (Random.Range(0, 101) < luck)
                 crit = true;
             else
                 crit = false;
             int damage = (int)(attackPower * Random.Range(1f,1.5f) * (crit ? 1.75 : 1)); // attackPower, randomRoll, crit.
-            targetCharacter.TakeDamage(damage, false);
+            targetCharacter.TakeDamage(damage, false, crit);
         } else
         {
-            print("Attack Failed!");
-            targetCharacter.StartCoroutine(NonHit("Missed!"));
+            targetCharacter.TakeDamage(0, false, false);
         }
         return successful;
     }
@@ -123,22 +124,28 @@ public class BaseStats : MonoBehaviour
     }                                        // Go into die state
     #endregion
     #region Receiver Methods
-    public void TakeDamage(int amount, bool magical)
+    public void TakeDamage(int amount, bool magical, bool wasCritical)
     {
         int damageAmount = (int)(amount - (5 + (magical ? magDefense : defense)) );
         if(damageAmount < 0)
         {
             damageAmount = 0;
         }
-        print(CharacterName + " has taken " + damageAmount + "!");
-        currentHP = Mathf.Max(currentHP - damageAmount, 0);              // No going below 0 hp
-        _BM.UpdatePartyVariables();
-        StartCoroutine(DisplayDamageAmount(damageAmount));
-        if(currentHP == 0)
+        if (damageAmount == 0)
         {
-            Die();
+            DamageDisplay(damageAmount, false);
         }
-
+        else
+        {
+            print(CharacterName + " has taken " + damageAmount + "!");
+            currentHP = Mathf.Max(currentHP - damageAmount, 0);              // No going below 0 hp
+            _BM.UpdatePartyVariables();
+            DamageDisplay(damageAmount, wasCritical);
+            if (currentHP == 0)
+            {
+                Die();
+            }
+        }
     }                // Damage taken by character
     public void HealDamage(int amount)
     {
@@ -154,23 +161,22 @@ public class BaseStats : MonoBehaviour
     }                                       // For characters in battle, start charging their ATB gauges
     #endregion
     #region UI Display
-    IEnumerator DisplayDamageAmount(int amountTodisplay)
+    private void DamageDisplay(int damageAmount, bool wasCritical)
     {
-        damageDisplay.text = "";
-        string a = amountTodisplay.ToString();
-        foreach(char letter in a)
+        if(wasCritical)
         {
-            damageDisplay.text += letter;
+            GameObject _damageDisplay = Instantiate(Resources.Load("Prefabs/CriticalDamageText") as GameObject,
+                                                   _DPSSpawnPoint.transform.position,
+                                                   _DPSSpawnPoint.transform.rotation);
+            _damageDisplay.GetComponent<DamageNumbers>().damageToDisplay = damageAmount;
         }
-        yield return new WaitForSeconds(3);
-        damageDisplay.text = "";
-    }
-    IEnumerator NonHit(string disp)
-    {
-        damageDisplay.text = "";
-        damageDisplay.text = disp;
-        yield return new WaitForSeconds(3);
-        damageDisplay.text = "";
+        else if(!wasCritical)
+        {
+            GameObject _damageDisplay = Instantiate(Resources.Load("Prefabs/DamageText") as GameObject,
+                                                _DPSSpawnPoint.transform.position,
+                                                _DPSSpawnPoint.transform.rotation);
+            _damageDisplay.GetComponent<DamageNumbers>().damageToDisplay = damageAmount;
+        }
     }
     #endregion
     #region Debuff
@@ -289,10 +295,6 @@ public class BaseStats : MonoBehaviour
     #endregion
 
     // Used for the UI component to display amount in graphic representation
-    public float ActionBarNormalized()
-    {
-        return _ActionBarAmount / 100;
-    }
     #region Level Changing
     private void OnEnable()
     {
@@ -311,4 +313,8 @@ public class BaseStats : MonoBehaviour
         }
     }
     #endregion
+    public float ActionBarNormalized()
+    {
+        return _ActionBarAmount / 100;
+    }
 }

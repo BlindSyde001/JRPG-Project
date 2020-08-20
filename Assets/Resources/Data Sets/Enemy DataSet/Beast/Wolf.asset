@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c339e1ee530b46647b9f43ee96dba46e, type: 3}
   m_Name: Wolf
   m_EditorClassIdentifier: 
-  ID: 
+  ID: Wolf
   _characterType: 1
-  level: 10
+  level: 5
+  totalXP: 0
   baseHP: 0
   baseMP: 0
   baseAtkPwr: 0

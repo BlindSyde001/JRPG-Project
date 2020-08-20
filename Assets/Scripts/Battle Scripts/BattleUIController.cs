@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class BattleUIController : MonoBehaviour
@@ -15,6 +16,14 @@ public class BattleUIController : MonoBehaviour
     public GameObject firstMagicButton;
     public GameObject messageBox;                 // For any messages needed to be written to player i.e victory/defeat, speech, etc
     public TextMeshProUGUI messageText;           // Text component of above
+
+    #region End of fight Screen
+    public GameObject finishMessageBox;
+    public List<GameObject> finishHeroPanel;
+    public bool endOfFight;
+    private int endOfFightTransition = 0;
+    private float t = 0;
+    #endregion
 
     #region Navigate UI Variables
     public List<Button> _CommandPanelButtons;     // Inputs for the player
@@ -47,6 +56,7 @@ public class BattleUIController : MonoBehaviour
     private void Start()
     {
         messageBox.SetActive(false);                               // turned on only when needed
+        finishMessageBox.SetActive(false);
         chosenHero = _BM._ActivePartyMembers[0];                   // Set first hero to control through UI
         _BM._CharacterPanels[0].transform.Find("Selected Panel").gameObject.SetActive(true);
         SetEnemyTargets();                                         // Set UI for enemies you can target
@@ -54,6 +64,10 @@ public class BattleUIController : MonoBehaviour
     }
     private void Update()
     {
+        if(endOfFight)
+        {
+            EndOfFightMessaging();
+        }
         if (chosenHero._ActionBarAmount >= 100)
         {
             ToggleCommandButtons(true); // Can use UI to input commands
@@ -261,20 +275,48 @@ public class BattleUIController : MonoBehaviour
         PerformAction(action, targetForAction);
     }
     #endregion
+    #region Finish Battle Messaging
+    private void EndOfFightMessaging()
+    {
+        MessageOnScreen("Victory!");
+        t += Time.deltaTime;
+        if(Input.GetButtonDown("Submit"))
+        {
+            if (t > 2)
+            {
+                endOfFightTransition++;
+                switch (endOfFightTransition)
+                {
+                    case 2:   // Bring up the EXP Screen for fighting members
+                        for (int i = 0; i < _BM._PartyMembersInBattle.Count; i++)
+                        {
+                            finishMessageBox.SetActive(true);
+                            finishHeroPanel[i].GetComponentInChildren<TextMeshProUGUI>().text = _BM._PartyMembersInBattle[i].CharacterName;
+                        }
+                        break;
+                    case 3:  // Tally the Experience
+                        foreach (BasePartyMember a in _BM._ActivePartyMembers)
+                        {
+                            a.totalXP += _BM.expPool / _BM._ActivePartyMembers.Count;
+                            Debug.Log(a.CharacterName + "Has gained " + (int)(_BM.expPool / _BM._ActivePartyMembers.Count) + " XP!");
+                        }
+                        break;
+                    case 4:  // Resume Game
+                        endOfFightTransition = 0;
+                        SceneManager.LoadScene(_BM._gameManager.currentScene);
+                        break;
+                }
+                t = 0;
+            }
+        }
+    }
+    #endregion
     #region Outputs
     public void MessageOnScreen(string text)
     {
         messageBox.SetActive(true);
         messageText.text = text;
-
-        //float t = 0;
-        //float cd = 3;
-        //t += Time.deltaTime;
-        //if(t >= cd)
-        //{
-        //    messageText.text = "";
-            
-        //}
+        
     }              // Display a message
     public void PerformAction(string action, BaseStats target)
     {

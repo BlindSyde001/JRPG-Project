@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
     public enum AbilityType { Damage, Heal, Other };
-[CreateAssetMenu(fileName = "Item", menuName = "Items")]
+[CreateAssetMenu(fileName = "Ability", menuName = "Abilities")]
 
 public class Abilities : ScriptableObject
 {

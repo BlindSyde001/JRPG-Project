@@ -22,7 +22,7 @@ public class Spells : ScriptableObject
             int damageAmount;
 
             damageAmount = (_SpellPower * 10);
-            target.TakeDamage(damageAmount, true);
+            target.TakeDamage(damageAmount, true, false);
         }
         if(_SpellType == SpellType.Heal)
         {

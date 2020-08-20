@@ -9,8 +9,8 @@ public class BattleManager : MonoBehaviour
 {
     //VARIABLES
     #region Reference Variables
-    private GameManager _gameManager;
     private BattleUIController _BUI;
+    public GameManager _gameManager;
     public List<GameObject> _CharacterPanels;             // The UI components showing the stats of party members
 
     [Header("Reference Variables")]
@@ -32,6 +32,7 @@ public class BattleManager : MonoBehaviour
     public List<GameObject> heroPosBack;
     public List<GameObject> enemyPos;
     #endregion
+    public int expPool;     // Total XP gained from defeating enemies, to be split between party members
 
     //UPDATES
     private void Awake()
@@ -134,11 +135,8 @@ public class BattleManager : MonoBehaviour
         // Set up the UI to represent All the Party Members in the battle Active and Downed
         for (int i = 0; i < _PartyMembersInBattle.Count; i++)                   // Cycle through Party List
         {
-            // Attach damage display
-            _PartyMembersInBattle[i].damageDisplay = 
-                _PartyMemberModels[i].transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
-            // Reset Damage display
-            _PartyMembersInBattle[i].damageDisplay.text = "";
+            _PartyMembersInBattle[i]._DPSSpawnPoint =
+            _PartyMemberModels[i].transform.GetChild(0).gameObject;
             // Turn on UI
             _CharacterPanels[i].SetActive(true);
             // Character Portrait
@@ -150,10 +148,9 @@ public class BattleManager : MonoBehaviour
         }
         for(int i = 0; i <_EnemyModels.Count; i++)
         {
+            _EnemiesInBattle[i]._DPSSpawnPoint =
+                _EnemyModels[i].transform.GetChild(0).gameObject;
             // Attach and reset damage display
-            _EnemiesInBattle[i].damageDisplay =
-                _EnemyModels[i].transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
-            _EnemiesInBattle[i].damageDisplay.text = "";
         }
     }
     private void StartActionBar()
@@ -173,9 +170,8 @@ public class BattleManager : MonoBehaviour
     #region End of Game States
     public void VictoryState()
     {
-        _BUI.MessageOnScreen("Victory!");
+        _BUI.endOfFight = true;
         Destroy(FindObjectOfType<EnemyInfoScript>().gameObject);
-        SceneManager.LoadScene(_gameManager.currentScene);
     }
     public void GameOverState()
     {

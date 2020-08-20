@@ -12,4 +12,5 @@ public class Items : ScriptableObject
     public int _ItemID;
     public int _ItemAmount;
     public ItemType _ItemType;
+    public string _ItemDescription;
 }

@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerCharacter;             // Moving model for open world
 
     private GameObject _EnemyInfo;                 // Gameobject with enemy scripts for battle scene
+    public float _InGameTime;
 
     private void Awake()
     {
