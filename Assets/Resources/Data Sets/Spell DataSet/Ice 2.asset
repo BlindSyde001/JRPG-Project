@@ -16,5 +16,8 @@ MonoBehaviour:
   _SpellID: 7
   _SpellPower: 16
   _SpellManaCost: 12
-  _SpellType: 0
   _SpellDescription: Deal a moderate amount of Ice damage
+  _SpellTarget: 0
+  _SpellType: 0
+  _SpellElement: 0
+  _SpellCombat: 0

@@ -6867,7 +6867,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemButton: {fileID: 6527013210756310038, guid: e342922ddbca1e045b7392561dc4a923,
     type: 3}
-  itemButtonContainer: {fileID: 709757592}
+  itemButtonContainerUI: {fileID: 0}
+  itemButtonContainerBattle: {fileID: 0}
   _Items:
   - {fileID: 11400000, guid: a86f1ee186463e04796b5f9ded7e0577, type: 2}
   - {fileID: 11400000, guid: bb766eb822d3ed541b84bd3d8c6cf3d4, type: 2}
@@ -15654,6 +15655,7 @@ MonoBehaviour:
   enemiesInScene:
   - {fileID: 2016976531}
   - {fileID: 2016976530}
+  - {fileID: 2016976533}
   stageEncounterRate: 5
   enemyEncounterInt: 0
 --- !u!1 &1927556515
@@ -16224,6 +16226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2016976529}
   - component: {fileID: 2016976532}
+  - component: {fileID: 2016976533}
   - component: {fileID: 2016976531}
   - component: {fileID: 2016976530}
   m_Layer: 0
@@ -16343,6 +16346,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41542d1ad3ade4542adc76084ad2cb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2016976533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016976528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6635f1ca800c3d4fb2163d5eb96f107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterName: 
+  availableSpells: []
+  inBattle: 0
+  _BM: {fileID: 0}
+  _BUI: {fileID: 0}
+  _DPSSpawnPoint: {fileID: 0}
+  characterModel: {fileID: 5256651195431094718, guid: 8be2a9be80fc835499331467c9b83d8a,
+    type: 3}
+  _ActionBarAmount: 0
+  _ActionBarRechargeAmount: 0
+  level: 0
+  totalXP: 0
+  nextLevelXP: 0
+  attackPower: 0
+  magAttackPower: 0
+  defense: 0
+  magDefense: 0
+  strength: 0
+  mind: 0
+  vitality: 0
+  spirit: 0
+  speed: 0
+  luck: 0
+  maxHP: 0
+  maxMP: 0
+  currentHP: 0
+  currentMP: 0
+  isAlive: 0
+  x: 0
+  targetCharacter: {fileID: 0}
 --- !u!1 &2021610032
 GameObject:
   m_ObjectHideFlags: 0

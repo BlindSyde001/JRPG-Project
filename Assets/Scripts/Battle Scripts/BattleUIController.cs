@@ -282,7 +282,7 @@ public class BattleUIController : MonoBehaviour
         t += Time.deltaTime;
         if(Input.GetButtonDown("Submit"))
         {
-            if (t > 2)
+            if (t > 1.5f)
             {
                 endOfFightTransition++;
                 switch (endOfFightTransition)
@@ -320,25 +320,27 @@ public class BattleUIController : MonoBehaviour
     }              // Display a message
     public void PerformAction(string action, BaseStats target)
     {
-        if(action == "Attack")
+        switch(action)
         {
-            chosenHero.Attack(target);
-            chosenHero._ActionBarAmount = 0;
-        }
-        else if(action == "Magic")
-        {
-            Debug.Log(chosenHero.CharacterName + " casted " + _GM._SpellsPool[_SpellID]._SpellName);
-            Spells spellToCast = _GM._SpellsPool[_SpellID];   // Define the spell to be cast
-            chosenHero.CastMagic(spellToCast, target);        // Send to player info to cast spell with their stats
-            //chosenHero._ActionBarAmount = 0;
-        }
-        else if (action == "Ability")
-        {
-            chosenHero._ActionBarAmount = 0;
-        }
-        else if( action == "Item")
-        {
-            chosenHero._ActionBarAmount = 0;
+            case "Attack":
+                chosenHero.Attack(target);
+                chosenHero._ActionBarAmount = 0;
+                break;
+
+            case "Magic":
+                Debug.Log(chosenHero.CharacterName + " casted " + _GM._SpellsPool[_SpellID]._SpellName);
+                Spells spellToCast = _GM._SpellsPool[_SpellID];   // Define the spell to be cast
+                chosenHero.CastMagic(spellToCast, target);        // Send to player info to cast spell with their stats
+                //chosenHero._ActionBarAmount = 0;
+                break;
+
+            case "Ability":
+                chosenHero._ActionBarAmount = 0;
+                break;
+
+            case "Item":
+                chosenHero._ActionBarAmount = 0;
+                break;
         }
         SetOffAllPanels();
         startOfGameSelected.GetComponent<Button>().Select();

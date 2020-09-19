@@ -5,6 +5,7 @@ using UnityEngine;
 public class ES_Bandit : BaseEnemy
 {
     private int potionCount = 3;
+
     private void Start()
     {
         CharacterName = "Bandit";
@@ -19,6 +20,7 @@ public class ES_Bandit : BaseEnemy
         currentMP = 50;
 
         attackPower = 5;
+        luck = 25;
     }
     new void Update()
     {
@@ -43,6 +45,7 @@ public class ES_Bandit : BaseEnemy
             Stab();
         }
     }
+
     private void Stab()
     {
         int damage = attackPower * 20;
@@ -63,7 +66,7 @@ public class ES_Bandit : BaseEnemy
                         targetCharacter = _BM._ActiveEnemies[i];
                      }
             }
-            targetCharacter.HealDamage(50);                                          // Heal Enemy
+            targetCharacter.HealDamage(50, false);                                          // Heal Enemy
             potionCount--;
         }
         else

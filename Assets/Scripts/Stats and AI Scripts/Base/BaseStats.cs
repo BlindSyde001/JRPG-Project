@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 [System.Serializable]
 public class BaseStats : MonoBehaviour
@@ -99,7 +100,7 @@ public class BaseStats : MonoBehaviour
         if (successful)
         {
             currentMP -= spell._SpellManaCost;                  // Because successful, take away mana cost
-            spell.ModulatedSpell(targetCharacter);
+            spell.ModulatedSpell(this, targetCharacter);
             _ActionBarAmount = 0;
         }
         else
@@ -147,7 +148,7 @@ public class BaseStats : MonoBehaviour
             }
         }
     }                // Damage taken by character
-    public void HealDamage(int amount)
+    public void HealDamage(int amount, bool wasCritical)
     {
         int healAmount = amount;
         print(amount + " Healed!");
@@ -318,3 +319,79 @@ public class BaseStats : MonoBehaviour
         return _ActionBarAmount / 100;
     }
 }
+
+public class BasePartyMember : BaseStats
+{
+    //VARIABLES
+    public bool isAlive = true;                        // Check to see if player has not died in battle
+    public StatsDataAsset thisChara;                   // The data asset containing information on the character
+    public Sprite characterPortrait;                   // Portrait image displayed in UI
+    public int currentLimit;                           // Limit amount of charge for special move
+    #region Growth Stat Base
+    [HideInInspector]
+    public float growthRateHyper = 0.5f;                      // Assigned to the Hero's Strongest stat
+    [HideInInspector]
+    public float growthRateStrong = 0.3f;                     // Assigned to the Hero's Secondary stat
+    [HideInInspector]
+    public float growthRateAverage = 0.2f;                    // Assigned to the Hero's Averaging stat
+    [HideInInspector]
+    public float growthRateWeak = 0.1f;                       // Assigned to the Hero's Weakest stat
+    #endregion
+
+    //UPDATES
+    new void Update()
+    {
+        if (isAlive)
+            base.Update();
+    }
+
+    //METHODS
+    public void NextLevel()
+    {
+        nextLevelXP = (int)(15 * Mathf.Pow(level, 2.3f) + (15 * level));
+        if (totalXP >= nextLevelXP)
+        {
+            level++;
+        }
+    }
+    public override void Die()
+    {
+        isAlive = false;
+        _BM._ActivePartyMembers.Remove(this);
+        _BM._DownedMembers.Add(this);
+        _BM.UpdatePartyAliveStatus();
+    }
+}
+
+public class BaseEnemy : BaseStats
+{
+    public bool isAlive;
+    public int x;
+    public BaseStats targetCharacter;
+    //UPDATES
+    new void Update()
+    {
+        if (isAlive)
+        {
+            base.Update();
+        }
+    }
+
+    //METHODS
+    public override void Die()
+    {
+        isAlive = false;
+        int i = _BM._ActiveEnemies.IndexOf(this);
+        _BM._ActiveEnemies.Remove(this);       // Remove from targetting list
+        _BM._DownedEnemies.Add(this);          // Add to downed list (for XP tally/revives, etc)
+        _BUI.SetEnemyTargets();
+        FindObjectOfType<BattleManager>().expPool += totalXP; // Add XP amount to total pool
+        Destroy(_BM._EnemyModels[i]);
+        _BM._EnemyModels.Remove(_BM._EnemyModels[i]);
+        if (_BM._ActiveEnemies.Count == 0)   // Win if no more enemies
+        {
+            _BM.VictoryState();
+        }
+    }
+}
+

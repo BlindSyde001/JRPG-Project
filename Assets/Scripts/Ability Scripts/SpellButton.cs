@@ -5,18 +5,18 @@ using TMPro;
 
 public class SpellButton : MonoBehaviour
 {
+    //VARIABLES
     public Spells thisSpell;
     public TextMeshProUGUI spellButtonName;
     public TextMeshProUGUI spellName;
     public TextMeshProUGUI spellCost;
     public TextMeshProUGUI spellDescription;
-    public int spellID;
 
+    //METHODS
     private void Start()
     {
         SetButton(thisSpell);
     }
-    //Initializes the button with the spell data
     public void SetButton(Spells _spell)
     {
         thisSpell = _spell;
@@ -27,6 +27,5 @@ public class SpellButton : MonoBehaviour
         spellName.text = thisSpell._SpellName;
         spellCost.text = thisSpell._SpellManaCost.ToString();
         spellDescription.text = thisSpell._SpellDescription;
-        spellID = thisSpell._SpellID;
     }
 }

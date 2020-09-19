@@ -16,5 +16,8 @@ MonoBehaviour:
   _SpellID: 12
   _SpellPower: 5
   _SpellManaCost: 3
-  _SpellType: 0
   _SpellDescription: Deal a small amount of Wind damage
+  _SpellTarget: 0
+  _SpellType: 0
+  _SpellElement: 0
+  _SpellCombat: 0

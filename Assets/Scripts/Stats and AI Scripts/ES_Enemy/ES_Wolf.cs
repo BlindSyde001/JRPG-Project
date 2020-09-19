@@ -18,6 +18,7 @@ public class ES_Wolf : BaseEnemy
         currentMP = 50;
 
         attackPower = 10;
+        luck = 25;
     }
     new void Update()
     {
@@ -40,13 +41,17 @@ public class ES_Wolf : BaseEnemy
                 break;
 
             case 1:
-                int x = Random.Range(0, _BM._ActivePartyMembers.Count);
-                BaseStats targetCharacter = _BM._ActivePartyMembers[x];
-
-                print(CharacterName + " Attacked " + targetCharacter.CharacterName);
-                Attack(targetCharacter);
+                BasicAttack();
                 break;
         }
+    }
+
+    private void BasicAttack()
+    {
+        int x = Random.Range(0, _BM._ActivePartyMembers.Count);
+        BaseStats targetCharacter = _BM._ActivePartyMembers[x];
+        print(CharacterName + " Attacked " + targetCharacter.CharacterName);
+        Attack(targetCharacter);
     }
     private void SonicHowl()
     {

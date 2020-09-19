@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-    public enum SpellType { Attack, Heal, Other };
+    public enum SpellTarget    { Single, Multi, Other}
+    public enum SpellType      { Damage, Heal, Shield, Other };
+    public enum SpellElement   { Fire, Ice, Lightning, Water, Wind, Earth, Light, Dark, None };
+    public enum SpellCombat    { Combat, World, Both };
 [CreateAssetMenu(fileName = "New Spell", menuName = "Spells")]
 
 public class Spells : ScriptableObject
@@ -12,25 +15,10 @@ public class Spells : ScriptableObject
     public int _SpellID;
     public int _SpellPower;
     public int _SpellManaCost;
-    public SpellType _SpellType;
     public string _SpellDescription;
 
-    public void ModulatedSpell(BaseStats target)
-    {
-        if(_SpellType == SpellType.Attack)
-        {
-            int damageAmount;
-
-            damageAmount = (_SpellPower * 10);
-            target.TakeDamage(damageAmount, true, false);
-        }
-        if(_SpellType == SpellType.Heal)
-        {
-            Debug.Log("Heal from " + _SpellName);
-        }
-        if(_SpellType == SpellType.Other)
-        {
-            Debug.Log("?? from " + _SpellName);
-        }
-    }
+    public SpellTarget _SpellTarget;
+    public SpellType _SpellType;
+    public SpellElement _SpellElement;
+    public SpellCombat _SpellCombat;
 }

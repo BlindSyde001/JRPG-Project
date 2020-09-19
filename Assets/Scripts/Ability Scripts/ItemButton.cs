@@ -5,20 +5,16 @@ using TMPro;
 
 public class ItemButton : MonoBehaviour
 {
+    //VARIABLES
     public Items thisItem;
     public TextMeshProUGUI ItemName;
     public TextMeshProUGUI ItemAmount;
-
-    //Initializes the button with the spell data
+    
+    //METHODS
     public void SetButton(Items _Item)
     {
         thisItem = _Item;
         ItemName.text = thisItem._ItemName;
         ItemAmount.text = thisItem._ItemAmount.ToString();
-    }
-
-    public void UseItem()
-    {
-        Debug.Log(thisItem._ItemName + " Was Cast");
     }
 }

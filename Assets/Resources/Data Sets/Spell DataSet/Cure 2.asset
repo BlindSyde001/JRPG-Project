@@ -16,5 +16,8 @@ MonoBehaviour:
   _SpellID: 4
   _SpellPower: 16
   _SpellManaCost: 12
-  _SpellType: 1
   _SpellDescription: Restore a moderate amount of HP
+  _SpellTarget: 0
+  _SpellType: 1
+  _SpellElement: 0
+  _SpellCombat: 0

@@ -16,5 +16,8 @@ MonoBehaviour:
   _SpellID: 5
   _SpellPower: 28
   _SpellManaCost: 36
-  _SpellType: 1
   _SpellDescription: Restore a large amount of HP
+  _SpellTarget: 0
+  _SpellType: 1
+  _SpellElement: 0
+  _SpellCombat: 0
