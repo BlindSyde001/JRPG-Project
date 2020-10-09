@@ -17,11 +17,11 @@ public class BattleManager : MonoBehaviour
     public List<BasePartyMember> _PartyMembersInBattle;   // List of current Party Members who have entered the battle
     public List<BaseEnemy> _EnemiesInBattle;              // List of current Enemies who have entered battle
     [Space]
-    public List<BasePartyMember> _ActivePartyMembers;     // List of Active Members in battle; Targettable
-    public List<BaseEnemy> _ActiveEnemies;                // List of Active Enemies in battle; Targettable
+    public List<BasePartyMember> _ActivePartyMembers;     // List of Active Members in battle; Targettable; Alive
+    public List<BaseEnemy> _ActiveEnemies;                // List of Active Enemies in battle; Targettable; Alive
     [Space]
-    public List<BasePartyMember> _DownedMembers;          // List of Downed Party Members; Non Targettable except for ressurection
-    public List<BaseEnemy> _DownedEnemies;                // List of Downed Enemies; Non Targettable except for ressurection
+    public List<BasePartyMember> _DownedMembers;          // List of Downed Party Members; Non Targettable except for resurrection
+    public List<BaseEnemy> _DownedEnemies;                // List of Downed Enemies; Non Targettable except for resurrection
     [Space]
     public List<GameObject> _PartyMemberModels;           // In game character model
     public List<GameObject> _EnemyModels;                 // In game character model
@@ -127,6 +127,7 @@ public class BattleManager : MonoBehaviour
                 _EnemiesInBattle.Add(_gameManager.enemyLineup[i]);
                 _ActiveEnemies.Add(_gameManager.enemyLineup[i]);
                 _EnemyModels.Add(instantiatedEnemy); // Add enemy model
+                _gameManager.enemyLineup[i].isAlive = true;
             }
         }
     }

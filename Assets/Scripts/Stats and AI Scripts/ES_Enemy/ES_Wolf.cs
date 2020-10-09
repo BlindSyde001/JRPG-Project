@@ -22,11 +22,14 @@ public class ES_Wolf : BaseEnemy
     }
     new void Update()
     {
-        base.Update();
-        if (_ActionBarAmount >= 100)
+        if(isAlive)
         {
-            EnemyAction();
-            _ActionBarAmount = 0;
+            base.Update();
+            if (_ActionBarAmount >= 100)
+            {
+                EnemyAction();
+                _ActionBarAmount = 0;
+            }
         }
     }
 
@@ -58,7 +61,7 @@ public class ES_Wolf : BaseEnemy
         int damage = attackPower * 5;
         foreach(BasePartyMember a in _BM._ActivePartyMembers)
         {
-            a.TakeDamage(damage, false, false);
+            a.TakeDamage(damage, false, false, SpellElement.None);
         }
     }
 }

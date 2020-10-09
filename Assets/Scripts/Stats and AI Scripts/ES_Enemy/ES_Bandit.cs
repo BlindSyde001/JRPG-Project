@@ -24,11 +24,14 @@ public class ES_Bandit : BaseEnemy
     }
     new void Update()
     {
-        base.Update();
-        if (_ActionBarAmount >= 100)
+        if (isAlive)
         {
-            EnemyAction();
-            _ActionBarAmount = 0;
+            base.Update();
+            if (_ActionBarAmount >= 100)
+            {
+                EnemyAction();
+                _ActionBarAmount = 0;
+            }
         }
     }
 
@@ -49,12 +52,13 @@ public class ES_Bandit : BaseEnemy
     private void Stab()
     {
         int damage = attackPower * 20;
-        targetCharacter.TakeDamage(damage, false, false);
+        targetCharacter.TakeDamage(damage, false, false, SpellElement.None);
     }
     private void Potion()
     {
         if (potionCount > 0)
         {
+            Debug.Log("POTION!");
             for (int i = 0; i < _BM._ActiveEnemies.Count; i++)                        // cycle through enemies
             {
                 if(_BM._ActiveEnemies[0])                                             // In case of already target being a hero

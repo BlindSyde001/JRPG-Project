@@ -7,9 +7,9 @@ using UnityEngine;
     public enum ItemType { Damage, Heal, Shield, Other };
     public enum ItemElement { Fire, Ice, Lightning, Water, Wind, Earth, Light, Dark, None };
     public enum ItemCombat { Combat, World, Both };
-[CreateAssetMenu(fileName = "New Item", menuName = "Items")]
+[CreateAssetMenu(fileName = "New Item", menuName = "ItemInfo")]
 
-public class Items : ScriptableObject
+public class ItemInfo : ScriptableObject
 {
     //VARIABLES
     public string _ItemName;
@@ -21,10 +21,4 @@ public class Items : ScriptableObject
     public ItemType _ItemType;
     public ItemElement _ItemElement;
     public ItemCombat _ItemCombat;
-
-    //METHODS
-    public void ModulatedItem()
-    {
-
-    }
 }

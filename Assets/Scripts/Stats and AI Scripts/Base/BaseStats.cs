@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -9,17 +10,20 @@ using TMPro;
 public class BaseStats : MonoBehaviour
 {
     //VARIABLES
-    public string CharacterName;
-    public List<Spells> availableSpells;
-    public bool inBattle;
+    public BaseSpell _BS;
     public BattleManager _BM;
     public BattleUIController _BUI;
+    public string CharacterName;
+    public List<SpellsInfo> availableSpells;
+    public bool inBattle;
     public GameObject _DPSSpawnPoint;
     public GameObject characterModel;
 
     private bool _CounterReady;                  // Is character able to counter physical attacks
     private bool _MCounterReady;                 // Is character able to counter magical attacks
 
+    protected float timer = 0;
+    protected bool slowLock;
     #region ATB Variables
     public float _ActionBarAmount;                 // Current Charge amount of ATB Gauge
     public float _ActionBarRechargeAmount;         // Current recharge amount specific to player
@@ -52,11 +56,27 @@ public class BaseStats : MonoBehaviour
     public int maxMP;                   // Determines amount of Spells able to be cast
     public int currentHP;               // Modifiable value for non stats interaction
     public int currentMP;               // Modifiable value for non stats interaction
+
+    [Header("Buffs")]
+    public bool zeal;                   // Increase Physical Damage
+    public bool faith;                  // Increase Magical Damage
+    public bool haste;                  // Increase speed of Action Bar Charge
+
+    [Header("Status Effects")]
+    public bool poison;
+    public bool silence;
+    public bool slow;
+
+    [Header("Status Resistances")]
+    public int poisonResist;
+    public int silenceResist;
+    public int slowResist;
     #endregion
 
     //UPDATES
     public virtual void Awake()
     {
+        _BS = FindObjectOfType<BaseSpell>();
         _BM = FindObjectOfType<BattleManager>();
         _BUI = FindObjectOfType<BattleUIController>();
     }
@@ -66,6 +86,9 @@ public class BaseStats : MonoBehaviour
         {
             _ActionBarAmount += _ActionBarRechargeAmount * Time.deltaTime;          // Recharge your action bar so you can take a turn
             _ActionBarAmount = Mathf.Clamp(_ActionBarAmount, 0, 100);
+
+            Poison();
+            Slow();
         }
     }
 
@@ -86,22 +109,45 @@ public class BaseStats : MonoBehaviour
             else
                 crit = false;
             int damage = (int)(attackPower * Random.Range(1f,1.5f) * (crit ? 1.75 : 1)); // attackPower, randomRoll, crit.
-            targetCharacter.TakeDamage(damage, false, crit);
+            targetCharacter.TakeDamage(damage, false, crit, SpellElement.None);
         } else
         {
-            targetCharacter.TakeDamage(0, false, false);
+            targetCharacter.TakeDamage(0, false, false, SpellElement.None);
         }
         return successful;
     }
-    public bool CastMagic(Spells spell, BaseStats targetCharacter)
+    public bool CastMagic(SpellsInfo spell, BaseStats targetCharacter)
     {
         bool successful = currentMP >= spell._SpellManaCost;    // Returns if you have enough mana to cast the spell
 
-        if (successful)
+        if (successful && !silence)
         {
             currentMP -= spell._SpellManaCost;                  // Because successful, take away mana cost
-            spell.ModulatedSpell(this, targetCharacter);
+            // Insert your chosen spellinfo into basespell script.
+            // Run the method using the spellinfo inserted.
+            if(spell._SpellTarget == SpellTarget.Single)        // Single Target Logic
+            {
+                _BS.ModulatedSpell(spell, this, targetCharacter);
+            }
+            else if(spell._SpellTarget == SpellTarget.Multi)    // Multi Target Logic
+            {
+                if(_BM._ActiveEnemies.Contains(targetCharacter))
+                {
+                    List<BaseStats> tempList = new List<BaseStats>();    // Temporary placeholders for upcasting
+                    BaseStats tempContain;
+                    for(int i = 0; i < _BM._ActiveEnemies.Count; i++)    // Upcast and put into placeholders
+                    {
+                        tempContain = (_BM._ActiveEnemies[i]);
+                        tempList.Add(tempContain);
+                    }
+                    _BS.ModulatedSpell(spell, this, tempList);           // Send Polymorphed list to be used
+                }
+            }
             _ActionBarAmount = 0;
+        }
+        else if(silence)
+        {
+            _BUI.MessageOnScreen("Unable to Cast!");
         }
         else
         {
@@ -115,7 +161,7 @@ public class BaseStats : MonoBehaviour
         defense += (int)(defense * .4f);
         Debug.Log("Increased Defence");
     }                                             // Increase in defence for a turn
-    public void UseItem(Items item, BaseStats targetCharacter)
+    public void UseItem(ItemInfo item, BaseStats targetCharacter)
     {
 
     }
@@ -125,7 +171,7 @@ public class BaseStats : MonoBehaviour
     }                                        // Go into die state
     #endregion
     #region Receiver Methods
-    public void TakeDamage(int amount, bool magical, bool wasCritical)
+    public void TakeDamage(int amount, bool magical, bool wasCritical, SpellElement element)
     {
         int damageAmount = (int)(amount - (5 + (magical ? magDefense : defense)) );
         if(damageAmount < 0)
@@ -180,119 +226,63 @@ public class BaseStats : MonoBehaviour
         }
     }
     #endregion
-    #region Debuff
-    //public void Petrify()
-    //{
-    //    //Stops Actions and becomes untargetable by enemy for set period of time. Nothing affects them except for petrify curative effects
-    //}
-    //public void Taint()
-    //{
-    //    //All healing becomes damage
-    //}
-    //public void Slow()
-    //{
-    //    //Decrease ATB charge rate
-    //}
-    //public void Stop()
-    //{
-    //    //atb charge rate becomes 0
-    //}
-    //public void Frenzy()
-    //{
-    //    //no longer in control of player. Only uses attack command when atb is full, and attacks random enemy
-    //}
-    //public void Confusion()
-    //{
-    //    //no longer in control of player.  
-    //}
-    //public void Silence()
-    //{
-    //    //spells are locked
-    //}
-    //public void Condemn()
-    //{
-    //    //PROC CHANCE
-    //    int strikeChance = 0;
-    //    int Proc = Random.Range(0, 100);
-    //    int Resist = Random.Range(0, 100);
-
-    //    if(Resist > condemnResist)
-    //    {
-    //        if(Proc <= strikeChance)
-    //        {
-    //            condemn = true;
-    //        }
-    //    }
-
-    //    //EFFECT
-    //    float duration = 15f;
-
-    //    if(condemn)
-    //    {
-    //        duration -= Time.deltaTime;
-
-    //        if (duration <= 0)
-    //        {
-    //            currentHP = 0;
-    //        }
-    //    }
-    //}
-    //public void Poison()
-    //{
-    //    //PROC CHANCE
-    //    int strikeChance = 0;
-    //    int Proc = Random.Range(0, 100);
-    //    int Resist = Random.Range(0, 100);
-
-    //    if(Resist > poisonResist)
-    //    {
-    //        if(Proc <= strikeChance)
-    //        {
-    //            poison = true;
-    //        }
-    //    }
-    //    //EFFECT
-    //    if(poison)
-    //    {
-    //        float timerTick = 0f;
-    //        int instanceApplication = 7;
-
-    //        timerTick += Time.deltaTime;
-
-    //        if (timerTick >= instanceApplication)
-
-    //        {
-    //            currentHP -= (maxHP * 5 / 100);
-    //            timerTick = 0;
-    //        }
-    //    }
-    //}
-    //public void Paralyzed()
-    //{
-        
-    //}
-    //public void DeathStrike()
-    //{
-    //    //PROC CHANCE
-    //    int strikeChance = 0;
-    //    int Proc = Random.Range(0, 100);
-    //    int Resist = Random.Range(0, 100);
-
-    //    if (Resist > deathstrikeResist)
-    //    {
-    //        if(Proc <= strikeChance)
-    //        {
-    //            deathstrike = true;
-    //        }
-    //    }
-
-    //    //EFFECT
-    //    if(deathstrike)
-    //    {
-    //        currentHP = 0;
-    //        deathstrike = false;
-    //    }
-    //}
+    #region Status Effects
+    public void Condemn()
+    {
+        // Die after timer countdown
+    }
+    public void Confusion()
+    {
+        // No longer in control of player.  
+    }
+    public void DeathStrike()
+    {
+        // Chance to instant kill
+    }
+    public void Frenzy()
+    {
+        // No longer in control of player. Only uses attack command when atb is full, and attacks random enemy
+    }
+    public void Petrify()
+    {
+        // Stops Actions and becomes untargetable by enemy for set period of time. Nothing affects them except for petrify curative effects
+    }
+    public void Poison()
+    {
+        // Damage over time
+        if(poison)
+        {
+            timer += Time.deltaTime;
+            if(timer >= 10)
+            {
+                TakeDamage((5 / 100) * maxHP, true, false, SpellElement.None);
+                timer = 0;
+                Debug.Log(CharacterName + " has taken poison Damage!");
+            }
+        }
+    }
+    public void Silence()
+    {
+        // Spells are locked
+        // Bool Check in Cast Magic Command
+    }
+    public void Slow()
+    {
+        // Decrease ATB charge rate
+        if(slow && !slowLock)
+        {
+            _ActionBarRechargeAmount = 0.75f * _ActionBarRechargeAmount;
+            slowLock = true;
+        }
+    }
+    public void Stop()
+    {
+        // ATB charge rate becomes 0
+    }
+    public void Taint()
+    {
+        // All healing becomes damage
+    }
     #endregion
 
     // Used for the UI component to display amount in graphic representation
@@ -323,6 +313,7 @@ public class BaseStats : MonoBehaviour
 public class BasePartyMember : BaseStats
 {
     //VARIABLES
+    [HideInInspector]
     public bool isAlive = true;                        // Check to see if player has not died in battle
     public StatsDataAsset thisChara;                   // The data asset containing information on the character
     public Sprite characterPortrait;                   // Portrait image displayed in UI
@@ -362,7 +353,6 @@ public class BasePartyMember : BaseStats
         _BM.UpdatePartyAliveStatus();
     }
 }
-
 public class BaseEnemy : BaseStats
 {
     public bool isAlive;
@@ -380,6 +370,7 @@ public class BaseEnemy : BaseStats
     //METHODS
     public override void Die()
     {
+        Debug.Log(CharacterName + " DIED!");
         isAlive = false;
         int i = _BM._ActiveEnemies.IndexOf(this);
         _BM._ActiveEnemies.Remove(this);       // Remove from targetting list

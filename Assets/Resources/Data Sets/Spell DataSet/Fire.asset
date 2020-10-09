@@ -16,5 +16,9 @@ MonoBehaviour:
   _SpellID: 0
   _SpellPower: 5
   _SpellManaCost: 3
-  _SpellType: 0
   _SpellDescription: Deal a small amount of Fire damage
+  statusChances: 000000000000000000000000
+  _SpellTarget: 1
+  _SpellType: 0
+  _SpellElement: 0
+  _SpellCombat: 0

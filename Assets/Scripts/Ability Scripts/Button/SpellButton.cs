@@ -6,7 +6,7 @@ using TMPro;
 public class SpellButton : MonoBehaviour
 {
     //VARIABLES
-    public Spells thisSpell;
+    public SpellsInfo thisSpell;
     public TextMeshProUGUI spellButtonName;
     public TextMeshProUGUI spellName;
     public TextMeshProUGUI spellCost;
@@ -17,7 +17,7 @@ public class SpellButton : MonoBehaviour
     {
         SetButton(thisSpell);
     }
-    public void SetButton(Spells _spell)
+    public void SetButton(SpellsInfo _spell)
     {
         thisSpell = _spell;
         spellButtonName.text = thisSpell._SpellName;

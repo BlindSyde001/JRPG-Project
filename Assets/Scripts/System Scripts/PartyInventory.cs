@@ -9,7 +9,7 @@ public class PartyInventory : MonoBehaviour
     public GameObject itemButton;                          // Used as base button for items.
     public GameObject itemButtonContainerUI;               // Contains all item buttons for UI Menu.
     public GameObject itemButtonContainerBattle;           // Contains all item buttons for Battle Menu.
-    public List<Items> _Items;                             // The items currently in inventory.
+    public List<ItemInfo> _Items;                             // The items currently in inventory.
 
     //METHODS
     #region ITEMS
@@ -40,7 +40,7 @@ public class PartyInventory : MonoBehaviour
     {
         foreach(Transform a in itemButtonContainerUI.transform)
         {
-            if(a.GetComponent<Items>()._ItemAmount <= 0)
+            if(a.GetComponent<ItemInfo>()._ItemAmount <= 0)
             {
                 Destroy(a.gameObject);
             }
@@ -50,7 +50,7 @@ public class PartyInventory : MonoBehaviour
     {
 
     }
-    public void UseItemUI(Items item, BaseStats target)    // Apply effects of an item that is usable out of Combat
+    public void UseItemUI(ItemInfo item, BaseStats target)    // Apply effects of an item that is usable out of Combat
     {
 
     }
@@ -78,7 +78,7 @@ public class PartyInventory : MonoBehaviour
     {
         foreach (Transform a in itemButtonContainerBattle.transform)
         {
-            if (a.GetComponent<Items>()._ItemAmount <= 0)
+            if (a.GetComponent<ItemInfo>()._ItemAmount <= 0)
             {
                 Destroy(a.gameObject);
             }

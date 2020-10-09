@@ -25,12 +25,15 @@ public class ES_XS_Destroyer : BaseEnemy
     }
     new void Update()
     {
-        base.Update();
-        if (_ActionBarAmount >= 100)
+        if (isAlive)
         {
-            EnemyAction();
-            moveCounter++;
-            _ActionBarAmount = 0;
+            base.Update();
+            if (_ActionBarAmount >= 100)
+            {
+                EnemyAction();
+                moveCounter++;
+                _ActionBarAmount = 0;
+            }
         }
     }
 
@@ -71,18 +74,24 @@ public class ES_XS_Destroyer : BaseEnemy
     }
     private void AntiPersonnelMissles() // AOE
     {
+        Debug.Log("anti personnel missiles!");
         foreach(BaseStats hero in _BM._ActivePartyMembers)
         {
-            hero.TakeDamage(hero.maxHP / 2, true, false);
+            hero.TakeDamage(hero.maxHP/2, true, false, SpellElement.None);
         }
     }
     private void BusterShot() // Tank Buster
     {
+        Debug.Log("Buster Shot!");
+        attackPower += 100;
+        BasicAttack();
+        attackPower -= 100;
         // Target tank and deal heavier damage to them
     }
     private void DefensiveMatrix() // Reduced Damage, CounterAttacks
     {
-
+        Debug.Log("SHIELD UP");
+        defense += defense;
     }
 
 

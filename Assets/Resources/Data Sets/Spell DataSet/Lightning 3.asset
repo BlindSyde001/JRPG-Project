@@ -17,6 +17,7 @@ MonoBehaviour:
   _SpellPower: 28
   _SpellManaCost: 36
   _SpellDescription: Deal a large amount of Lightning damage
+  statusChances: 000000000000000000000000
   _SpellTarget: 0
   _SpellType: 0
   _SpellElement: 0

@@ -329,9 +329,9 @@ public class BattleUIController : MonoBehaviour
 
             case "Magic":
                 Debug.Log(chosenHero.CharacterName + " casted " + _GM._SpellsPool[_SpellID]._SpellName);
-                Spells spellToCast = _GM._SpellsPool[_SpellID];   // Define the spell to be cast
-                chosenHero.CastMagic(spellToCast, target);        // Send to player info to cast spell with their stats
-                //chosenHero._ActionBarAmount = 0;
+                SpellsInfo spellToCast = _GM._SpellsPool[_SpellID];   // Define the spell to be cast
+                chosenHero.CastMagic(spellToCast, target);            // Send to player info to cast spell to target
+                chosenHero._ActionBarAmount = 0;
                 break;
 
             case "Ability":

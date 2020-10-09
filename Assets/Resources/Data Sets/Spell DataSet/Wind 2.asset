@@ -17,6 +17,7 @@ MonoBehaviour:
   _SpellPower: 16
   _SpellManaCost: 12
   _SpellDescription: Deal a moderate amount of Wind damage
+  statusChances: 000000000000000000000000
   _SpellTarget: 0
   _SpellType: 0
   _SpellElement: 0

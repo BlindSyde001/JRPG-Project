@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public List<BasePartyMember> _AllPartyMembers; // Stored variables of all Playable Characters
 
     [Header("DATABASE")]
-    public List<Spells> _SpellsPool;               // All spells in the Game for the player
+    public List<SpellsInfo> _SpellsPool;               // All spells in the Game for the player
 
     [Header("Stored Data")]
     public string currentScene;                    // The current Scene the game is in.
