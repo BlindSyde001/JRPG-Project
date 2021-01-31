@@ -16,9 +16,9 @@ public class SceneInformation : MonoBehaviour
     private int encounterType;                // Different arrangements of enemies for the encounter
     private float t;                          // Artificial tick rate timer
     private bool lockout;                     // Only one instance of enemy encounter loading
-
     private void Start()
     {
+        print("STARTED");
         _GM = FindObjectOfType<GameManager>();
         _GM.currentScene = sceneName;
         _GM.currentBattleSceneBackground = battleSceneBackground;

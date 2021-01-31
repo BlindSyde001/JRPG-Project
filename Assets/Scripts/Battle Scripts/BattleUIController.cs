@@ -19,6 +19,8 @@ public class BattleUIController : MonoBehaviour
 
     #region End of fight Screen
     public GameObject finishMessageBox;
+    public GameObject goldBox;
+    public GameObject xpBox;
     public List<GameObject> finishHeroPanel;
     public bool endOfFight;
     private int endOfFightTransition = 0;
@@ -28,9 +30,11 @@ public class BattleUIController : MonoBehaviour
     #region Navigate UI Variables
     public List<Button> _CommandPanelButtons;     // Inputs for the player
     public List<GameObject> _InputPanels;         // List of all Panels with input buttons
+    public List<GameObject> _DisplayPanels;       // List of default Panels open when battle starts
     public List<GameObject> EnemyTargets;         // List of the buttons used to target enemies in battle
     public BasePartyMember chosenHero;            // Currently selected hero, to control actions
     public int cycleButtonInput;
+    public int lastCycleInput;                    // For hero death purposes
     bool canAttack = false;
 
     public string action;
@@ -99,18 +103,39 @@ public class BattleUIController : MonoBehaviour
             {
                 cycleButtonInput = 0;
             }
+            lastCycleInput = cycleButtonInput;
             chosenHero = _BM._ActivePartyMembers[cycleButtonInput];
             _BM._CharacterPanels[cycleButtonInput].transform.Find("Selected Panel").gameObject.SetActive(true);   // Turn on new select
-            Debug.Log(chosenHero.CharacterName + " Is Selected");
+            //Debug.Log(chosenHero.CharacterName + " Is Selected");
         }
-    }                     // Switch control between active Heroes
+    }                     // Switch control between active Heroes.
+    public void CycleOnDeathHeroes()
+    {
+        if (_BM._DownedMembers.Contains(chosenHero))
+        {
+            Debug.Log("Yes");
+            _BM._CharacterPanels[lastCycleInput].transform.Find("Selected Panel").gameObject.SetActive(false);  // turn off current select
+
+            lastCycleInput += 1;                                        // find new Select
+            if (lastCycleInput < 0)
+            {
+                lastCycleInput = (_BM._ActivePartyMembers.Count - 1);
+            }
+            else if (lastCycleInput > (_BM._ActivePartyMembers.Count - 1))
+            {
+                lastCycleInput = 0;
+            }
+            chosenHero = _BM._ActivePartyMembers[lastCycleInput];
+            _BM._CharacterPanels[lastCycleInput].transform.Find("Selected Panel").gameObject.SetActive(true);
+        }
+    }                     // Switch control between active Heroes On Death.
     public void CycleThroughTabs()
     {
         if(Input.GetButtonDown("Trigger"))
         {
 
         }
-    }                       // Switch between UI tab groups
+    }                       // Switch between UI tab groups.
     public void SetEnemyTargets()
     {
         foreach (GameObject a in EnemyTargets)
@@ -154,23 +179,31 @@ public class BattleUIController : MonoBehaviour
             }
         }
     }      // If ATB is charged, can input commands
-    private void SetOffAllPanels()
+    private void SetOffAllInputPanels()
     {
         foreach (GameObject a in _InputPanels)
         {
             a.SetActive(false);
         }
-    }                       // Turns off all our panels so they don't overlap.
+    }                  // Turns off all our panels so they don't overlap.
+    private void TurnOnDisplayPanels()
+    {
+        foreach (GameObject a in _DisplayPanels)
+        {
+            a.SetActive(true);
+        }
+    }                   // Turn On display panels. Used mainly for start of battle.
     private void OpenTargetList()
     {
         _InputPanels[0].SetActive(true);
-    }                        // Open Targetting list (Enemies / Heroes)
+    }                        // Open Targetting list (Enemies / Heroes).
 
+    #region Event Triggers
     // Event triggers for UI buttons
     // SUBMIT
     public void AccessAttack()
     {
-        SetOffAllPanels();
+        SetOffAllInputPanels();
         if (canAttack)
         {
             _InputPanels[0].SetActive(true);
@@ -180,7 +213,7 @@ public class BattleUIController : MonoBehaviour
     }
     public void AccessMagic()
     {
-        SetOffAllPanels();
+        SetOffAllInputPanels();
         if (canAttack)
         {
             _InputPanels[3].SetActive(true);
@@ -191,7 +224,7 @@ public class BattleUIController : MonoBehaviour
     }
     public void AccessAbilities()
     {
-        SetOffAllPanels();
+        SetOffAllInputPanels();
         if (canAttack)
         {
 
@@ -199,7 +232,7 @@ public class BattleUIController : MonoBehaviour
     }
     public void AccessItems()
     {
-        SetOffAllPanels();
+        SetOffAllInputPanels();
         if (canAttack)
         {
 
@@ -260,6 +293,7 @@ public class BattleUIController : MonoBehaviour
 
     }
     #endregion
+    #endregion
     #region Variables from Inputs
     public void ActionType(string inputString)
     {
@@ -294,7 +328,11 @@ public class BattleUIController : MonoBehaviour
                             finishHeroPanel[i].GetComponentInChildren<TextMeshProUGUI>().text = _BM._PartyMembersInBattle[i].CharacterName;
                         }
                         break;
-                    case 3:  // Tally the Experience
+                    case 3:  // Tally the Experience and Gold
+                        goldBox.SetActive(true);
+                        xpBox.SetActive(true);
+                        //goldBox.GetComponentInChildren<Text>().text = _BM.goldPool.ToString();
+                        //xpBox.GetComponentInChildren<Text>().text = _BM.expPool.ToString();
                         foreach (BasePartyMember a in _BM._ActivePartyMembers)
                         {
                             a.totalXP += _BM.expPool / _BM._ActivePartyMembers.Count;
@@ -342,8 +380,29 @@ public class BattleUIController : MonoBehaviour
                 chosenHero._ActionBarAmount = 0;
                 break;
         }
-        SetOffAllPanels();
+        SetOffAllInputPanels();
         startOfGameSelected.GetComponent<Button>().Select();
+    }
+    #endregion
+    #region Level Changing
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnNewSceneLoaded;
+    }
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnNewSceneLoaded;
+    }
+    private void OnNewSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Battle Scene")
+        {
+            finishMessageBox.SetActive(false);
+            goldBox.SetActive(false);
+            xpBox.SetActive(false);
+            SetOffAllInputPanels();
+            TurnOnDisplayPanels();
+        }
     }
     #endregion
 }

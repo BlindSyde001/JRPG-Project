@@ -10,7 +10,7 @@ using TMPro;
 public class BaseStats : MonoBehaviour
 {
     //VARIABLES
-    public BaseSpell _BS;
+    public BaseAction _BS;
     public BattleManager _BM;
     public BattleUIController _BUI;
     public string CharacterName;
@@ -21,6 +21,7 @@ public class BaseStats : MonoBehaviour
 
     private bool _CounterReady;                  // Is character able to counter physical attacks
     private bool _MCounterReady;                 // Is character able to counter magical attacks
+    public bool attackPiercing;                  // Does the character ignore defense?
 
     protected float timer = 0;
     protected bool slowLock;
@@ -63,9 +64,9 @@ public class BaseStats : MonoBehaviour
     public bool haste;                  // Increase speed of Action Bar Charge
 
     [Header("Status Effects")]
-    public bool poison;
-    public bool silence;
-    public bool slow;
+    public bool poison;                 // Damage over time
+    public bool silence;                // Can't cast spells
+    public bool slow;                   // Decrease speed of Action Bar Charge
 
     [Header("Status Resistances")]
     public int poisonResist;
@@ -76,7 +77,7 @@ public class BaseStats : MonoBehaviour
     //UPDATES
     public virtual void Awake()
     {
-        _BS = FindObjectOfType<BaseSpell>();
+        _BS = FindObjectOfType<BaseAction>();
         _BM = FindObjectOfType<BattleManager>();
         _BUI = FindObjectOfType<BattleUIController>();
     }
@@ -86,7 +87,6 @@ public class BaseStats : MonoBehaviour
         {
             _ActionBarAmount += _ActionBarRechargeAmount * Time.deltaTime;          // Recharge your action bar so you can take a turn
             _ActionBarAmount = Mathf.Clamp(_ActionBarAmount, 0, 100);
-
             Poison();
             Slow();
         }
@@ -109,10 +109,10 @@ public class BaseStats : MonoBehaviour
             else
                 crit = false;
             int damage = (int)(attackPower * Random.Range(1f,1.5f) * (crit ? 1.75 : 1)); // attackPower, randomRoll, crit.
-            targetCharacter.TakeDamage(damage, false, crit, SpellElement.None);
+            targetCharacter.TakeDamage(damage, false, crit, ActionElement.None, attackPiercing);
         } else
         {
-            targetCharacter.TakeDamage(0, false, false, SpellElement.None);
+            targetCharacter.TakeDamage(0, false, false, ActionElement.None, attackPiercing);
         }
         return successful;
     }
@@ -125,11 +125,11 @@ public class BaseStats : MonoBehaviour
             currentMP -= spell._SpellManaCost;                  // Because successful, take away mana cost
             // Insert your chosen spellinfo into basespell script.
             // Run the method using the spellinfo inserted.
-            if(spell._SpellTarget == SpellTarget.Single)        // Single Target Logic
+            if(spell._SpellTarget == ActionTarget.Single)        // Single Target Logic
             {
                 _BS.ModulatedSpell(spell, this, targetCharacter);
             }
-            else if(spell._SpellTarget == SpellTarget.Multi)    // Multi Target Logic
+            else if(spell._SpellTarget == ActionTarget.Multi)    // Multi Target Logic
             {
                 if(_BM._ActiveEnemies.Contains(targetCharacter))
                 {
@@ -161,7 +161,7 @@ public class BaseStats : MonoBehaviour
         defense += (int)(defense * .4f);
         Debug.Log("Increased Defence");
     }                                             // Increase in defence for a turn
-    public void UseItem(ItemInfo item, BaseStats targetCharacter)
+    public void UseItem(ConsumableInfo item, BaseStats targetCharacter)
     {
 
     }
@@ -171,10 +171,10 @@ public class BaseStats : MonoBehaviour
     }                                        // Go into die state
     #endregion
     #region Receiver Methods
-    public void TakeDamage(int amount, bool magical, bool wasCritical, SpellElement element)
+    public void TakeDamage(int amount, bool magical, bool wasCritical, ActionElement element, bool piercing)
     {
-        int damageAmount = (int)(amount - (5 + (magical ? magDefense : defense)) );
-        if(damageAmount < 0)
+        int damageAmount = (int)(amount - (piercing ? (5 + (magical ? magDefense : defense)) : 0) );
+        if (damageAmount < 0)
         {
             damageAmount = 0;
         }
@@ -193,7 +193,7 @@ public class BaseStats : MonoBehaviour
                 Die();
             }
         }
-    }                // Damage taken by character
+    } // Damage taken by character
     public void HealDamage(int amount, bool wasCritical)
     {
         int healAmount = amount;
@@ -255,7 +255,7 @@ public class BaseStats : MonoBehaviour
             timer += Time.deltaTime;
             if(timer >= 10)
             {
-                TakeDamage((5 / 100) * maxHP, true, false, SpellElement.None);
+                TakeDamage((5 / 100) * maxHP, true, false, ActionElement.None, true);
                 timer = 0;
                 Debug.Log(CharacterName + " has taken poison Damage!");
             }
@@ -299,6 +299,7 @@ public class BaseStats : MonoBehaviour
     {
         if(scene.name == "Battle Scene")
         {
+            // Variable declarations
             _BM = FindObjectOfType<BattleManager>();
             _BUI = FindObjectOfType<BattleUIController>();
         }
@@ -318,6 +319,14 @@ public class BasePartyMember : BaseStats
     public StatsDataAsset thisChara;                   // The data asset containing information on the character
     public Sprite characterPortrait;                   // Portrait image displayed in UI
     public int currentLimit;                           // Limit amount of charge for special move
+
+    [Space]
+    [Header("Equipment")]
+    public EquipmentInfo Weapon;                       // Provides Main DMG Stat and a Secondary; May have additional Effects
+    public EquipmentInfo Armour;                       // Provides Main Def Stat and a Secondary; May have additional Effects
+    public EquipmentInfo AccessoryOne;                 // Provides various effects and/or stats
+    public EquipmentInfo AccessoryTwo;
+
     #region Growth Stat Base
     [HideInInspector]
     public float growthRateHyper = 0.5f;                      // Assigned to the Hero's Strongest stat
@@ -328,7 +337,35 @@ public class BasePartyMember : BaseStats
     [HideInInspector]
     public float growthRateWeak = 0.1f;                       // Assigned to the Hero's Weakest stat
     #endregion
+    #region Equipment Stats
+    [HideInInspector]
+    public int equipAttackPower;             // Main Damage Modifier for Physical Attacks
+    [HideInInspector]
+    public int equipMagAttackPower;          // Main Damage Modifier for Magical Attacks
+    [HideInInspector]
+    public int equipDefense;                 // Main Damage Reduction Modifier for Physical Attacks
+    [HideInInspector]
+    public int equipMagDefense;              // Main Damage Reduction Modifier for Magical Attacks
 
+    [HideInInspector]
+    public int equipStrength;                // Secondary Modifier for Attack, HP
+    [HideInInspector]
+    public int equipMind;                    // Secondary Modifier for magAttack, MP
+    [HideInInspector]
+    public int equipVitality;                // Secondary Modifier for Defense, HP
+    [HideInInspector]
+    public int equipSpirit;                  // Secondary Modifier for magDefense, MP
+
+    [HideInInspector]
+    public int equipSpeed;                   // Increases speed of Action Bar being charged as well as initial Action Bar charge amount
+    [HideInInspector]
+    public int equipLuck;                    // Increases chance of Attacks Critically Striking
+
+    [HideInInspector]
+    public int equipHP;                   // Determines amount of Damage able to take before being KO'D
+    [HideInInspector]
+    public int equipMP;                   // Determines amount of Spells able to be cast
+    #endregion
     //UPDATES
     new void Update()
     {
@@ -337,7 +374,7 @@ public class BasePartyMember : BaseStats
     }
 
     //METHODS
-    public void NextLevel()
+    public virtual void NextLevel()
     {
         nextLevelXP = (int)(15 * Mathf.Pow(level, 2.3f) + (15 * level));
         if (totalXP >= nextLevelXP)
@@ -351,6 +388,11 @@ public class BasePartyMember : BaseStats
         _BM._ActivePartyMembers.Remove(this);
         _BM._DownedMembers.Add(this);
         _BM.UpdatePartyAliveStatus();
+        if (_BM._ActivePartyMembers.Count != 0)
+        {
+            Debug.Log("ON DIE CYCLE");
+            _BUI.CycleOnDeathHeroes();
+        }
     }
 }
 public class BaseEnemy : BaseStats

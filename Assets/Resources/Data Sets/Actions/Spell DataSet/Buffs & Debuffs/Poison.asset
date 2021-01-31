@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0669c9bc2f2ab3d4bb820fb8d3741e97, type: 3}
+  m_Name: Poison
+  m_EditorClassIdentifier: 
+  posStatusChances: 000000000000000000000000
+  negStatusChances: 000000000000000000000000
+  _ActionPiercing: 0
+  _ActionDescription: 
+  _SpellName: Poison
+  _SpellID: 5
+  _SpellPower: 0
+  _SpellManaCost: 8
+  _SpellTarget: 0
+  _SpellEffect: 0
+  _SpellElement: 0
+  _SpellCombat: 0

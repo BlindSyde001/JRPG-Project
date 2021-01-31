@@ -33,6 +33,7 @@ public class BattleManager : MonoBehaviour
     public List<GameObject> enemyPos;
     #endregion
     public int expPool;     // Total XP gained from defeating enemies, to be split between party members
+    public int goldPool;    // Total Gold gained from enemies
 
     //UPDATES
     private void Awake()

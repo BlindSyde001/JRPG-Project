@@ -9,6 +9,53 @@ public class HS_Officer : BasePartyMember
         Stats();
         NextLevel();
     }
+    private void EquipStats()
+    {
+        #region Reset Equip Stats
+        equipAttackPower = 0;
+        equipMagAttackPower = 0;
+        equipDefense = 0;
+        equipMagDefense = 0;
+
+        equipStrength = 0;
+        equipMind = 0;
+        equipVitality = 0;
+        equipSpirit = 0;
+
+        equipSpeed = 0;
+        equipLuck = 0;
+
+        equipHP = 0;
+        equipMP = 0;
+        #endregion
+        List<EquipmentInfo> tempEquip = new List<EquipmentInfo>();
+        tempEquip.Add(Weapon);
+        if (Armour != null)
+            tempEquip.Add(Armour);
+        if (AccessoryOne != null)
+            tempEquip.Add(AccessoryOne);
+        if (AccessoryTwo != null)
+            tempEquip.Add(AccessoryTwo);
+
+        foreach (EquipmentInfo currentEquip in tempEquip)
+        {
+            equipAttackPower += currentEquip.attackPower;
+            equipMagAttackPower += currentEquip.magAttackPower;
+            equipDefense += currentEquip.defense;
+            equipMagDefense += currentEquip.magDefense;
+
+            equipStrength += currentEquip.strength;
+            equipMind += currentEquip.mind;
+            equipVitality += currentEquip.vitality;
+            equipSpirit += currentEquip.spirit;
+
+            equipSpeed += currentEquip.speed;
+            equipLuck += currentEquip.luck;
+
+            equipHP += currentEquip.hP;
+            equipMP += currentEquip.mP;
+        }
+    }
     private void Stats()
     {
         CharacterName = thisChara.ID;
@@ -31,8 +78,43 @@ public class HS_Officer : BasePartyMember
         maxHP = (int)(thisChara.baseHP * (1 + growthRateHyper) * level) + (strength / 2 * level) + (vitality / 4 * level);
         maxMP = (int)(thisChara.baseMP * (1 + growthRateWeak) * level) + (mind) + (spirit / 4 * level);
     }
+
     private void LimitBreak()
     {
-
+        // Deadeye
+        // Executes low HP enemies, and deals heightened critical damage to those it doesn't execute
     }
+
+    public override void NextLevel()
+    {
+        base.NextLevel();
+        GainNewAbility();
+    }
+    private void GainNewAbility()
+    {
+        switch (level)
+        {
+            case 7:
+                // Krak Grenades
+                break;
+            case 10:
+                // Piercing Shot
+                break;
+        }
+    }
+
+    #region Unique Abilities
+    private void KrakGrenades()
+    {
+        // AOE damage on enemies
+    }
+    private void PiercingShot()
+    {
+        // damage and reduce armor of target enemy
+    }
+    private void BulletTime()
+    {
+        // Spamming shots at a target
+    }
+    #endregion
 }
