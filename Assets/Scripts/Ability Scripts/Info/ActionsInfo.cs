@@ -7,7 +7,7 @@ using UnityEngine;
     public enum ActionEffect    { Damage, Heal, Effect };                       // What effect does this have on character
     public enum ActionElement   { Fire, Ice, Lightning, Water, Wind, Earth, Light, Dark, None };    // Element for resists
     public enum ActionValue     { Flat, Percent, None };                               // Value variable to calculate
-    public enum ValueVariable   { STR, MND, VIT, SPR, SPD, LCK}
+    public enum ValueVariable   { STR, MND, VIT, SPR, SPD, LCK, NONE}                  // Secondary variable for spell calculation
     public enum ActionCombat    { Combat, World, Both };                               // where can you use this action?
 
 public class ActionsInfo : ScriptableObject

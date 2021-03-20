@@ -2155,7 +2155,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 362437238}
   m_OnClick:
     m_PersistentCalls:
@@ -3135,7 +3135,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 474200571}
   m_OnClick:
     m_PersistentCalls:
@@ -3300,7 +3300,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 479817936}
   m_OnClick:
     m_PersistentCalls:
@@ -4911,8 +4911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - Hello! My name is Alfred. How's it going my man. I've been having an awesome
-    day so far tesing out this game even though I'm a prefabricated object stuck
-    in a game engine.
+    day so far!
   - What's up?
   - See ya 'round!
   _name: Alfred
@@ -6244,7 +6243,7 @@ MonoBehaviour:
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
   level: 0
-  totalXP: 0
+  currentXP: 0
   nextLevelXP: 0
   attackPower: 0
   magAttackPower: 0
@@ -6318,7 +6317,7 @@ MonoBehaviour:
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 20
   level: 0
-  totalXP: 0
+  currentXP: 0
   nextLevelXP: 0
   attackPower: 0
   magAttackPower: 0
@@ -6392,7 +6391,7 @@ MonoBehaviour:
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
   level: 0
-  totalXP: 0
+  currentXP: 0
   nextLevelXP: 0
   attackPower: 0
   magAttackPower: 0
@@ -6466,7 +6465,7 @@ MonoBehaviour:
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
   level: 0
-  totalXP: 0
+  currentXP: 0
   nextLevelXP: 0
   attackPower: 0
   magAttackPower: 0
@@ -6543,7 +6542,7 @@ MonoBehaviour:
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 20
   level: 0
-  totalXP: 0
+  currentXP: 0
   nextLevelXP: 0
   attackPower: 0
   magAttackPower: 0
@@ -6617,7 +6616,7 @@ MonoBehaviour:
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
   level: 0
-  totalXP: 0
+  currentXP: 0
   nextLevelXP: 0
   attackPower: 0
   magAttackPower: 0
@@ -6691,7 +6690,7 @@ MonoBehaviour:
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
   level: 0
-  totalXP: 0
+  currentXP: 0
   nextLevelXP: 0
   attackPower: 0
   magAttackPower: 0
@@ -6765,7 +6764,7 @@ MonoBehaviour:
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
   level: 0
-  totalXP: 0
+  currentXP: 0
   nextLevelXP: 0
   attackPower: 0
   magAttackPower: 0
@@ -7002,7 +7001,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 783373234}
   m_OnClick:
     m_PersistentCalls:
@@ -9951,7 +9950,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1115910245}
   m_OnClick:
     m_PersistentCalls:
@@ -10072,7 +10071,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1117593725}
   m_OnClick:
     m_PersistentCalls:
@@ -15988,7 +15987,7 @@ MonoBehaviour:
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
   level: 0
-  totalXP: 0
+  currentXP: 0
   nextLevelXP: 0
   attackPower: 0
   magAttackPower: 0
@@ -16053,7 +16052,7 @@ MonoBehaviour:
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
   level: 0
-  totalXP: 0
+  currentXP: 0
   nextLevelXP: 0
   attackPower: 0
   magAttackPower: 0

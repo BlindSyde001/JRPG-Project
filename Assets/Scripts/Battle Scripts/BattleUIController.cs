@@ -200,6 +200,7 @@ public class BattleUIController : MonoBehaviour
         _InputPanels[0].SetActive(true);
     }                        // Open Targetting list (Enemies / Heroes).
 
+    #endregion
     #region Event Triggers
     // Event triggers for UI buttons
     // SUBMIT
@@ -295,7 +296,6 @@ public class BattleUIController : MonoBehaviour
 
     }
     #endregion
-    #endregion
     #region Variables from Inputs
     public void ActionType(string inputString)
     {
@@ -334,8 +334,8 @@ public class BattleUIController : MonoBehaviour
                     case 3:  // Tally the Experience and Gold
                         goldBox.SetActive(true);
                         xpBox.SetActive(true);
-                        goldBox.GetComponentInChildren<TextMeshProUGUI>().text = _BM.goldPool.ToString();
-                        xpBox.GetComponentInChildren<TextMeshProUGUI>().text = _BM.expPool.ToString();
+                        goldBox.GetComponentInChildren<TextMeshProUGUI>().text = _BM.goldPool.ToString() + "G";
+                        xpBox.GetComponentInChildren<TextMeshProUGUI>().text = _BM.expPool.ToString() + "EXP";
                         foreach (BasePartyMember a in _BM._ActivePartyMembers)
                         {
                             a.currentXP += _BM.expPool / _BM._ActivePartyMembers.Count;

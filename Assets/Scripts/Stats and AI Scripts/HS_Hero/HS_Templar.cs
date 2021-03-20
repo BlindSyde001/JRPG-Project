@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class HS_Templar : BasePartyMember
 {
-    //private void Start()
-    //{
-    //    EquipStats();
-    //    NextLevel();
-    //}
+    #region Affecting Stats
     private void EquipStats()
     {
         #region Reset Equip Stats
@@ -81,16 +77,39 @@ public class HS_Templar : BasePartyMember
         maxHP = (int)(thisChara.baseHP * (1 + growthRateHyper) * level) + (strength / 2 * level) + (vitality / 4 * level) + equipHP;
         maxMP = (int)(thisChara.baseMP * (1 + growthRateWeak) * level) + (mind) + (spirit / 4 * level) + equipMP;
     }
-
-    private void LimitBreak()
-    {
-
-    }
     public override void NextLevel()
     {
         base.NextLevel();
         GainNewAbility();
     }
+
+
+    public override void StartOfGameStats()
+    {
+        EquipStats();
+
+        CharacterName = thisChara.ID;
+        level = thisChara.startingLevel;
+        currentXP = thisChara.startingXP;
+
+        attackPower = (int)thisChara.baseAtkPwr + equipAttackPower;
+        magAttackPower = (int)thisChara.baseMagAtkPwr + equipMagAttackPower;
+        defense = (int)thisChara.baseDef + equipDefense;
+        magDefense = (int)thisChara.baseMagDef + equipMagDefense;
+
+        strength = (int)(thisChara.baseStr * (1 + growthRateStrong) * level) + equipStrength;
+        mind = (int)(thisChara.baseMnd * (1 + growthRateWeak) * level) + equipMind;
+        vitality = (int)(thisChara.baseVit * (1 + growthRateStrong) * level) + equipVitality;
+        spirit = (int)(thisChara.baseSpr * (1 + growthRateStrong) * level) + equipSpirit;
+
+        speed = (int)(thisChara.baseSpd * (1 + growthRateWeak) * level) + equipSpeed;
+        luck = (int)(thisChara.baseLck * (1 + growthRateAverage) * level) + equipLuck;
+
+        maxHP = (int)(thisChara.baseHP * (1 + growthRateHyper) * level) + (strength / 2 * level) + (vitality / 4 * level) + equipHP;
+        maxMP = (int)(thisChara.baseMP * (1 + growthRateWeak) * level) + (mind) + (spirit / 4 * level) + equipMP;
+    }
+    #endregion
+    #region Ability Gain
     private void GainNewAbility()
     {
         switch (level)
@@ -100,4 +119,11 @@ public class HS_Templar : BasePartyMember
                 break;
         }
     }         // Unlock New Abilities as character levels up
+    #endregion
+    #region Unique Abilities
+    private void LimitBreak()
+    {
+
+    }
+    #endregion
 }

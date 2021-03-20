@@ -79,6 +79,7 @@ public class HS_Officer : BasePartyMember
         GainNewAbility();
     }
 
+
     public override void StartOfGameStats()
     {
         EquipStats();

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: Templar
   _characterType: 0
-  startingLevel: 0
+  startingLevel: 10
   startingXP: 0
   baseHP: 50
   baseMP: 5
