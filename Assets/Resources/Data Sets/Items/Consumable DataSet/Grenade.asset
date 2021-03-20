@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9e3a64cfa77f6489fdaf1058f1cc5f, type: 3}
   m_Name: Grenade
   m_EditorClassIdentifier: 
-  posStatusChances: 000000000000000000000000
-  negStatusChances: 000000000000000000000000
+  _ActionType: 0
+  posBuffChances: 00000000000000000000000000000000
+  negStatusChances: 00000000000000000000000000000000
+  dispelChances: 0000000000000000000000000000000000000000000000000000000000000000
   _ActionPiercing: 0
-  _ActionDescription: 
-  _ItemName: 
-  _ItemID: 0
+  powerValue: 0
+  _ActionDescription: Deals 100 damage to all targets.
+  _ItemName: Grenade
+  _ItemID: 1
   _ItemAmount: 5
-  _Itemtarget: 0
+  _ItemTarget: 0
   _ItemEffect: 0
-  _ItemElement: 0
+  _ItemElement: 8
   _ItemCombat: 0

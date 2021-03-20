@@ -963,11 +963,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 120721524}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 5.63, y: 5.8331, z: 39.3}
+  m_LocalPosition: {x: 7.26, y: 5.8331, z: 12.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 314718057}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &140290186
 GameObject:
@@ -1652,8 +1652,8 @@ Transform:
   - {fileID: 2067199994}
   - {fileID: 1728944546}
   - {fileID: 684352217}
-  - {fileID: 120721525}
   - {fileID: 789635802}
+  - {fileID: 120721525}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4910,7 +4910,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sentences:
-  - Hello! My name is Alfred.
+  - Hello! My name is Alfred. How's it going my man. I've been having an awesome
+    day so far tesing out this game even though I'm a prefabricated object stuck
+    in a game engine.
   - What's up?
   - See ya 'round!
   _name: Alfred
@@ -4918,6 +4920,7 @@ MonoBehaviour:
   patrolPoints:
   - {fileID: 120721525}
   - {fileID: 789635802}
+  currentPos: 0
   speed: 5
   _RotationSpeed: 20
 --- !u!136 &684352219
@@ -6236,6 +6239,7 @@ MonoBehaviour:
   _DPSSpawnPoint: {fileID: 0}
   characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
     type: 3}
+  isAlive: 1
   attackPiercing: 0
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
@@ -6265,18 +6269,17 @@ MonoBehaviour:
   poisonResist: 0
   silenceResist: 0
   slowResist: 0
-  isAlive: 1
   thisChara: {fileID: 11400000, guid: b1c9a6b66eee4ae4f90f332e6389d4f9, type: 2}
   characterPortrait: {fileID: 21300000, guid: 35496bef0ea47b348b43482aedc2d176, type: 3}
   currentLimit: 0
-  Weapon: {fileID: 0}
-  Armour: {fileID: 0}
-  AccessoryOne: {fileID: 0}
-  AccessoryTwo: {fileID: 0}
   growthRateHyper: 0.5
   growthRateStrong: 0.3
   growthRateAverage: 0.2
   growthRateWeak: 0.1
+  Weapon: {fileID: 0}
+  Armour: {fileID: 0}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
   equipAttackPower: 0
   equipMagAttackPower: 0
   equipDefense: 0
@@ -6310,6 +6313,7 @@ MonoBehaviour:
   _DPSSpawnPoint: {fileID: 0}
   characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
     type: 3}
+  isAlive: 1
   attackPiercing: 0
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 20
@@ -6339,18 +6343,17 @@ MonoBehaviour:
   poisonResist: 0
   silenceResist: 0
   slowResist: 0
-  isAlive: 1
   thisChara: {fileID: 11400000, guid: 776ce631b157a7742b46541635f32a6f, type: 2}
   characterPortrait: {fileID: 21300000, guid: 11a050d0f53cbc749842b8a9d59d6c24, type: 3}
   currentLimit: 0
-  Weapon: {fileID: 11400000, guid: 2eba27af603b68945a917a4c4328c965, type: 2}
-  Armour: {fileID: 11400000, guid: db6b79c4636566142b6383f719598b4c, type: 2}
-  AccessoryOne: {fileID: 0}
-  AccessoryTwo: {fileID: 0}
   growthRateHyper: 0.5
   growthRateStrong: 0.3
   growthRateAverage: 0.2
   growthRateWeak: 0.1
+  Weapon: {fileID: 11400000, guid: 2eba27af603b68945a917a4c4328c965, type: 2}
+  Armour: {fileID: 11400000, guid: db6b79c4636566142b6383f719598b4c, type: 2}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
   equipAttackPower: 0
   equipMagAttackPower: 0
   equipDefense: 0
@@ -6384,6 +6387,7 @@ MonoBehaviour:
   _DPSSpawnPoint: {fileID: 0}
   characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
     type: 3}
+  isAlive: 1
   attackPiercing: 0
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
@@ -6413,18 +6417,17 @@ MonoBehaviour:
   poisonResist: 0
   silenceResist: 0
   slowResist: 0
-  isAlive: 1
   thisChara: {fileID: 11400000, guid: 972d7a14df683c74282d36b0a0340e64, type: 2}
   characterPortrait: {fileID: 21300000, guid: eb9aaa8acd367b64c988e72fac7b5e25, type: 3}
   currentLimit: 0
-  Weapon: {fileID: 0}
-  Armour: {fileID: 0}
-  AccessoryOne: {fileID: 0}
-  AccessoryTwo: {fileID: 0}
   growthRateHyper: 0.5
   growthRateStrong: 0.3
   growthRateAverage: 0.2
   growthRateWeak: 0.1
+  Weapon: {fileID: 0}
+  Armour: {fileID: 0}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
   equipAttackPower: 0
   equipMagAttackPower: 0
   equipDefense: 0
@@ -6458,6 +6461,7 @@ MonoBehaviour:
   _DPSSpawnPoint: {fileID: 0}
   characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
     type: 3}
+  isAlive: 1
   attackPiercing: 0
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
@@ -6487,18 +6491,17 @@ MonoBehaviour:
   poisonResist: 0
   silenceResist: 0
   slowResist: 0
-  isAlive: 1
   thisChara: {fileID: 11400000, guid: 54259f9e4634cfc4c898ee14410186a7, type: 2}
   characterPortrait: {fileID: 21300000, guid: 11a050d0f53cbc749842b8a9d59d6c24, type: 3}
   currentLimit: 0
-  Weapon: {fileID: 0}
-  Armour: {fileID: 0}
-  AccessoryOne: {fileID: 0}
-  AccessoryTwo: {fileID: 0}
   growthRateHyper: 0.5
   growthRateStrong: 0.3
   growthRateAverage: 0.2
   growthRateWeak: 0.1
+  Weapon: {fileID: 0}
+  Armour: {fileID: 0}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
   equipAttackPower: 0
   equipMagAttackPower: 0
   equipDefense: 0
@@ -6535,6 +6538,7 @@ MonoBehaviour:
   _DPSSpawnPoint: {fileID: 0}
   characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
     type: 3}
+  isAlive: 1
   attackPiercing: 0
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 20
@@ -6564,18 +6568,17 @@ MonoBehaviour:
   poisonResist: 0
   silenceResist: 0
   slowResist: 0
-  isAlive: 1
   thisChara: {fileID: 11400000, guid: 91fb544bf8bfb1c429a895cd2feef069, type: 2}
   characterPortrait: {fileID: 21300000, guid: 35496bef0ea47b348b43482aedc2d176, type: 3}
   currentLimit: 0
-  Weapon: {fileID: 0}
-  Armour: {fileID: 0}
-  AccessoryOne: {fileID: 0}
-  AccessoryTwo: {fileID: 0}
   growthRateHyper: 0.5
   growthRateStrong: 0.3
   growthRateAverage: 0.2
   growthRateWeak: 0.1
+  Weapon: {fileID: 11400000, guid: 2a316280501d7db4aa343011f1eee3c9, type: 2}
+  Armour: {fileID: 0}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
   equipAttackPower: 0
   equipMagAttackPower: 0
   equipDefense: 0
@@ -6609,6 +6612,7 @@ MonoBehaviour:
   _DPSSpawnPoint: {fileID: 0}
   characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
     type: 3}
+  isAlive: 1
   attackPiercing: 0
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
@@ -6638,18 +6642,17 @@ MonoBehaviour:
   poisonResist: 0
   silenceResist: 0
   slowResist: 0
-  isAlive: 1
   thisChara: {fileID: 11400000, guid: c5013c4ecbaef814786cbd6bc47ce45b, type: 2}
   characterPortrait: {fileID: 21300000, guid: 785325e73bdb6434286be5f65b4d6521, type: 3}
   currentLimit: 0
-  Weapon: {fileID: 0}
-  Armour: {fileID: 0}
-  AccessoryOne: {fileID: 0}
-  AccessoryTwo: {fileID: 0}
   growthRateHyper: 0.5
   growthRateStrong: 0.3
   growthRateAverage: 0.2
   growthRateWeak: 0.1
+  Weapon: {fileID: 0}
+  Armour: {fileID: 0}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
   equipAttackPower: 0
   equipMagAttackPower: 0
   equipDefense: 0
@@ -6683,6 +6686,7 @@ MonoBehaviour:
   _DPSSpawnPoint: {fileID: 0}
   characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
     type: 3}
+  isAlive: 1
   attackPiercing: 0
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
@@ -6712,18 +6716,17 @@ MonoBehaviour:
   poisonResist: 0
   silenceResist: 0
   slowResist: 0
-  isAlive: 1
   thisChara: {fileID: 11400000, guid: 1034cf83d41295748a44392233cc9d40, type: 2}
   characterPortrait: {fileID: 21300000, guid: eb9aaa8acd367b64c988e72fac7b5e25, type: 3}
   currentLimit: 0
-  Weapon: {fileID: 0}
-  Armour: {fileID: 0}
-  AccessoryOne: {fileID: 0}
-  AccessoryTwo: {fileID: 0}
   growthRateHyper: 0.5
   growthRateStrong: 0.3
   growthRateAverage: 0.2
   growthRateWeak: 0.1
+  Weapon: {fileID: 0}
+  Armour: {fileID: 0}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
   equipAttackPower: 0
   equipMagAttackPower: 0
   equipDefense: 0
@@ -6757,6 +6760,7 @@ MonoBehaviour:
   _DPSSpawnPoint: {fileID: 0}
   characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
     type: 3}
+  isAlive: 1
   attackPiercing: 0
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
@@ -6786,18 +6790,17 @@ MonoBehaviour:
   poisonResist: 0
   silenceResist: 0
   slowResist: 0
-  isAlive: 1
   thisChara: {fileID: 11400000, guid: d1e90e24a7100114299160172897c071, type: 2}
   characterPortrait: {fileID: 21300000, guid: 11a050d0f53cbc749842b8a9d59d6c24, type: 3}
   currentLimit: 0
-  Weapon: {fileID: 0}
-  Armour: {fileID: 0}
-  AccessoryOne: {fileID: 0}
-  AccessoryTwo: {fileID: 0}
   growthRateHyper: 0.5
   growthRateStrong: 0.3
   growthRateAverage: 0.2
   growthRateWeak: 0.1
+  Weapon: {fileID: 0}
+  Armour: {fileID: 0}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
   equipAttackPower: 0
   equipMagAttackPower: 0
   equipDefense: 0
@@ -7066,11 +7069,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789635801}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 22.85, y: 5.8331, z: -0.43}
+  m_LocalPosition: {x: 21.33, y: 5.8331, z: 12.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 314718057}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &790903808
 GameObject:
@@ -12121,7 +12124,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -26.332397, w: 56.923748}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -14532,6 +14535,7 @@ MonoBehaviour:
   _name: 
   inTalkingRange: 0
   patrolPoints: []
+  currentPos: 0
   speed: 0
   _RotationSpeed: 0
 --- !u!136 &1728944548
@@ -15780,7 +15784,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 769559305}
-          m_TargetAssemblyTypeName: 
+          m_TargetAssemblyTypeName: PartyInventory, Assembly-CSharp
           m_MethodName: InitiateInventoryUI
           m_Mode: 1
           m_Arguments:
@@ -15979,6 +15983,7 @@ MonoBehaviour:
   _DPSSpawnPoint: {fileID: 0}
   characterModel: {fileID: 5992843789428437988, guid: 169bdf9adf4907749b30f389b8fd2c5d,
     type: 3}
+  isAlive: 0
   attackPiercing: 0
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
@@ -16008,7 +16013,6 @@ MonoBehaviour:
   poisonResist: 0
   silenceResist: 0
   slowResist: 0
-  isAlive: 0
   x: 0
   targetCharacter: {fileID: 0}
 --- !u!114 &2016976532
@@ -16044,6 +16048,7 @@ MonoBehaviour:
   _DPSSpawnPoint: {fileID: 0}
   characterModel: {fileID: 5256651195431094718, guid: 8be2a9be80fc835499331467c9b83d8a,
     type: 3}
+  isAlive: 0
   attackPiercing: 0
   _ActionBarAmount: 0
   _ActionBarRechargeAmount: 0
@@ -16073,7 +16078,6 @@ MonoBehaviour:
   poisonResist: 0
   silenceResist: 0
   slowResist: 0
-  isAlive: 0
   x: 0
   targetCharacter: {fileID: 0}
 --- !u!1 &2021610032
@@ -16545,6 +16549,7 @@ MonoBehaviour:
   _name: 
   inTalkingRange: 0
   patrolPoints: []
+  currentPos: 0
   speed: 0
   _RotationSpeed: 10
 --- !u!4 &2067199994

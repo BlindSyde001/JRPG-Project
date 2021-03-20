@@ -17,7 +17,7 @@ public class BattleUIController : MonoBehaviour
     public GameObject messageBox;                 // For any messages needed to be written to player i.e victory/defeat, speech, etc
     public TextMeshProUGUI messageText;           // Text component of above
 
-    #region End of fight Screen
+    #region End of Fight Screen
     public GameObject finishMessageBox;
     public GameObject goldBox;
     public GameObject xpBox;
@@ -26,7 +26,6 @@ public class BattleUIController : MonoBehaviour
     private int endOfFightTransition = 0;
     private float t = 0;
     #endregion
-
     #region Navigate UI Variables
     public List<Button> _CommandPanelButtons;     // Inputs for the player
     public List<GameObject> _InputPanels;         // List of all Panels with input buttons
@@ -68,9 +67,12 @@ public class BattleUIController : MonoBehaviour
     }
     private void Update()
     {
-        if(endOfFight)
+        if (endOfFight)
         {
-            EndOfFightMessaging();
+            if (_BM._DownedMembers.Count == _BM._PartyMembersInBattle.Count)
+                EndOfFightMessaging(false);
+            else
+                EndOfFightMessaging(true);
         }
         if (chosenHero._ActionBarAmount >= 100)
         {
@@ -310,13 +312,14 @@ public class BattleUIController : MonoBehaviour
     }
     #endregion
     #region Finish Battle Messaging
-    private void EndOfFightMessaging()
+    private void EndOfFightMessaging(bool win)
     {
-        MessageOnScreen("Victory!");
         t += Time.deltaTime;
+        MessageOnScreen(win? "Victory!" : "Game Over...");
+
         if(Input.GetButtonDown("Submit"))
         {
-            if (t > 1.5f)
+            if(win && t > 1f)
             {
                 endOfFightTransition++;
                 switch (endOfFightTransition)
@@ -331,12 +334,13 @@ public class BattleUIController : MonoBehaviour
                     case 3:  // Tally the Experience and Gold
                         goldBox.SetActive(true);
                         xpBox.SetActive(true);
-                        //goldBox.GetComponentInChildren<Text>().text = _BM.goldPool.ToString();
-                        //xpBox.GetComponentInChildren<Text>().text = _BM.expPool.ToString();
+                        goldBox.GetComponentInChildren<TextMeshProUGUI>().text = _BM.goldPool.ToString();
+                        xpBox.GetComponentInChildren<TextMeshProUGUI>().text = _BM.expPool.ToString();
                         foreach (BasePartyMember a in _BM._ActivePartyMembers)
                         {
-                            a.totalXP += _BM.expPool / _BM._ActivePartyMembers.Count;
+                            a.currentXP += _BM.expPool / _BM._ActivePartyMembers.Count;
                             Debug.Log(a.CharacterName + "Has gained " + (int)(_BM.expPool / _BM._ActivePartyMembers.Count) + " XP!");
+                            a.NextLevel();
                         }
                         break;
                     case 4:  // Resume Game
@@ -345,7 +349,11 @@ public class BattleUIController : MonoBehaviour
                         break;
                 }
                 t = 0;
-            }
+            }        // Divy up EXP,Gold, Item Drops.
+            else if(!win && t > 2f)
+            {
+                SceneManager.LoadScene("Title Screen");
+            }  // Transition to the Title Screen
         }
     }
     #endregion
@@ -402,6 +410,7 @@ public class BattleUIController : MonoBehaviour
             xpBox.SetActive(false);
             SetOffAllInputPanels();
             TurnOnDisplayPanels();
+            startOfGameSelected.GetComponent<Button>().Select();
         }
     }
     #endregion

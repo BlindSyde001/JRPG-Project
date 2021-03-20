@@ -15,7 +15,7 @@ public class NPCGeneric : MonoBehaviour
     //private float waitTime = 0;
     private bool inTalkingRange = false;
     public List<Transform> patrolPoints;
-    private int currentPos = 0;
+    public int currentPos = 0;
     public float speed;
     #endregion
     #region Look Variables
@@ -32,8 +32,8 @@ public class NPCGeneric : MonoBehaviour
             LookAt();
             return;
         }
-        //if (patrolPoints.Count != 0)
-        //    MovePattern();
+        if (patrolPoints.Count != 0)
+            MovePattern();
     }
 
     //METHODS
@@ -47,7 +47,7 @@ public class NPCGeneric : MonoBehaviour
                 currentPos = 0;
             }
         }
-        Vector3 _Pdirection = transform.position - patrolPoints[currentPos].position;
+        Vector3 _Pdirection = patrolPoints[currentPos].position - transform.position;
         _Pdirection.y = 0;
         Quaternion _PLookRotation = Quaternion.LookRotation(_Pdirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, _PLookRotation, Time.deltaTime * _RotationSpeed);

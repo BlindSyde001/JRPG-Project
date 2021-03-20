@@ -19,6 +19,7 @@ public class BaseStats : MonoBehaviour
     public GameObject _DPSSpawnPoint;
     public GameObject characterModel;
 
+    public bool isAlive;
     private bool _CounterReady;                  // Is character able to counter physical attacks
     private bool _MCounterReady;                 // Is character able to counter magical attacks
     public bool attackPiercing;                  // Does the character ignore defense?
@@ -33,7 +34,7 @@ public class BaseStats : MonoBehaviour
     [Header("Level")]
     [Header("MAIN STATS")]
     public int level;                   // Level used to increase stats. range from 1 - 100
-    public int totalXP;                 // Amount of XP accumulated
+    public int currentXP;               // Amount of XP accumulated
     public int nextLevelXP;             // Amount needed to Level Up
 
     [Header("Primary")]
@@ -99,7 +100,7 @@ public class BaseStats : MonoBehaviour
         // Did it hit? Calculate dodge
         int chance;
         chance = 100;
-        bool successful = (Random.Range(0, 100) < chance);
+        bool successful = Random.Range(0, 100) < chance;
 
         if(successful)
         {
@@ -314,18 +315,9 @@ public class BaseStats : MonoBehaviour
 public class BasePartyMember : BaseStats
 {
     //VARIABLES
-    [HideInInspector]
-    public bool isAlive = true;                        // Check to see if player has not died in battle
     public StatsDataAsset thisChara;                   // The data asset containing information on the character
     public Sprite characterPortrait;                   // Portrait image displayed in UI
     public int currentLimit;                           // Limit amount of charge for special move
-
-    [Space]
-    [Header("Equipment")]
-    public EquipmentInfo Weapon;                       // Provides Main DMG Stat and a Secondary; May have additional Effects
-    public EquipmentInfo Armour;                       // Provides Main Def Stat and a Secondary; May have additional Effects
-    public EquipmentInfo AccessoryOne;                 // Provides various effects and/or stats
-    public EquipmentInfo AccessoryTwo;
 
     #region Growth Stat Base
     [HideInInspector]
@@ -336,6 +328,14 @@ public class BasePartyMember : BaseStats
     public float growthRateAverage = 0.2f;                    // Assigned to the Hero's Averaging stat
     [HideInInspector]
     public float growthRateWeak = 0.1f;                       // Assigned to the Hero's Weakest stat
+    #endregion
+    #region Equipment Items
+    [Space]
+    [Header("Equipment")]
+    public EquipmentInfo Weapon;                       // Provides Main DMG Stat and a Secondary; May have additional Effects
+    public EquipmentInfo Armour;                       // Provides Main Def Stat and a Secondary; May have additional Effects
+    public EquipmentInfo AccessoryOne;                 // Provides various effects and/or stats
+    public EquipmentInfo AccessoryTwo;                 // Provides various effects and/or stats
     #endregion
     #region Equipment Stats
     [HideInInspector]
@@ -362,11 +362,16 @@ public class BasePartyMember : BaseStats
     public int equipLuck;                    // Increases chance of Attacks Critically Striking
 
     [HideInInspector]
-    public int equipHP;                   // Determines amount of Damage able to take before being KO'D
+    public int equipHP;                      // Determines amount of Damage able to take before being KO'D
     [HideInInspector]
-    public int equipMP;                   // Determines amount of Spells able to be cast
+    public int equipMP;                      // Determines amount of Spells able to be cast
     #endregion
     //UPDATES
+    private void Start()
+    {
+        if (currentHP > 0)
+            isAlive = true;
+    }
     new void Update()
     {
         if (isAlive)
@@ -374,10 +379,14 @@ public class BasePartyMember : BaseStats
     }
 
     //METHODS
+    public virtual void StartOfGameStats()
+    {
+
+    }
     public virtual void NextLevel()
     {
         nextLevelXP = (int)(15 * Mathf.Pow(level, 2.3f) + (15 * level));
-        if (totalXP >= nextLevelXP)
+        if (currentXP >= nextLevelXP)
         {
             level++;
         }
@@ -397,7 +406,6 @@ public class BasePartyMember : BaseStats
 }
 public class BaseEnemy : BaseStats
 {
-    public bool isAlive;
     public int x;
     public BaseStats targetCharacter;
     //UPDATES
@@ -418,12 +426,12 @@ public class BaseEnemy : BaseStats
         _BM._ActiveEnemies.Remove(this);       // Remove from targetting list
         _BM._DownedEnemies.Add(this);          // Add to downed list (for XP tally/revives, etc)
         _BUI.SetEnemyTargets();
-        FindObjectOfType<BattleManager>().expPool += totalXP; // Add XP amount to total pool
+        FindObjectOfType<BattleManager>().expPool += currentXP; // Add XP amount to total pool
         Destroy(_BM._EnemyModels[i]);
         _BM._EnemyModels.Remove(_BM._EnemyModels[i]);
         if (_BM._ActiveEnemies.Count == 0)   // Win if no more enemies
         {
-            _BM.VictoryState();
+            _BM.EndOfBattleState();
         }
     }
 }

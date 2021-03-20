@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_LightingSettings: {fileID: 1414152587}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -118,6 +118,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -173,6 +175,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -197,13 +201,12 @@ MonoBehaviour:
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_outlineColor:
-    serializedVersion: 2
-    rgba: 4278190080
   m_fontSize: 24
   m_fontSizeBase: 24
   m_fontWeight: 400
@@ -211,7 +214,9 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -221,10 +226,8 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
-  m_isLinkedTextComponent: 0
-  m_isTextTruncated: 0
+  parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
@@ -232,40 +235,18 @@ MonoBehaviour:
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
-  m_ignoreRectMaskCulling: 0
-  m_ignoreCulling: 1
   m_horizontalMapping: 0
   m_verticalMapping: 0
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 1
-  m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
   m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_textInfo:
-    textComponent: {fileID: 122763095}
-    characterCount: 7
-    spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
-    linkCount: 0
-    lineCount: 1
-    pageCount: 1
-    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_spriteAnimator: {fileID: 0}
   m_hasFontAssetChanged: 0
-  m_subTextObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &122763096
@@ -328,17 +309,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: -1
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0, g: 0.17644125, b: 0.4433962, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.300551, b: 0.754717, a: 1}
+    m_PressedColor: {r: 0, g: 0.13149107, b: 0.3301887, a: 1}
+    m_SelectedColor: {r: 0, g: 0.26201507, b: 0.6509434, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -371,8 +353,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.14195444, g: 0.2249795, b: 0.5471698, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -443,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1050386122}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &688935243
@@ -517,6 +501,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -673,6 +659,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -697,13 +685,12 @@ MonoBehaviour:
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_outlineColor:
-    serializedVersion: 2
-    rgba: 4278190080
   m_fontSize: 24
   m_fontSizeBase: 24
   m_fontWeight: 400
@@ -711,7 +698,9 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -721,10 +710,8 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
-  m_isLinkedTextComponent: 0
-  m_isTextTruncated: 0
+  parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
@@ -732,40 +719,18 @@ MonoBehaviour:
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
-  m_ignoreRectMaskCulling: 0
-  m_ignoreCulling: 1
   m_horizontalMapping: 0
   m_verticalMapping: 0
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 1
-  m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
   m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_textInfo:
-    textComponent: {fileID: 923664590}
-    characterCount: 9
-    spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
-    linkCount: 0
-    lineCount: 1
-    pageCount: 1
-    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_spriteAnimator: {fileID: 0}
   m_hasFontAssetChanged: 0
-  m_subTextObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &923664591
@@ -828,6 +793,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -852,13 +819,12 @@ MonoBehaviour:
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_outlineColor:
-    serializedVersion: 2
-    rgba: 4278190080
   m_fontSize: 24
   m_fontSizeBase: 24
   m_fontWeight: 400
@@ -866,7 +832,9 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -876,10 +844,8 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
-  m_isLinkedTextComponent: 0
-  m_isTextTruncated: 0
+  parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
@@ -887,40 +853,18 @@ MonoBehaviour:
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
-  m_ignoreRectMaskCulling: 0
-  m_ignoreCulling: 1
   m_horizontalMapping: 0
   m_verticalMapping: 0
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 1
-  m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
   m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_textInfo:
-    textComponent: {fileID: 999574558}
-    characterCount: 8
-    spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
-    linkCount: 0
-    lineCount: 1
-    pageCount: 1
-    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_spriteAnimator: {fileID: 0}
   m_hasFontAssetChanged: 0
-  m_subTextObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &999574559
@@ -983,6 +927,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1007,13 +953,12 @@ MonoBehaviour:
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_outlineColor:
-    serializedVersion: 2
-    rgba: 4278190080
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
@@ -1021,7 +966,9 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 258
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -1031,10 +978,8 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
-  m_isLinkedTextComponent: 0
-  m_isTextTruncated: 0
+  parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
@@ -1042,40 +987,18 @@ MonoBehaviour:
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
-  m_ignoreRectMaskCulling: 0
-  m_ignoreCulling: 1
   m_horizontalMapping: 0
   m_verticalMapping: 0
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 1
-  m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
   m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_textInfo:
-    textComponent: {fileID: 1024800124}
-    characterCount: 9
-    spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
-    linkCount: 0
-    lineCount: 1
-    pageCount: 1
-    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_spriteAnimator: {fileID: 0}
   m_hasFontAssetChanged: 0
-  m_subTextObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1024800125
@@ -1098,6 +1021,7 @@ GameObject:
   - component: {fileID: 1050386126}
   - component: {fileID: 1050386125}
   - component: {fileID: 1050386124}
+  - component: {fileID: 1050386127}
   m_Layer: 5
   m_Name: New Game Button
   m_TagString: Untagged
@@ -1138,17 +1062,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: -1
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0, g: 0.17644125, b: 0.4433962, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.300551, b: 0.754717, a: 1}
+    m_PressedColor: {r: 0, g: 0.13149107, b: 0.3301887, a: 1}
+    m_SelectedColor: {r: 0, g: 0.26201507, b: 0.6509434, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1167,18 +1092,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1050386125}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1401323636}
-        m_MethodName: NewGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1050386125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1192,8 +1106,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.14195444, g: 0.2249795, b: 0.5471698, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1215,6 +1131,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050386122}
   m_CullTransparentMesh: 0
+--- !u!114 &1050386127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050386122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1401323636}
+          m_TargetAssemblyTypeName: LoadFunctions, Assembly-CSharp
+          m_MethodName: NewGame
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1086935644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,17 +1212,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: -1
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0, g: 0.17644125, b: 0.4433962, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.300551, b: 0.754717, a: 1}
+    m_PressedColor: {r: 0, g: 0.13149107, b: 0.3301887, a: 1}
+    m_SelectedColor: {r: 0, g: 0.26201507, b: 0.6509434, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1310,8 +1256,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.14195444, g: 0.2249795, b: 0.5471698, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1333,6 +1281,730 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1086935644}
   m_CullTransparentMesh: 0
+--- !u!1 &1352726601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1352726613}
+  - component: {fileID: 1352726612}
+  - component: {fileID: 1352726614}
+  - component: {fileID: 1352726611}
+  - component: {fileID: 1352726610}
+  - component: {fileID: 1352726609}
+  - component: {fileID: 1352726608}
+  - component: {fileID: 1352726607}
+  - component: {fileID: 1352726606}
+  - component: {fileID: 1352726605}
+  - component: {fileID: 1352726604}
+  - component: {fileID: 1352726603}
+  - component: {fileID: 1352726602}
+  m_Layer: 0
+  m_Name: DATA TRANSFER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!114 &1352726602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352726601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41414e3bb24a1b04da81938ce376c602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemButton: {fileID: 6527013210756310038, guid: e342922ddbca1e045b7392561dc4a923,
+    type: 3}
+  itemButtonContainerUI: {fileID: 0}
+  itemButtonContainerBattle: {fileID: 0}
+  _Items:
+  - {fileID: 11400000, guid: a86f1ee186463e04796b5f9ded7e0577, type: 2}
+  - {fileID: 11400000, guid: bb766eb822d3ed541b84bd3d8c6cf3d4, type: 2}
+  - {fileID: 11400000, guid: 0cda138dd75f9c244b6fe3a3bb5cea54, type: 2}
+  tempList: []
+--- !u!114 &1352726603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352726601}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 679bd2cee83614f438dd2a3bad04aefe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _BS: {fileID: 0}
+  _BM: {fileID: 0}
+  _BUI: {fileID: 0}
+  CharacterName: Thaumaturge
+  availableSpells: []
+  inBattle: 0
+  _DPSSpawnPoint: {fileID: 0}
+  characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
+    type: 3}
+  isAlive: 1
+  attackPiercing: 0
+  _ActionBarAmount: 0
+  _ActionBarRechargeAmount: 0
+  level: 0
+  currentXP: 0
+  nextLevelXP: 0
+  attackPower: 0
+  magAttackPower: 0
+  defense: 0
+  magDefense: 0
+  strength: 0
+  mind: 0
+  vitality: 0
+  spirit: 0
+  speed: 0
+  luck: 0
+  maxHP: 0
+  maxMP: 0
+  currentHP: 0
+  currentMP: 0
+  zeal: 0
+  faith: 0
+  haste: 0
+  poison: 0
+  silence: 0
+  slow: 0
+  poisonResist: 0
+  silenceResist: 0
+  slowResist: 0
+  thisChara: {fileID: 11400000, guid: b1c9a6b66eee4ae4f90f332e6389d4f9, type: 2}
+  characterPortrait: {fileID: 21300000, guid: 35496bef0ea47b348b43482aedc2d176, type: 3}
+  currentLimit: 0
+  growthRateHyper: 0.5
+  growthRateStrong: 0.3
+  growthRateAverage: 0.2
+  growthRateWeak: 0.1
+  Weapon: {fileID: 0}
+  Armour: {fileID: 0}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
+  equipAttackPower: 0
+  equipMagAttackPower: 0
+  equipDefense: 0
+  equipMagDefense: 0
+  equipStrength: 0
+  equipMind: 0
+  equipVitality: 0
+  equipSpirit: 0
+  equipSpeed: 0
+  equipLuck: 0
+  equipHP: 0
+  equipMP: 0
+--- !u!114 &1352726604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352726601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693b282244a008445beff31ae8ae7b9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _BS: {fileID: 0}
+  _BM: {fileID: 0}
+  _BUI: {fileID: 0}
+  CharacterName: Templar
+  availableSpells: []
+  inBattle: 0
+  _DPSSpawnPoint: {fileID: 0}
+  characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
+    type: 3}
+  isAlive: 1
+  attackPiercing: 0
+  _ActionBarAmount: 0
+  _ActionBarRechargeAmount: 20
+  level: 0
+  currentXP: 0
+  nextLevelXP: 0
+  attackPower: 0
+  magAttackPower: 0
+  defense: 0
+  magDefense: 0
+  strength: 0
+  mind: 0
+  vitality: 0
+  spirit: 0
+  speed: 0
+  luck: 0
+  maxHP: 0
+  maxMP: 0
+  currentHP: 1092
+  currentMP: 139
+  zeal: 0
+  faith: 0
+  haste: 0
+  poison: 0
+  silence: 0
+  slow: 0
+  poisonResist: 0
+  silenceResist: 0
+  slowResist: 0
+  thisChara: {fileID: 11400000, guid: 776ce631b157a7742b46541635f32a6f, type: 2}
+  characterPortrait: {fileID: 21300000, guid: 11a050d0f53cbc749842b8a9d59d6c24, type: 3}
+  currentLimit: 0
+  growthRateHyper: 0.5
+  growthRateStrong: 0.3
+  growthRateAverage: 0.2
+  growthRateWeak: 0.1
+  Weapon: {fileID: 11400000, guid: 2eba27af603b68945a917a4c4328c965, type: 2}
+  Armour: {fileID: 11400000, guid: db6b79c4636566142b6383f719598b4c, type: 2}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
+  equipAttackPower: 0
+  equipMagAttackPower: 0
+  equipDefense: 0
+  equipMagDefense: 0
+  equipStrength: 0
+  equipMind: 0
+  equipVitality: 0
+  equipSpirit: 0
+  equipSpeed: 0
+  equipLuck: 0
+  equipHP: 0
+  equipMP: 0
+--- !u!114 &1352726605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352726601}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9200ffdf1dfa9f8499d29bd71090f930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _BS: {fileID: 0}
+  _BM: {fileID: 0}
+  _BUI: {fileID: 0}
+  CharacterName: Spiritualist
+  availableSpells: []
+  inBattle: 0
+  _DPSSpawnPoint: {fileID: 0}
+  characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
+    type: 3}
+  isAlive: 1
+  attackPiercing: 0
+  _ActionBarAmount: 0
+  _ActionBarRechargeAmount: 0
+  level: 0
+  currentXP: 0
+  nextLevelXP: 0
+  attackPower: 0
+  magAttackPower: 0
+  defense: 0
+  magDefense: 0
+  strength: 0
+  mind: 0
+  vitality: 0
+  spirit: 0
+  speed: 0
+  luck: 0
+  maxHP: 0
+  maxMP: 0
+  currentHP: 0
+  currentMP: 0
+  zeal: 0
+  faith: 0
+  haste: 0
+  poison: 0
+  silence: 0
+  slow: 0
+  poisonResist: 0
+  silenceResist: 0
+  slowResist: 0
+  thisChara: {fileID: 11400000, guid: 972d7a14df683c74282d36b0a0340e64, type: 2}
+  characterPortrait: {fileID: 21300000, guid: eb9aaa8acd367b64c988e72fac7b5e25, type: 3}
+  currentLimit: 0
+  growthRateHyper: 0.5
+  growthRateStrong: 0.3
+  growthRateAverage: 0.2
+  growthRateWeak: 0.1
+  Weapon: {fileID: 0}
+  Armour: {fileID: 0}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
+  equipAttackPower: 0
+  equipMagAttackPower: 0
+  equipDefense: 0
+  equipMagDefense: 0
+  equipStrength: 0
+  equipMind: 0
+  equipVitality: 0
+  equipSpirit: 0
+  equipSpeed: 0
+  equipLuck: 0
+  equipHP: 0
+  equipMP: 0
+--- !u!114 &1352726606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352726601}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68871a0758d9af438982b11be566ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _BS: {fileID: 0}
+  _BM: {fileID: 0}
+  _BUI: {fileID: 0}
+  CharacterName: Shaman
+  availableSpells: []
+  inBattle: 0
+  _DPSSpawnPoint: {fileID: 0}
+  characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
+    type: 3}
+  isAlive: 1
+  attackPiercing: 0
+  _ActionBarAmount: 0
+  _ActionBarRechargeAmount: 0
+  level: 0
+  currentXP: 0
+  nextLevelXP: 0
+  attackPower: 0
+  magAttackPower: 0
+  defense: 0
+  magDefense: 0
+  strength: 0
+  mind: 0
+  vitality: 0
+  spirit: 0
+  speed: 0
+  luck: 0
+  maxHP: 0
+  maxMP: 0
+  currentHP: 0
+  currentMP: 0
+  zeal: 0
+  faith: 0
+  haste: 0
+  poison: 0
+  silence: 0
+  slow: 0
+  poisonResist: 0
+  silenceResist: 0
+  slowResist: 0
+  thisChara: {fileID: 11400000, guid: 54259f9e4634cfc4c898ee14410186a7, type: 2}
+  characterPortrait: {fileID: 21300000, guid: 11a050d0f53cbc749842b8a9d59d6c24, type: 3}
+  currentLimit: 0
+  growthRateHyper: 0.5
+  growthRateStrong: 0.3
+  growthRateAverage: 0.2
+  growthRateWeak: 0.1
+  Weapon: {fileID: 0}
+  Armour: {fileID: 0}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
+  equipAttackPower: 0
+  equipMagAttackPower: 0
+  equipDefense: 0
+  equipMagDefense: 0
+  equipStrength: 0
+  equipMind: 0
+  equipVitality: 0
+  equipSpirit: 0
+  equipSpeed: 0
+  equipLuck: 0
+  equipHP: 0
+  equipMP: 0
+--- !u!114 &1352726607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352726601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca0ef1b22b30e74ea9f4b5edd48fa26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _BS: {fileID: 0}
+  _BM: {fileID: 0}
+  _BUI: {fileID: 0}
+  CharacterName: Officer
+  availableSpells: []
+  inBattle: 0
+  _DPSSpawnPoint: {fileID: 0}
+  characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
+    type: 3}
+  isAlive: 1
+  attackPiercing: 0
+  _ActionBarAmount: 0
+  _ActionBarRechargeAmount: 20
+  level: 0
+  currentXP: 0
+  nextLevelXP: 0
+  attackPower: 0
+  magAttackPower: 0
+  defense: 0
+  magDefense: 0
+  strength: 0
+  mind: 0
+  vitality: 0
+  spirit: 0
+  speed: 0
+  luck: 0
+  maxHP: 0
+  maxMP: 0
+  currentHP: 0
+  currentMP: 0
+  zeal: 0
+  faith: 0
+  haste: 0
+  poison: 0
+  silence: 0
+  slow: 0
+  poisonResist: 0
+  silenceResist: 0
+  slowResist: 0
+  thisChara: {fileID: 11400000, guid: 91fb544bf8bfb1c429a895cd2feef069, type: 2}
+  characterPortrait: {fileID: 21300000, guid: 35496bef0ea47b348b43482aedc2d176, type: 3}
+  currentLimit: 0
+  growthRateHyper: 0.5
+  growthRateStrong: 0.3
+  growthRateAverage: 0.2
+  growthRateWeak: 0.1
+  Weapon: {fileID: 11400000, guid: 2a316280501d7db4aa343011f1eee3c9, type: 2}
+  Armour: {fileID: 11400000, guid: db6b79c4636566142b6383f719598b4c, type: 2}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
+  equipAttackPower: 0
+  equipMagAttackPower: 0
+  equipDefense: 0
+  equipMagDefense: 0
+  equipStrength: 0
+  equipMind: 0
+  equipVitality: 0
+  equipSpirit: 0
+  equipSpeed: 0
+  equipLuck: 0
+  equipHP: 0
+  equipMP: 0
+--- !u!114 &1352726608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352726601}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2296ec342e8c7db47b325e74ea1fec82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _BS: {fileID: 0}
+  _BM: {fileID: 0}
+  _BUI: {fileID: 0}
+  CharacterName: Mechanomancer
+  availableSpells: []
+  inBattle: 0
+  _DPSSpawnPoint: {fileID: 0}
+  characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
+    type: 3}
+  isAlive: 1
+  attackPiercing: 0
+  _ActionBarAmount: 0
+  _ActionBarRechargeAmount: 0
+  level: 0
+  currentXP: 0
+  nextLevelXP: 0
+  attackPower: 0
+  magAttackPower: 0
+  defense: 0
+  magDefense: 0
+  strength: 0
+  mind: 0
+  vitality: 0
+  spirit: 0
+  speed: 0
+  luck: 0
+  maxHP: 0
+  maxMP: 0
+  currentHP: 0
+  currentMP: 0
+  zeal: 0
+  faith: 0
+  haste: 0
+  poison: 0
+  silence: 0
+  slow: 0
+  poisonResist: 0
+  silenceResist: 0
+  slowResist: 0
+  thisChara: {fileID: 11400000, guid: c5013c4ecbaef814786cbd6bc47ce45b, type: 2}
+  characterPortrait: {fileID: 21300000, guid: 785325e73bdb6434286be5f65b4d6521, type: 3}
+  currentLimit: 0
+  growthRateHyper: 0.5
+  growthRateStrong: 0.3
+  growthRateAverage: 0.2
+  growthRateWeak: 0.1
+  Weapon: {fileID: 0}
+  Armour: {fileID: 0}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
+  equipAttackPower: 0
+  equipMagAttackPower: 0
+  equipDefense: 0
+  equipMagDefense: 0
+  equipStrength: 0
+  equipMind: 0
+  equipVitality: 0
+  equipSpirit: 0
+  equipSpeed: 0
+  equipLuck: 0
+  equipHP: 0
+  equipMP: 0
+--- !u!114 &1352726609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352726601}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa234b01325f3147af22e404a631a7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _BS: {fileID: 0}
+  _BM: {fileID: 0}
+  _BUI: {fileID: 0}
+  CharacterName: Machinist
+  availableSpells: []
+  inBattle: 0
+  _DPSSpawnPoint: {fileID: 0}
+  characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
+    type: 3}
+  isAlive: 1
+  attackPiercing: 0
+  _ActionBarAmount: 0
+  _ActionBarRechargeAmount: 0
+  level: 0
+  currentXP: 0
+  nextLevelXP: 0
+  attackPower: 0
+  magAttackPower: 0
+  defense: 0
+  magDefense: 0
+  strength: 0
+  mind: 0
+  vitality: 0
+  spirit: 0
+  speed: 0
+  luck: 0
+  maxHP: 0
+  maxMP: 0
+  currentHP: 0
+  currentMP: 0
+  zeal: 0
+  faith: 0
+  haste: 0
+  poison: 0
+  silence: 0
+  slow: 0
+  poisonResist: 0
+  silenceResist: 0
+  slowResist: 0
+  thisChara: {fileID: 11400000, guid: 1034cf83d41295748a44392233cc9d40, type: 2}
+  characterPortrait: {fileID: 21300000, guid: eb9aaa8acd367b64c988e72fac7b5e25, type: 3}
+  currentLimit: 0
+  growthRateHyper: 0.5
+  growthRateStrong: 0.3
+  growthRateAverage: 0.2
+  growthRateWeak: 0.1
+  Weapon: {fileID: 0}
+  Armour: {fileID: 0}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
+  equipAttackPower: 0
+  equipMagAttackPower: 0
+  equipDefense: 0
+  equipMagDefense: 0
+  equipStrength: 0
+  equipMind: 0
+  equipVitality: 0
+  equipSpirit: 0
+  equipSpeed: 0
+  equipLuck: 0
+  equipHP: 0
+  equipMP: 0
+--- !u!114 &1352726610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352726601}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91cd1d715ef08424080cd32d3ceec27a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _BS: {fileID: 0}
+  _BM: {fileID: 0}
+  _BUI: {fileID: 0}
+  CharacterName: BountyHunter
+  availableSpells: []
+  inBattle: 0
+  _DPSSpawnPoint: {fileID: 0}
+  characterModel: {fileID: 5105461124045260460, guid: 6075ec06afa90a745aaeb286604802a0,
+    type: 3}
+  isAlive: 1
+  attackPiercing: 0
+  _ActionBarAmount: 0
+  _ActionBarRechargeAmount: 0
+  level: 0
+  currentXP: 0
+  nextLevelXP: 0
+  attackPower: 0
+  magAttackPower: 0
+  defense: 0
+  magDefense: 0
+  strength: 0
+  mind: 0
+  vitality: 0
+  spirit: 0
+  speed: 0
+  luck: 0
+  maxHP: 0
+  maxMP: 0
+  currentHP: 0
+  currentMP: 0
+  zeal: 0
+  faith: 0
+  haste: 0
+  poison: 0
+  silence: 0
+  slow: 0
+  poisonResist: 0
+  silenceResist: 0
+  slowResist: 0
+  thisChara: {fileID: 11400000, guid: d1e90e24a7100114299160172897c071, type: 2}
+  characterPortrait: {fileID: 21300000, guid: 11a050d0f53cbc749842b8a9d59d6c24, type: 3}
+  currentLimit: 0
+  growthRateHyper: 0.5
+  growthRateStrong: 0.3
+  growthRateAverage: 0.2
+  growthRateWeak: 0.1
+  Weapon: {fileID: 0}
+  Armour: {fileID: 0}
+  AccessoryOne: {fileID: 0}
+  AccessoryTwo: {fileID: 0}
+  equipAttackPower: 0
+  equipMagAttackPower: 0
+  equipDefense: 0
+  equipMagDefense: 0
+  equipStrength: 0
+  equipMind: 0
+  equipVitality: 0
+  equipSpirit: 0
+  equipSpeed: 0
+  equipLuck: 0
+  equipHP: 0
+  equipMP: 0
+--- !u!114 &1352726611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352726601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec48f98718d947438f9e7c98d4c2556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellInfo: {fileID: 0}
+  abilityInfo: {fileID: 0}
+  itemInfo: {fileID: 0}
+--- !u!114 &1352726612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352726601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c164bf7a4e8be9145915732ca7becca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partyLineup:
+  - {fileID: 1352726607}
+  - {fileID: 1352726604}
+  enemyLineup: []
+  positionFront: 00010000
+  _AllPartyMembers:
+  - {fileID: 1352726610}
+  - {fileID: 1352726609}
+  - {fileID: 1352726608}
+  - {fileID: 1352726607}
+  - {fileID: 1352726606}
+  - {fileID: 1352726605}
+  - {fileID: 1352726604}
+  - {fileID: 1352726603}
+  _SpellsPool:
+  - {fileID: 11400000, guid: 6de33e21b8459e4448168b562fde0c17, type: 2}
+  - {fileID: 11400000, guid: 4fc3ca208e3c41041b8ad821b865b896, type: 2}
+  - {fileID: 11400000, guid: ec351caa447b7834f8fc9404cf96ddda, type: 2}
+  - {fileID: 11400000, guid: fa2d095fc757eb348867a9cf4d08553f, type: 2}
+  - {fileID: 11400000, guid: f3749759027832f47898b0d2aac4e777, type: 2}
+  - {fileID: 11400000, guid: 05cce0c8383282644a35feff41687327, type: 2}
+  - {fileID: 11400000, guid: 7ed6429571e2d124ba65965654023ed3, type: 2}
+  - {fileID: 11400000, guid: e3d10c63dcd4f1f4ab56fb2d6d5599dd, type: 2}
+  currentScene: 
+  currentBattleSceneBackground: 
+  lastKnownPosition: {x: 0, y: 0, z: 0}
+  lastKnownRotation: {x: 0, y: 0, z: 0, w: 0}
+  playerCharacter: {fileID: 8120582500236211777, guid: 0bc21d18da1e35d48a541a6bd3fc884b,
+    type: 3}
+  _InGameTime: 0
+--- !u!4 &1352726613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352726601}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1352726614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352726601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54cd1ee52761d644b9966a9fec7cb966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1401323631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,6 +2084,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &1401323635
 Canvas:
   m_ObjectHideFlags: 0
@@ -1445,115 +2118,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e115ccd28fc828e409d06262fde5443c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1481846783
-GameObject:
+--- !u!850595691 &1414152587
+LightingSettings:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1481846784}
-  - component: {fileID: 1481846786}
-  - component: {fileID: 1481846785}
-  m_Layer: 0
-  m_Name: DATA TRANSFER
-  m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1481846784
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1481846783}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1481846785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1481846783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 693b282244a008445beff31ae8ae7b9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CharacterName: 
-  availableSpells: []
-  inBattle: 0
-  _BM: {fileID: 0}
-  _BUI: {fileID: 0}
-  damageDisplay: {fileID: 0}
-  characterModel: {fileID: 0}
-  _ActionBarAmount: 0
-  _ActionBarRechargeAmount: 0
-  level: 0
-  currentXP: 0
-  nextLevelXP: 0
-  attackPower: 0
-  magAttackPower: 0
-  defense: 0
-  magDefense: 0
-  strength: 0
-  mind: 0
-  vitality: 0
-  spirit: 0
-  speed: 0
-  luck: 0
-  maxHP: 0
-  maxMP: 0
-  currentHP: 0
-  currentMP: 0
-  isAlive: 1
-  thisChara: {fileID: 11400000, guid: 776ce631b157a7742b46541635f32a6f, type: 2}
-  characterPortrait: {fileID: 21300000, guid: 11a050d0f53cbc749842b8a9d59d6c24, type: 3}
-  currentLimit: 0
-  growthRateHyper: 0.5
-  growthRateStrong: 0.3
-  growthRateAverage: 0.2
-  growthRateWeak: 0.1
---- !u!114 &1481846786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1481846783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c164bf7a4e8be9145915732ca7becca5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  partyLineup:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  enemyLineup:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  positionFront: 
-  _AllPartyMembers: []
-  _SpellsPool: []
-  currentScene: 
+  m_Name: Settings.lighting
+  serializedVersion: 3
+  m_GIWorkflowMode: 1
+  m_EnableBakedLightmaps: 1
+  m_EnableRealtimeLightmaps: 1
+  m_RealtimeEnvironmentLighting: 1
+  m_BounceScale: 1
+  m_AlbedoBoost: 1
+  m_IndirectOutputScale: 1
+  m_UsingShadowmask: 1
+  m_BakeBackend: 1
+  m_LightmapMaxSize: 1024
+  m_BakeResolution: 40
+  m_Padding: 2
+  m_TextureCompression: 1
+  m_AO: 0
+  m_AOMaxDistance: 1
+  m_CompAOExponent: 1
+  m_CompAOExponentDirect: 0
+  m_ExtractAO: 0
+  m_MixedBakeMode: 2
+  m_LightmapsBakeMode: 1
+  m_FilterMode: 1
+  m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
+  m_ExportTrainingData: 0
+  m_TrainingDataDestination: TrainingData
+  m_RealtimeResolution: 2
+  m_ForceWhiteAlbedo: 0
+  m_ForceUpdates: 0
+  m_FinalGather: 0
+  m_FinalGatherRayCount: 256
+  m_FinalGatherFiltering: 1
+  m_PVRCulling: 1
+  m_PVRSampling: 1
+  m_PVRDirectSampleCount: 32
+  m_PVRSampleCount: 512
+  m_PVREnvironmentSampleCount: 256
+  m_PVREnvironmentReferencePointCount: 2048
+  m_LightProbeSampleCountMultiplier: 4
+  m_PVRBounces: 2
+  m_PVRMinBounces: 2
+  m_PVREnvironmentMIS: 1
+  m_PVRFilteringMode: 1
+  m_PVRDenoiserTypeDirect: 1
+  m_PVRDenoiserTypeIndirect: 1
+  m_PVRDenoiserTypeAO: 1
+  m_PVRFilterTypeDirect: 0
+  m_PVRFilterTypeIndirect: 0
+  m_PVRFilterTypeAO: 0
+  m_PVRFilteringGaussRadiusDirect: 1
+  m_PVRFilteringGaussRadiusIndirect: 5
+  m_PVRFilteringGaussRadiusAO: 2
+  m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+  m_PVRFilteringAtrousPositionSigmaIndirect: 2
+  m_PVRFilteringAtrousPositionSigmaAO: 1
 --- !u!1 &1508625216
 GameObject:
   m_ObjectHideFlags: 0
@@ -1630,6 +2255,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &1508625218
@@ -1698,17 +2324,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: -1
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0, g: 0.17644125, b: 0.4433962, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.300551, b: 0.754717, a: 1}
+    m_PressedColor: {r: 0, g: 0.13149107, b: 0.3301887, a: 1}
+    m_SelectedColor: {r: 0, g: 0.26201507, b: 0.6509434, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1727,18 +2354,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1578329177}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1401323636}
-        m_MethodName: ExitGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1578329177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1752,8 +2368,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.14195444, g: 0.2249795, b: 0.5471698, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1827,6 +2445,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1851,13 +2471,12 @@ MonoBehaviour:
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_outlineColor:
-    serializedVersion: 2
-    rgba: 4278190080
   m_fontSize: 24
   m_fontSizeBase: 24
   m_fontWeight: 400
@@ -1865,7 +2484,9 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -1875,10 +2496,8 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
-  m_isLinkedTextComponent: 0
-  m_isTextTruncated: 0
+  parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
@@ -1886,40 +2505,18 @@ MonoBehaviour:
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
-  m_ignoreRectMaskCulling: 0
-  m_ignoreCulling: 1
   m_horizontalMapping: 0
   m_verticalMapping: 0
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 1
-  m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
   m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_textInfo:
-    textComponent: {fileID: 2084542139}
-    characterCount: 9
-    spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
-    linkCount: 0
-    lineCount: 1
-    pageCount: 1
-    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_spriteAnimator: {fileID: 0}
   m_hasFontAssetChanged: 0
-  m_subTextObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2084542140

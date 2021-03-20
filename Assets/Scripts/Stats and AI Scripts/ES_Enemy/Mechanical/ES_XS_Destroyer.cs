@@ -21,7 +21,7 @@ public class ES_XS_Destroyer : BaseEnemy
         _ActionBarRechargeAmount = 10;
 
         level = 15;
-        totalXP = 300;
+        currentXP = 300;
 
         maxHP = 2000;
         maxMP = 500;

@@ -9,8 +9,8 @@ public class StatsDataAsset : ScriptableObject
     public string ID;
     public CharacterType _characterType;
 
-    public int level;                      // Character's starting level
-    public int totalXP;                    // Character's starting XP
+    public int startingLevel;              // Character's starting level
+    public int startingXP;                 // Character's starting XP
 
     public float baseHP;                   // Health Pool
     public float baseMP;                   // Mana Pool

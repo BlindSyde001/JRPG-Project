@@ -26,7 +26,7 @@ public class DialogueManager : MonoBehaviour
         {
             sentences.Enqueue(sentence);                    // Set the sentences in order.
         }
-        DisplayNextSentence();                             // Start the Convo.
+        DisplayNextSentence();                              // Start the Convo.
     }
     public void DisplayNextSentence()
     {
@@ -41,12 +41,13 @@ public class DialogueManager : MonoBehaviour
     }
     IEnumerator TypeSentence (string sentence)
     {
+        FindObjectOfType<Interaction>()._sentenceForSkip = sentence;
         chatText.text = "";                               // Reset message box text.
-        foreach(char letter in sentence.ToCharArray())
-        {
-            chatText.text += letter;                      // Typing message.
-            yield return null;
-        }
+            foreach (char letter in sentence.ToCharArray())
+            {
+                chatText.text += letter;                      // Typing message.
+                yield return null;
+            }
     }
     public void EndDialogue()
     {

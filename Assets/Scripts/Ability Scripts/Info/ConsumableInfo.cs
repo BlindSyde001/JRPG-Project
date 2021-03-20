@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ConsumableInfo : BaseItemInfo
 {
-    public ActionTarget _Itemtarget;
+    public ActionTarget _ItemTarget;
     public ActionEffect _ItemEffect;
     public ActionElement _ItemElement;
     public ActionCombat _ItemCombat;

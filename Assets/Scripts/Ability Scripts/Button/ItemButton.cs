@@ -7,12 +7,12 @@ using TMPro;
 public class ItemButton : MonoBehaviour
 {
     //VARIABLES
-    public ConsumableInfo thisItem;
+    public BaseItemInfo thisItem;
     public TextMeshProUGUI ItemName;
     public TextMeshProUGUI ItemAmount;
     public Navigation newNav =  new Navigation();
     //METHODS
-    public void SetButton(ConsumableInfo _Item)
+    public void SetButton(BaseItemInfo _Item)
     {
         thisItem = _Item;
         ItemName.text = thisItem._ItemName;

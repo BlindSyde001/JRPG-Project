@@ -18,7 +18,6 @@ public class SceneInformation : MonoBehaviour
     private bool lockout;                     // Only one instance of enemy encounter loading
     private void Start()
     {
-        print("STARTED");
         _GM = FindObjectOfType<GameManager>();
         _GM.currentScene = sceneName;
         _GM.currentBattleSceneBackground = battleSceneBackground;

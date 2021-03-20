@@ -12,6 +12,7 @@ public class BaseAction : MonoBehaviour
     protected bool crit;
 
     //METHODS
+    #region Spell
     public virtual void ModulatedSpell(SpellsInfo spellUsed, BaseStats Caster, BaseStats target)         // Single
     {
         spellInfo = spellUsed;
@@ -22,8 +23,18 @@ public class BaseAction : MonoBehaviour
                 { crit = true; }
                 else { crit = false; }
 
-                rawValue = (int)((spellInfo._SpellPower * Caster.magAttackPower + Caster.mind) * Random.Range(1, 1.6f) * (crit ? 1.75f : 1));
-                target.TakeDamage(rawValue, true, crit, spellInfo._SpellElement, spellInfo._ActionPiercing);
+                // For conventional damage attacks
+                if (spellUsed._SpellValue == ActionValue.Flat)
+                {
+                    rawValue = (int)((spellInfo.powerValue * Caster.magAttackPower + Caster.mind) * Random.Range(1, 1.6f) * (crit ? 1.75f : 1));
+                    target.TakeDamage(rawValue, true, crit, spellUsed._SpellElement, spellUsed._ActionPiercing);
+                }
+                // For perecnetage based attacks
+                else if(spellUsed._SpellValue == ActionValue.Percent)
+                {
+                    rawValue = (int)((spellInfo.powerValue / 100) * target.maxHP);
+                    target.TakeDamage(rawValue, true, crit, spellUsed._SpellElement, spellUsed._ActionPiercing);
+                }
                 break;
 
             case ActionEffect.Heal:
@@ -31,7 +42,7 @@ public class BaseAction : MonoBehaviour
                 { crit = true; }
                 else { crit = false; }
 
-                rawValue = (int)((spellInfo._SpellPower * Caster.magAttackPower + Caster.mind) * Random.Range(1, 1.6f) * (crit ? 1.75f : 1));
+                rawValue = (int)((spellInfo.powerValue* Caster.magAttackPower + Caster.mind) * Random.Range(1, 1.6f) * (crit ? 1.75f : 1));
                 target.HealDamage(rawValue, crit);
                 break;
         }
@@ -48,7 +59,7 @@ public class BaseAction : MonoBehaviour
                 { crit = true; }
                 else { crit = false; }
 
-                rawValue = (int)((spellInfo._SpellPower * Caster.magAttackPower + Caster.mind) * Random.Range(1, 1.6f) * (crit ? 1.75f : 1));
+                rawValue = (int)((spellInfo.powerValue * Caster.magAttackPower + Caster.mind) * Random.Range(1, 1.6f) * (crit ? 1.75f : 1));
                 foreach (BaseStats x in targets)
                 {
                     x.TakeDamage(rawValue, true, crit, spellInfo._SpellElement, spellInfo._ActionPiercing);
@@ -60,7 +71,7 @@ public class BaseAction : MonoBehaviour
                 { crit = true; }
                 else { crit = false; }
 
-                rawValue = (int)((spellInfo._SpellPower * Caster.magAttackPower + Caster.mind) * Random.Range(1, 1.6f) * (crit ? 1.75f : 1));
+                rawValue = (int)((spellInfo.powerValue * Caster.magAttackPower + Caster.mind) * Random.Range(1, 1.6f) * (crit ? 1.75f : 1));
                 foreach (BaseStats x in targets)
                 {
                     x.HealDamage(rawValue, crit);
@@ -70,7 +81,8 @@ public class BaseAction : MonoBehaviour
         ActionsInfo inputAction = spellInfo;
         StatusEffect(targets, inputAction);
     }
-
+    #endregion
+    #region Ability
     public virtual void ModulatedAbility(AbilityInfo abilityUsed, bool magical, BaseStats Caster, BaseStats target)
     {
         abilityInfo = abilityUsed;
@@ -81,7 +93,7 @@ public class BaseAction : MonoBehaviour
                 { crit = true; }
                 else { crit = false; }
 
-                rawValue = (int)((abilityInfo._AbilityPower * 
+                rawValue = (int)((abilityInfo.powerValue * 
                 (magical ? Caster.magAttackPower + Caster.mind : Caster.attackPower + Caster.strength)) 
                 * Random.Range(1, 1.6f) * (crit ? 1.75f : 1));
 
@@ -93,7 +105,7 @@ public class BaseAction : MonoBehaviour
                 { crit = true; }
                 else { crit = false; }
 
-                rawValue = (int)((abilityInfo._AbilityPower * Caster.magAttackPower + Caster.mind) * Random.Range(1, 1.6f) * (crit ? 1.75f : 1));
+                rawValue = (int)((abilityInfo.powerValue * Caster.magAttackPower + Caster.mind) * Random.Range(1, 1.6f) * (crit ? 1.75f : 1));
                 target.HealDamage(rawValue, crit);
                 break;
         }
@@ -110,7 +122,7 @@ public class BaseAction : MonoBehaviour
                 { crit = true; }
                 else { crit = false; }
 
-                rawValue = (int)((abilityInfo._AbilityPower *
+                rawValue = (int)((abilityInfo.powerValue *
                 (magical ? Caster.magAttackPower + Caster.mind : Caster.attackPower + Caster.strength))
                 * Random.Range(1, 1.6f) * (crit ? 1.75f : 1));
 
@@ -125,7 +137,7 @@ public class BaseAction : MonoBehaviour
                 { crit = true; }
                 else { crit = false; }
 
-                rawValue = (int)((abilityInfo._AbilityPower * Caster.magAttackPower + Caster.mind) * Random.Range(1, 1.6f) * (crit ? 1.75f : 1));
+                rawValue = (int)((abilityInfo.powerValue * Caster.magAttackPower + Caster.mind) * Random.Range(1, 1.6f) * (crit ? 1.75f : 1));
                 foreach (BaseStats x in targets)
                 {
                     x.HealDamage(rawValue, crit);
@@ -135,33 +147,44 @@ public class BaseAction : MonoBehaviour
         ActionsInfo inputAction = abilityInfo;
         StatusEffect(targets, inputAction);
     }
-
+    #endregion
+    #region Status
     public void StatusEffect(BaseStats target, ActionsInfo action) // Status Effects Logic: Positive then Negative
     {
-        for (int i = 0; i < action.posStatusChances.Length; i++)
+        for (int i = 0; i < action.posBuffChances.Length; i++)
         {
-            if(action.posStatusChances[i] > 0)
+            if(action.posBuffChances[i] > 0)
             {
                 switch(i)
                 {
                     case 0: // Zeal
-                        if(Random.Range(0, 101) <= action.posStatusChances[i])
+                        if(Random.Range(0, 101) <= action.posBuffChances[i])
                         {
                             target.zeal = true;
                         }
                         break;
 
                     case 1: // Faith
-                        if (Random.Range(0, 101) <= action.posStatusChances[i])
+                        if (Random.Range(0, 101) <= action.posBuffChances[i])
                         {
                             target.faith = true;
                         }
                         break;
 
                     case 2: // Haste
-                        if (Random.Range(0, 101) <= action.posStatusChances[i])
+                        if (Random.Range(0, 101) <= action.posBuffChances[i])
                         {
                             target.haste = true;
+                        }
+                        break;
+
+                    case 3: // Revive
+                        if (Random.Range(0, 101) <= action.posBuffChances[i])
+                        {
+                            target.isAlive = true;
+                            target._BM._ActivePartyMembers.Add((BasePartyMember)target);
+                            target._BM._DownedMembers.Remove((BasePartyMember)target);
+                            target._BM.UpdatePartyAliveStatus();
                         }
                         break;
                 }
@@ -174,21 +197,21 @@ public class BaseAction : MonoBehaviour
                 switch (i)
                 {
                     case 0: // Poison
-                        if (Random.Range(0, 101 + target.poisonResist) <= action.posStatusChances[i])
+                        if (Random.Range(0, 101 + target.poisonResist) <= action.posBuffChances[i])
                         {
                             target.poison = true;
                         }
                         break;
 
                     case 1: // Silence
-                        if (Random.Range(0, 101 + target.silenceResist) <= action.posStatusChances[i])
+                        if (Random.Range(0, 101 + target.silenceResist) <= action.posBuffChances[i])
                         {
                             target.silence = true;
                         }
                         break;
 
                     case 2: // Slow
-                        if (Random.Range(0, 101 + target.slowResist) <= action.posStatusChances[i])
+                        if (Random.Range(0, 101 + target.slowResist) <= action.posBuffChances[i])
                         {
                             target.slow = true;
                         }
@@ -196,17 +219,67 @@ public class BaseAction : MonoBehaviour
                 }
             }
         }
-    }
-    public void StatusEffect(List<BaseStats> targets, ActionsInfo action) // Status Effects Logic: Positive then Negative
-    {
-        for (int i = 0; i < action.posStatusChances.Length; i++)
+        for (int i = 0; i < action.dispelChances.Length; i++)
         {
-            if (spellInfo.posStatusChances[i] > 0)
+            if (action.dispelChances[i] > 0)
             {
                 switch (i)
                 {
                     case 0: // Zeal
-                        if (Random.Range(0, 101) <= action.posStatusChances[i])
+                        if (Random.Range(0, 101) <= action.posBuffChances[i])
+                        {
+                                target.zeal = true;
+                        }
+                        break;
+
+                    case 1: // Faith
+                        if (Random.Range(0, 101) <= action.posBuffChances[i])
+                        {
+                                target.faith = true;
+                        }
+                        break;
+
+                    case 2: // Haste
+                        if (Random.Range(0, 101) <= action.posBuffChances[i])
+                        {
+                                target.haste = true;
+                        }
+                        break;
+
+                    case 3: // Poison
+                        if (Random.Range(0, 101) <= action.dispelChances[i])
+                        {
+                                target.poison = true;
+                        }
+                        break;
+
+                    case 4: // Silence
+                        if (Random.Range(0, 101) <= action.dispelChances[i])
+                        {
+                                target.silence = true;
+                        }
+                        break;
+
+                    case 5: // Slow
+                        if (Random.Range(0, 101) <= action.dispelChances[i])
+                        {
+                                target.slow = true;
+                        }
+                        break;
+                }
+            }
+        }
+    }
+    public void StatusEffect(List<BaseStats> targets, ActionsInfo action) // Status Effects Logic: Positive, Negative, then Dispel(Pos/Neg)
+    {
+        for (int i = 0; i < action.posBuffChances.Length; i++)
+        {
+            if (spellInfo.posBuffChances[i] > 0)
+            {
+                switch (i)
+                {
+                    case 0: // Zeal
+                        if (Random.Range(0, 101) <= action.posBuffChances[i])
                         {
                             foreach(BaseStats target in targets)
                             {
@@ -216,7 +289,7 @@ public class BaseAction : MonoBehaviour
                         break;
 
                     case 1: // Faith
-                        if (Random.Range(0, 101) <= action.posStatusChances[i])
+                        if (Random.Range(0, 101) <= action.posBuffChances[i])
                         {
                             foreach (BaseStats target in targets)
                             {
@@ -226,11 +299,24 @@ public class BaseAction : MonoBehaviour
                         break;
 
                     case 2: // Haste
-                        if (Random.Range(0, 101) <= action.posStatusChances[i])
+                        if (Random.Range(0, 101) <= action.posBuffChances[i])
                         {
                             foreach (BaseStats target in targets)
                             {
                                 target.haste = true;
+                            }
+                        }
+                        break;
+
+                    case 3: // Revive
+                        if (Random.Range(0, 101) <= action.posBuffChances[i])
+                        {
+                            foreach (BaseStats target in targets)
+                            {
+                                target.isAlive = true;
+                                target._BM._ActivePartyMembers.Add((BasePartyMember)target);
+                                target._BM._DownedMembers.Remove((BasePartyMember)target);
+                                target._BM.UpdatePartyAliveStatus();
                             }
                         }
                         break;
@@ -244,7 +330,7 @@ public class BaseAction : MonoBehaviour
                 switch (i)
                 {
                     case 0: // Poison
-                        if (Random.Range(0, 101) <= action.posStatusChances[i])
+                        if (Random.Range(0, 101) <= action.negStatusChances[i])
                         {
                             foreach (BaseStats target in targets)
                             {
@@ -254,7 +340,7 @@ public class BaseAction : MonoBehaviour
                         break;
 
                     case 1: // Silence
-                        if (Random.Range(0, 101) <= action.posStatusChances[i])
+                        if (Random.Range(0, 101) <= action.negStatusChances[i])
                         {
                             foreach (BaseStats target in targets)
                             {
@@ -264,7 +350,75 @@ public class BaseAction : MonoBehaviour
                         break;
 
                     case 2: // Slow
-                        if (Random.Range(0, 101) <= action.posStatusChances[i])
+                        if (Random.Range(0, 101) <= action.negStatusChances[i])
+                        {
+                            foreach (BaseStats target in targets)
+                            {
+                                target.slow = true;
+                            }
+                        }
+                        break;
+                }
+            }
+        }
+        for (int i = 0; i < action.dispelChances.Length; i++)
+        {
+            if (action.dispelChances[i] > 0)
+            {
+                switch (i)
+                {
+                    case 0: // Zeal
+                        if (Random.Range(0, 101) <= action.posBuffChances[i])
+                        {
+                            foreach (BaseStats target in targets)
+                            {
+                                target.zeal = true;
+                            }
+                        }
+                        break;
+
+                    case 1: // Faith
+                        if (Random.Range(0, 101) <= action.posBuffChances[i])
+                        {
+                            foreach (BaseStats target in targets)
+                            {
+                                target.faith = true;
+                            }
+                        }
+                        break;
+
+                    case 2: // Haste
+                        if (Random.Range(0, 101) <= action.posBuffChances[i])
+                        {
+                            foreach (BaseStats target in targets)
+                            {
+                                target.haste = true;
+                            }
+                        }
+                        break;
+
+                    case 3: // Poison
+                        if (Random.Range(0, 101) <= action.dispelChances[i])
+                        {
+                            foreach (BaseStats target in targets)
+                            {
+                                target.poison = true;
+                            }
+                        }
+                        break;
+
+                    case 4: // Silence
+                        if (Random.Range(0, 101) <= action.dispelChances[i])
+                        {
+                            foreach (BaseStats target in targets)
+                            {
+                                target.silence = true;
+                            }
+                        }
+                        break;
+
+                    case 5: // Slow
+                        if (Random.Range(0, 101) <= action.dispelChances[i])
                         {
                             foreach (BaseStats target in targets)
                             {
@@ -276,10 +430,5 @@ public class BaseAction : MonoBehaviour
             }
         }
     }
-
-    public void Gravity()
-    {
-        // rawValue = (int)(target.currentHP * spellinfo.SpellPower);
-        // target.TakeDamage(rawValue, true, false, spellinfo.SpellElement);
-    }
+    #endregion
 }

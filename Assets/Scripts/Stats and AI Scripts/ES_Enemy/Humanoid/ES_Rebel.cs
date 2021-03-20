@@ -14,7 +14,7 @@ public class ES_Rebel : BaseEnemy
         _ActionBarRechargeAmount = 10;
 
         level = 5;
-        totalXP = 30;
+        currentXP = 30;
 
         maxHP = 200;
         maxMP = 0;

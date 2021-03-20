@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class HS_Officer : BasePartyMember
 {
-    private void Start()
-    {
-        Stats();
-        NextLevel();
-    }
+    #region Affecting Stats
     private void EquipStats()
     {
+        // Reset stats added from equipment to zero
         #region Reset Equip Stats
         equipAttackPower = 0;
         equipMagAttackPower = 0;
@@ -28,6 +25,7 @@ public class HS_Officer : BasePartyMember
         equipHP = 0;
         equipMP = 0;
         #endregion
+        #region Add Equipped Items to a Temporary List
         List<EquipmentInfo> tempEquip = new List<EquipmentInfo>();
         tempEquip.Add(Weapon);
         if (Armour != null)
@@ -36,7 +34,8 @@ public class HS_Officer : BasePartyMember
             tempEquip.Add(AccessoryOne);
         if (AccessoryTwo != null)
             tempEquip.Add(AccessoryTwo);
-
+        #endregion
+        // Add new stats to the characters from equipped items
         foreach (EquipmentInfo currentEquip in tempEquip)
         {
             equipAttackPower += currentEquip.attackPower;
@@ -56,40 +55,56 @@ public class HS_Officer : BasePartyMember
             equipMP += currentEquip.mP;
         }
     }
-    private void Stats()
+    private void TotalStats()
     {
-        CharacterName = thisChara.ID;
-        level = thisChara.level;
-        totalXP = thisChara.totalXP;
+        attackPower = (int)thisChara.baseAtkPwr + equipAttackPower;
+        magAttackPower = (int)thisChara.baseMagAtkPwr + equipMagAttackPower;
+        defense = (int)thisChara.baseDef + equipDefense;
+        magDefense = (int)thisChara.baseMagDef + equipMagDefense;
 
-        attackPower = (int)thisChara.baseAtkPwr;
-        magAttackPower = (int)thisChara.baseMagAtkPwr;
-        defense = (int)thisChara.baseDef;
-        magDefense = (int)thisChara.baseMagDef;
+        strength = (int)(thisChara.baseStr * (1 + growthRateStrong) * level) + equipStrength;
+        mind = (int)(thisChara.baseMnd * (1 + growthRateWeak) * level) + equipMind;
+        vitality = (int)(thisChara.baseVit * (1 + growthRateAverage) * level) + equipVitality;
+        spirit = (int)(thisChara.baseSpr * (1 + growthRateAverage) * level) + equipSpirit;
 
-        strength = (int)(thisChara.baseStr * (1 + growthRateStrong) * level);
-        mind = (int)(thisChara.baseMnd * (1 + growthRateWeak) * level);
-        vitality = (int)(thisChara.baseVit * (1 + growthRateAverage) * level);
-        spirit = (int)(thisChara.baseSpr * (1 + growthRateAverage) * level);
+        speed = (int)(thisChara.baseSpd * (1 + growthRateWeak) * level) + equipSpeed;
+        luck = (int)(thisChara.baseLck * (1 + growthRateAverage) * level) + equipLuck;
 
-        speed = (int)(thisChara.baseSpd * (1 + growthRateWeak) * level);
-        luck = (int)(thisChara.baseLck * (1 + growthRateAverage) * level);
-
-        maxHP = (int)(thisChara.baseHP * (1 + growthRateHyper) * level) + (strength / 2 * level) + (vitality / 4 * level);
-        maxMP = (int)(thisChara.baseMP * (1 + growthRateWeak) * level) + (mind) + (spirit / 4 * level);
+        maxHP = (int)(thisChara.baseHP * (1 + growthRateHyper) * level) + (strength / 2 * level) + (vitality / 4 * level) + equipHP;
+        maxMP = (int)(thisChara.baseMP * (1 + growthRateWeak) * level) + (mind) + (spirit / 4 * level) + equipMP;
     }
-
-    private void LimitBreak()
-    {
-        // Deadeye
-        // Executes low HP enemies, and deals heightened critical damage to those it doesn't execute
-    }
-
     public override void NextLevel()
     {
         base.NextLevel();
         GainNewAbility();
     }
+
+    public override void StartOfGameStats()
+    {
+        EquipStats();
+
+        CharacterName = thisChara.ID;
+        level = thisChara.startingLevel;
+        currentXP = thisChara.startingXP;
+
+        attackPower = (int)thisChara.baseAtkPwr + equipAttackPower;
+        magAttackPower = (int)thisChara.baseMagAtkPwr + equipMagAttackPower;
+        defense = (int)thisChara.baseDef + equipDefense;
+        magDefense = (int)thisChara.baseMagDef + equipMagDefense;
+
+        strength = (int)(thisChara.baseStr * (1 + growthRateStrong) * level) + equipStrength;
+        mind = (int)(thisChara.baseMnd * (1 + growthRateWeak) * level) + equipMind;
+        vitality = (int)(thisChara.baseVit * (1 + growthRateAverage) * level) + equipVitality;
+        spirit = (int)(thisChara.baseSpr * (1 + growthRateAverage) * level) + equipSpirit;
+
+        speed = (int)(thisChara.baseSpd * (1 + growthRateWeak) * level) + equipSpeed;
+        luck = (int)(thisChara.baseLck * (1 + growthRateAverage) * level) + equipLuck;
+
+        maxHP = (int)(thisChara.baseHP * (1 + growthRateHyper) * level) + (strength / 2 * level) + (vitality / 4 * level) + equipHP;
+        maxMP = (int)(thisChara.baseMP * (1 + growthRateWeak) * level) + (mind) + (spirit / 4 * level) + equipMP;
+    }
+    #endregion
+    #region Ability Gain
     private void GainNewAbility()
     {
         switch (level)
@@ -102,17 +117,35 @@ public class HS_Officer : BasePartyMember
                 break;
         }
     }
-
+    #endregion
     #region Unique Abilities
+    private void LimitBreak()
+    {
+        // Deadeye
+        // Executes low HP enemies, and deals heightened critical damage to those it doesn't execute
+    }
+
+
     private void KrakGrenades()
     {
-        // AOE damage on enemies
+            bool crit;
+            if (Random.Range(0, 101) < luck)
+                crit = true;
+            else
+                crit = false;
+        // AOE damage on enemies equal to 80% of basic attack. Pierces defenses
+        foreach(BaseEnemy enemy in _BM._ActiveEnemies)
+        {
+            int damage = (int)(attackPower * Random.Range(1f, 1.5f) * (crit ? 1.75 : 1));
+            TakeDamage(damage, false, crit, ActionElement.None, true);
+        }
     }
     private void PiercingShot()
     {
-        // damage and reduce armor of target enemy
+        // Damage and reduces target's defense by 20%
+
     }
-    private void BulletTime()
+    private void RapidFire()
     {
         // Spamming shots at a target
     }

@@ -11,15 +11,19 @@ public class PartyInventory : MonoBehaviour
     public GameObject itemButtonContainerUI;                        // Contains all item buttons for UI Menu.
     public GameObject itemButtonContainerBattle;                    // Contains all item buttons for Battle Menu.
     public List<ConsumableInfo> _Items;                             // The items currently in inventory.
-    public List<GameObject> tempList;                               // Used for button Navigation
+    public List<GameObject> tempList;                               // Used for Button Navigation
+
+    //UPDATES
 
     //METHODS
     #region ITEMS
     public void InitiateInventoryUI()                      // Creates the Inventory list when you open the UI
     {
+        print("Initiated UI");
         // Reset Item List
         foreach (Transform a in itemButtonContainerUI.transform)
         {
+            a.GetComponent<ItemButton>().thisItem = _Items[a.GetSiblingIndex()];           // Set the item into the button
             a.GetComponent<ItemButton>().SetButton(a.GetComponent<ItemButton>().thisItem); // Sets the item into the UI Button
 
             if(a.GetComponent<ItemButton>().thisItem._ItemAmount == 0)                     // Turns off button if you don't have any of the item
@@ -30,25 +34,23 @@ public class PartyInventory : MonoBehaviour
             {
                 a.gameObject.SetActive(true);
                 tempList.Add(a.gameObject);
-
-                //Debug.Log("I Have " + a.GetComponent<ItemButton>().thisItem._ItemAmount + " x " + a.GetComponent<ItemButton>().thisItem + "!");
             }
         }
         for (int i = 0; i < tempList.Count; i++)
         {
             if (tempList.Count != 0 || tempList.Count != 1)
             {
-                if (i == 0)
+                if (i == 0) // For first in the list, UP, goes to the last item in list
                 {
                     tempList[i].gameObject.GetComponent<ItemButton>().newNav.selectOnUp = tempList[tempList.Count - 1].gameObject.GetComponent<Button>();
                     tempList[i].gameObject.GetComponent<ItemButton>().newNav.selectOnDown = tempList[i + 1].gameObject.GetComponent<Button>();
                 }
-                else if (i == tempList.Count - 1)
+                else if (i == tempList.Count - 1) // For last in the list, DOWN, goes to first item in list
                 {
                     tempList[i].gameObject.GetComponent<ItemButton>().newNav.selectOnUp = tempList[i - 1].gameObject.GetComponent<Button>();
                     tempList[i].gameObject.GetComponent<ItemButton>().newNav.selectOnDown = tempList[0].gameObject.GetComponent<Button>();
                 }
-                else if (i > 0 || i < tempList.Count - 1)
+                else if (i > 0 || i < tempList.Count - 1) // For all other items
                 {
                     tempList[i].gameObject.GetComponent<ItemButton>().newNav.selectOnUp = tempList[i - 1].gameObject.GetComponent<Button>();
                     tempList[i].gameObject.GetComponent<ItemButton>().newNav.selectOnDown = tempList[i + 1].gameObject.GetComponent<Button>();
@@ -161,13 +163,18 @@ public class PartyInventory : MonoBehaviour
     {
         if (scene.name != "Battle Scene")
         {
-            itemButtonContainerUI = GameObject.Find("itemButtonContainerUI");
-            InitiateInventoryUI();
+            tempList.Clear();
+            //if (scene.name != "Title Screen")
+            //{
+            //    itemButtonContainerUI = GameObject.Find("itemButtonContainerUI");
+            //    InitiateInventoryUI();
+            //}
         }
-        else if(scene.name == "Battle Scene")
+        else if(scene.name == "Battle Scene") // Clear button list so you can add the new ones for battle and set navigation
         {
-            //itemButtonContainerBattle = GameObject.Find("itemButtonContainerBattle");
-            //InitiateInventoryBattle();
+            tempList.Clear();
+            itemButtonContainerBattle = GameObject.Find("Item Button Container Battle");
+            InitiateInventoryBattle();
         }
     }
     #endregion

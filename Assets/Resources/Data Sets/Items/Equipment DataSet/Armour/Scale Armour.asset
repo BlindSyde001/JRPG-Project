@@ -16,10 +16,23 @@ MonoBehaviour:
   negStatusChances: 000000000000000000000000
   _ActionPiercing: 0
   _ActionDescription: 
-  _ItemName: 
+  _ItemName: Scale Armour
   _ItemID: 0
   _ItemAmount: 0
   _EquipSlot: 1
   _EquipType: 0
-  PrimaryStat: 0
-  SecondaryStat: 0
+  attackPower: 0
+  magAttackPower: 0
+  defense: 0
+  magDefense: 0
+  strength: 0
+  mind: 0
+  vitality: 0
+  spirit: 0
+  speed: 0
+  luck: 0
+  hP: 0
+  mP: 0
+  zeal: 0
+  faith: 0
+  haste: 0

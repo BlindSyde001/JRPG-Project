@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: Templar
   _characterType: 0
-  level: 12
-  totalXP: 3891
+  startingLevel: 0
+  startingXP: 0
   baseHP: 50
   baseMP: 5
   baseAtkPwr: 30

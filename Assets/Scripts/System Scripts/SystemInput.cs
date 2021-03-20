@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SystemInput : MonoBehaviour
 {
@@ -12,34 +13,41 @@ public class SystemInput : MonoBehaviour
     private Movement _PlayerMovement;
     public Button _MenuStartButton;
 
+    private Scene scene;
     #region UI Display Variables
     public List<UIComponents> displayPanel;
     #endregion
     //UPDATES
     private void Start()
     {
+        scene = SceneManager.GetActiveScene();
         _GM = FindObjectOfType<GameManager>();
         _PlayerMovement = FindObjectOfType<Movement>();
         isMenuOpen = false;                             // Changes Inputs When Menu is Open/Closed
     }
     private void FixedUpdate()
     {
+        if(_PlayerMovement != null)
         DirectionalButtons();                           //Player Movement
     }
     private void Update()
     {
-        StartButton();
-        CancelButton();
+        if (scene.name != "Level Testing")
+        {
+            StartButton();
+            CancelButton();
+        }
     }
 
     //METHODS
     private void DirectionalButtons()
     {
+        // Move When Pressing button down
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
         {
             _PlayerMovement.input.x = Input.GetAxisRaw("Horizontal");
             _PlayerMovement.input.z = Input.GetAxisRaw("Vertical");
-        }
+        } // Stop moving
         else
         {
             _PlayerMovement.input.x = 0;

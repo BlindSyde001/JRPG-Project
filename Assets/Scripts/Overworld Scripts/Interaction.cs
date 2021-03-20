@@ -12,18 +12,36 @@ public class Interaction : MonoBehaviour
     public NPCGeneric NPC;                           //The NPC in Chat Range
     public bool convoCont;
     public Animator msgBoxAnim;
+    private DialogueManager _dm;
+    public string _sentenceForSkip;
 
     //UPDATES
+    private void Start()
+    {
+        msgBoxAnim = GameObject.Find("Message Box").GetComponent<Animator>();
+        _dm = FindObjectOfType<DialogueManager>();
+    }
+
     private void Update()
     {
+        // Starts Talking
         if(Input.GetKeyDown(KeyCode.E) && talkingRange && !convoCont)
         {
             msgBoxAnim.SetBool("IsOpen", true);
-            FindObjectOfType<DialogueManager>().StartDialogue(NPC);
+            _dm.StartDialogue(NPC);
             convoCont = true;
-        } else if(Input.GetKeyDown(KeyCode.E) && convoCont)
+        }
+        // If I'm already talking
+        else if(Input.GetKeyDown(KeyCode.E) && convoCont)
         {
-            FindObjectOfType<DialogueManager>().DisplayNextSentence();
+            // Finish the sentence or start new one
+            if (_dm.chatText.text != _sentenceForSkip)
+            {
+                _dm.StopAllCoroutines();
+                _dm.chatText.text = _sentenceForSkip;
+            }
+            else
+                _dm.DisplayNextSentence();
         }
     }
 
@@ -48,20 +66,20 @@ public class Interaction : MonoBehaviour
         }
     }
     #region Level Changing
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnNewSceneLoaded;
-    }
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnNewSceneLoaded;
-    }
-    private void OnNewSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name != "Battle Scene")
-        {
-            msgBoxAnim = GameObject.Find("Message Box").GetComponent<Animator>();
-        }
-    }
+    //private void OnEnable()
+    //{
+    //    SceneManager.sceneLoaded += OnNewSceneLoaded;
+    //}
+    //private void OnDisable()
+    //{
+    //    SceneManager.sceneLoaded -= OnNewSceneLoaded;
+    //}
+    //private void OnNewSceneLoaded(Scene scene, LoadSceneMode mode)
+    //{
+    //    if (scene.name != "Battle Scene")
+    //    {
+    //        msgBoxAnim = GameObject.Find("Message Box").GetComponent<Animator>();
+    //    }
+    //}
     #endregion
 }

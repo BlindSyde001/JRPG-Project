@@ -17,7 +17,7 @@ public class ES_Bandit : BaseEnemy
         _ActionBarRechargeAmount = 10;
 
         level = 5;
-        totalXP = 30;
+        currentXP = 30;
 
         maxHP = 150;
         maxMP = 50;

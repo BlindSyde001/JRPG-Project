@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public List<BasePartyMember> _AllPartyMembers; // Stored variables of all Playable Characters
 
     [Header("DATABASE")]
-    public List<SpellsInfo> _SpellsPool;               // All spells in the Game for the player
+    public List<SpellsInfo> _SpellsPool;           // All spells in the Game for the player
 
     [Header("Stored Data")]
     public string currentScene;                    // The current Scene the game is in.
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
@@ -38,15 +38,8 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    #region Level Changing
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnNewSceneLoaded;
-    }
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnNewSceneLoaded;
-    }
+
+    #region Event Subscription
     private void OnNewSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name != "Battle Scene")
@@ -54,12 +47,36 @@ public class GameManager : MonoBehaviour
             // create new player object at last position
             if(lastKnownPosition != new Vector3(0, 0, 0) && lastKnownRotation != new Quaternion(0, 0, 0, 0))
             {
-                Destroy(FindObjectOfType<Movement>().gameObject);                   // Get rid of any that comes with scene
-                Instantiate(playerCharacter, lastKnownPosition, lastKnownRotation); // respawn player in same spot
-                lastKnownPosition = new Vector3(0, 0, 0);
-                lastKnownRotation = new Quaternion(0, 0, 0, 0);
+                if (scene.name != "Title Screen")
+                {
+                    Destroy(FindObjectOfType<Movement>().gameObject);                   // Get rid of any that comes with scene
+                    Instantiate(playerCharacter, lastKnownPosition, lastKnownRotation); // Respawn player in same spot
+                    lastKnownPosition = new Vector3(0, 0, 0);
+                    lastKnownRotation = new Quaternion(0, 0, 0, 0);
+                }
             }
         }
+    }
+    void OnNewGame()
+    {
+        foreach(BasePartyMember member in _AllPartyMembers)
+        {
+            member.StartOfGameStats();
+            member.currentHP = member.maxHP;
+            member.currentMP = member.maxMP;
+        }
+    }
+    #endregion
+    #region Enable/Disable
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnNewSceneLoaded;
+        EventManager.StartedGame += OnNewGame;
+    }
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnNewSceneLoaded;
+        EventManager.StartedGame -= OnNewGame;
     }
     #endregion
 }

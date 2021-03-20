@@ -31,7 +31,6 @@ public class SpellButton : MonoBehaviour
 
     public void OnSubmit(BaseEventData data)
     {
-        Debug.Log("Worked");
         GameObject.FindObjectOfType<BattleUIController>().SubmitMagic(thisSpell._SpellID);
     }
 

@@ -11,7 +11,7 @@ public class ES_Wolf : BaseEnemy
         _ActionBarRechargeAmount = 10;
 
         level = 10;
-        totalXP = 25;
+        currentXP = 25;
 
         maxHP = 300;
         maxMP = 50;

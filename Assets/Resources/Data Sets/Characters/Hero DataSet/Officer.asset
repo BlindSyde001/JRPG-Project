@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: Officer
   _characterType: 0
-  level: 7
-  totalXP: 1014
+  startingLevel: 7
+  startingXP: 0
   baseHP: 50
   baseMP: 1
   baseAtkPwr: 30

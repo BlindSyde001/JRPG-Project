@@ -9,14 +9,16 @@ public class AbilityInfo : ActionsInfo
     //VARIABLES
     public string _AbilityName;
     public int _AbilityID;
-    public int _AbilityPower;
     public int _AbilityCost;
 
     public enum AbilityProperty { Physical, Magical};
 
-    public ActionTarget _Abilitytarget;
+    public ActionTarget _AbilityTarget;
+    public ActionCombat _AbilityCombat;
+
     public ActionEffect _AbilityEffect;
     public ActionElement _AbilityElement;
-    public ActionCombat _AbilityCombat;
+    public ActionValue _AbilityValue;
+
     public AbilityProperty _AbilityProperty;
 }

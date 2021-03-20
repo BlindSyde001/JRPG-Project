@@ -170,20 +170,16 @@ public class BattleManager : MonoBehaviour
     }
     #endregion
     #region End of Game States
-    public void VictoryState()
+    public void EndOfBattleState()
     {
         _BUI.endOfFight = true;
         Destroy(FindObjectOfType<EnemyInfoScript>().gameObject);
     }
-    public void GameOverState()
-    {
-        _BUI.MessageOnScreen("Game Over!");
-    }
     #endregion
     public void UpdatePartyAliveStatus()
     {
-        if(_DownedMembers.Count == _PartyMembersInBattle.Count)  // If all the party members have been downed
-            GameOverState();
+        if (_DownedMembers.Count == _PartyMembersInBattle.Count)  // If all the party members have been downed
+            EndOfBattleState();
     }
     public void UpdatePartyVariables()
     {

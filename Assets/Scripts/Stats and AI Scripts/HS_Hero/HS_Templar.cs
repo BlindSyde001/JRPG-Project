@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class HS_Templar : BasePartyMember
 {
-    private void Start()
-    {
-        Stats();
-        NextLevel();
-    }
+    //private void Start()
+    //{
+    //    EquipStats();
+    //    NextLevel();
+    //}
     private void EquipStats()
     {
         #region Reset Equip Stats
@@ -28,6 +28,7 @@ public class HS_Templar : BasePartyMember
         equipHP = 0;
         equipMP = 0;
         #endregion
+        #region Add Equipped Items to Temporary List
         List<EquipmentInfo> tempEquip = new List<EquipmentInfo>();
         tempEquip.Add(Weapon);
         if (Armour != null)
@@ -36,8 +37,9 @@ public class HS_Templar : BasePartyMember
             tempEquip.Add(AccessoryOne);
         if (AccessoryTwo != null)
             tempEquip.Add(AccessoryTwo);
+        #endregion
 
-        foreach(EquipmentInfo currentEquip in tempEquip)
+        foreach (EquipmentInfo currentEquip in tempEquip)
         {
             equipAttackPower += currentEquip.attackPower;
             equipMagAttackPower += currentEquip.magAttackPower;
@@ -55,14 +57,13 @@ public class HS_Templar : BasePartyMember
             equipHP += currentEquip.hP;
             equipMP += currentEquip.mP;
         }
+        TotalStats();
     }
-    private void Stats()
+    private void TotalStats()
     {
         CharacterName = thisChara.ID;
-        level = thisChara.level;
-        totalXP = thisChara.totalXP;
-
-        EquipStats();
+        level = thisChara.startingLevel;
+        currentXP = thisChara.startingXP;
 
         attackPower = (int)thisChara.baseAtkPwr + equipAttackPower;
         magAttackPower = (int)thisChara.baseMagAtkPwr + equipMagAttackPower;
@@ -85,7 +86,6 @@ public class HS_Templar : BasePartyMember
     {
 
     }
-
     public override void NextLevel()
     {
         base.NextLevel();

@@ -13,7 +13,7 @@ public class ES_Hjacked_Patrolbot : BaseEnemy
         _ActionBarRechargeAmount = 10;
 
         level = 7;
-        totalXP = 40;
+        currentXP = 40;
 
         maxHP = 280;
         maxMP = 0;
