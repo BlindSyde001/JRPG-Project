@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseItemInfo : ActionsInfo
+public class BaseItemInfo : ActionInfo
 {
     public string _ItemName;
     public int _ItemID;

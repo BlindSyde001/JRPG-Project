@@ -9,21 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e373941625ec7548955f98123b6ebd9, type: 3}
+  m_Script: {fileID: 11500000, guid: d100de906ca4cb541960e09586d37b0c, type: 3}
   m_Name: PowerShot
   m_EditorClassIdentifier: 
-  posBuffChances: 000000000000000000000000
-  negStatusChances: 000000000000000000000000
-  dispelChances: 000000000000000000000000000000000000000000000000
-  _ActionPiercing: 0
+  _ActionType: 1
+  _ActionTarget: 0
+  _ActionEffect: 0
+  _ActionElement: 8
+  _ActionValue: 0
+  _ActionCombat: 0
+  _ActionName: Power Shot
   powerValue: 0
+  _ActionCost: 0
   _ActionDescription: 
-  _AbilityName: 
-  _AbilityID: 0
-  _AbilityCost: 0
-  _AbilityTarget: 0
-  _AbilityCombat: 0
-  _AbilityEffect: 0
-  _AbilityElement: 8
-  _AbilityValue: 0
-  _AbilityProperty: 0
+  posBuffChances: 
+  negStatusChances: 
+  dispelChances: 
+  _ActionPiercing: 1

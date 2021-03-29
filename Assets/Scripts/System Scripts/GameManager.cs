@@ -14,9 +14,6 @@ public class GameManager : MonoBehaviour
     public List<bool> positionFront;               // For positions of party members
     public List<BasePartyMember> _AllPartyMembers; // Stored variables of all Playable Characters
 
-    [Header("DATABASE")]
-    public List<SpellsInfo> _SpellsPool;           // All spells in the Game for the player
-
     [Header("Stored Data")]
     public string currentScene;                    // The current Scene the game is in.
     public string currentBattleSceneBackground;    // Stored background for battle scene per area.

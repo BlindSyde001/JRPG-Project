@@ -50,6 +50,7 @@ public class BattleUIController : MonoBehaviour
     #endregion
 
     //UPDATES
+    #region Updates
     private void Awake()
     {
         _BM = FindObjectOfType<BattleManager>();
@@ -87,7 +88,7 @@ public class BattleUIController : MonoBehaviour
     {
         CycleThroughHeroes();    // Press cycle buttons to switch between heroes, so that the UI represents that hero's action pool
     }
-
+    #endregion
     //METHODS
     #region UI Navigation Commands
     public void CycleThroughHeroes()
@@ -108,7 +109,6 @@ public class BattleUIController : MonoBehaviour
             lastCycleInput = cycleButtonInput;
             chosenHero = _BM._ActivePartyMembers[cycleButtonInput];
             _BM._CharacterPanels[cycleButtonInput].transform.Find("Selected Panel").gameObject.SetActive(true);   // Turn on new select
-            //Debug.Log(chosenHero.CharacterName + " Is Selected");
         }
     }                     // Switch control between active Heroes.
     public void CycleOnDeathHeroes()
@@ -131,13 +131,6 @@ public class BattleUIController : MonoBehaviour
             _BM._CharacterPanels[lastCycleInput].transform.Find("Selected Panel").gameObject.SetActive(true);
         }
     }                     // Switch control between active Heroes On Death.
-    public void CycleThroughTabs()
-    {
-        if(Input.GetButtonDown("Trigger"))
-        {
-
-        }
-    }                       // Switch between UI tab groups.
     public void SetEnemyTargets()
     {
         foreach (GameObject a in EnemyTargets)
@@ -150,10 +143,6 @@ public class BattleUIController : MonoBehaviour
             EnemyTargets[i].GetComponentInChildren<TextMeshProUGUI>().text = _BM._ActiveEnemies[i].CharacterName;
         }
     }                        // Set the buttons of targettable enemies.
-    public void SetAvailableSpells()
-    {
-
-    }                     // Turns on only the spells that the player has.
     public void ToggleCommandButtons(bool isActive)
     {
         canAttack = isActive;   //Sets us to be able to use the attacke button as in the function AttackTest
@@ -201,116 +190,6 @@ public class BattleUIController : MonoBehaviour
     }                        // Open Targetting list (Enemies / Heroes).
 
     #endregion
-    #region Event Triggers
-    // Event triggers for UI buttons
-    // SUBMIT
-    public void AccessAttack()
-    {
-        SetOffAllInputPanels();
-        if (canAttack)
-        {
-            _InputPanels[0].SetActive(true);
-            EnemyTargets[0].GetComponent<Button>().Select();
-            ActionType("Attack");
-        }
-    }
-    public void AccessMagic()
-    {
-        SetOffAllInputPanels();
-        if (canAttack)
-        {
-            _InputPanels[3].SetActive(true);
-            _InputPanels[2].SetActive(true);
-            firstMagicButton.GetComponent<Button>().Select();
-            ActionType("Magic");
-        }
-    }
-    public void AccessAbilities()
-    {
-        SetOffAllInputPanels();
-        if (canAttack)
-        {
-
-        }
-    }
-    public void AccessItems()
-    {
-        SetOffAllInputPanels();
-        if (canAttack)
-        {
-
-        }
-    }
-
-    public void SubmitMagic(int input)
-    {
-        if(canAttack)
-        {
-            _InputPanels[0].SetActive(true);
-            EnemyTargets[0].transform.GetComponent<Button>().Select();
-            _SpellID = input;
-        }
-    }
-    public void SubmitAbility()
-    {
-
-    }
-    public void SubmitItem()
-    {
-
-    }
-    // CANCEL
-    public void ReturnToCommandAttack()
-    {
-        _InputPanels[0].SetActive(false);
-        _InputPanels[2].SetActive(false);
-        _CommandPanelButtons[0].Select();
-    }
-    public void ReturnToCommandMagic()
-    {
-        _InputPanels[3].SetActive(false);
-        _InputPanels[2].SetActive(false);
-        _CommandPanelButtons[1].Select();
-    }
-    public void ReturnToCommandAbility()
-    {
-        _InputPanels[2].SetActive(false);
-        _CommandPanelButtons[2].Select();
-    }
-    public void ReturnToCommandItem()
-    {
-        _InputPanels[2].SetActive(false);
-        _CommandPanelButtons[3].Select();
-    }
-
-    public void ReturnToAccessMagic()
-    {
-
-    }
-    public void ReturnToAccessAbility()
-    {
-
-    }
-    public void ReturnToAccessItem()
-    {
-
-    }
-    #endregion
-    #region Variables from Inputs
-    public void ActionType(string inputString)
-    {
-        action = inputString;
-    }            // Attack, Magic, Ability, Item
-    public void SpellNum(int idNum)
-    {
-        _SpellID = idNum;
-    }
-    public void ActionTarget(int enemy)
-    {
-        targetForAction = _BM._ActiveEnemies[enemy];
-        PerformAction(action, targetForAction);
-    }
-    #endregion
     #region Finish Battle Messaging
     private void EndOfFightMessaging(bool win)
     {
@@ -349,7 +228,7 @@ public class BattleUIController : MonoBehaviour
                         break;
                 }
                 t = 0;
-            }        // Divy up EXP,Gold, Item Drops.
+            }        // Divy up EXP, Gold, Item Drops.
             else if(!win && t > 2f)
             {
                 SceneManager.LoadScene("Title Screen");
@@ -357,41 +236,17 @@ public class BattleUIController : MonoBehaviour
         }
     }
     #endregion
-    #region Outputs
+
+    public void BattleCommand(ActionInfo action, BaseStats target)
+    {
+        chosenHero.UseAction(action, target);
+    }
     public void MessageOnScreen(string text)
     {
         messageBox.SetActive(true);
         messageText.text = text;
         
-    }              // Display a message
-    public void PerformAction(string action, BaseStats target)
-    {
-        switch(action)
-        {
-            case "Attack":
-                chosenHero.Attack(target);
-                chosenHero._ActionBarAmount = 0;
-                break;
-
-            case "Magic":
-                Debug.Log(chosenHero.CharacterName + " casted " + _GM._SpellsPool[_SpellID]._SpellName);
-                SpellsInfo spellToCast = _GM._SpellsPool[_SpellID];   // Define the spell to be cast
-                chosenHero.CastMagic(spellToCast, target);            // Send to player info to cast spell to target
-                chosenHero._ActionBarAmount = 0;
-                break;
-
-            case "Ability":
-                chosenHero._ActionBarAmount = 0;
-                break;
-
-            case "Item":
-                chosenHero._ActionBarAmount = 0;
-                break;
-        }
-        SetOffAllInputPanels();
-        startOfGameSelected.GetComponent<Button>().Select();
     }
-    #endregion
     #region Level Changing
     private void OnEnable()
     {

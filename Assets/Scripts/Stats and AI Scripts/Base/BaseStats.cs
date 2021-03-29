@@ -10,18 +10,18 @@ using TMPro;
 public class BaseStats : MonoBehaviour
 {
     //VARIABLES
-    public BaseAction _BS;
+    [HideInInspector]
+    public ActionModulator _BS;
+    [HideInInspector]
     public BattleManager _BM;
+    [HideInInspector]
     public BattleUIController _BUI;
     public string CharacterName;
-    public List<SpellsInfo> availableSpells;
     public bool inBattle;
     public GameObject _DPSSpawnPoint;
     public GameObject characterModel;
 
     public bool isAlive;
-    private bool _CounterReady;                  // Is character able to counter physical attacks
-    private bool _MCounterReady;                 // Is character able to counter magical attacks
     public bool attackPiercing;                  // Does the character ignore defense?
 
     protected float timer = 0;
@@ -78,7 +78,7 @@ public class BaseStats : MonoBehaviour
     //UPDATES
     public virtual void Awake()
     {
-        _BS = FindObjectOfType<BaseAction>();
+        _BS = FindObjectOfType<ActionModulator>();
         _BM = FindObjectOfType<BattleManager>();
         _BUI = FindObjectOfType<BattleUIController>();
     }
@@ -88,8 +88,6 @@ public class BaseStats : MonoBehaviour
         {
             _ActionBarAmount += _ActionBarRechargeAmount * Time.deltaTime;          // Recharge your action bar so you can take a turn
             _ActionBarAmount = Mathf.Clamp(_ActionBarAmount, 0, 100);
-            Poison();
-            Slow();
         }
     }
 
@@ -117,31 +115,38 @@ public class BaseStats : MonoBehaviour
         }
         return successful;
     }
-    public bool CastMagic(SpellsInfo spell, BaseStats targetCharacter)
+    public void UseAction(ActionInfo actionUsed, BaseStats targetCharacter)
     {
-        bool successful = currentMP >= spell._SpellManaCost;    // Returns if you have enough mana to cast the spell
+        switch (actionUsed._ActionType)
+        {
+            case ActionType.Spell:
+        bool successful = currentMP >= actionUsed._ActionCost;    // Returns if you have enough mana to cast the spell
 
         if (successful && !silence)
         {
-            currentMP -= spell._SpellManaCost;                  // Because successful, take away mana cost
-            // Insert your chosen spellinfo into basespell script.
-            // Run the method using the spellinfo inserted.
-            if(spell._SpellTarget == ActionTarget.Single)        // Single Target Logic
+            currentMP -= actionUsed._ActionCost;                  // Because successful, take away mana cost
+            // Run the method using the spell inserted.
+            if(actionUsed._ActionTarget == ActionTarget.Single)        // Single Target Logic
             {
-                _BS.ModulatedSpell(spell, this, targetCharacter);
+                _BS.ModulatedAction(actionUsed, this, targetCharacter);
             }
-            else if(spell._SpellTarget == ActionTarget.Multi)    // Multi Target Logic
+            else if(actionUsed._ActionTarget == ActionTarget.Multi)    // Multi Target Logic
             {
                 if(_BM._ActiveEnemies.Contains(targetCharacter))
                 {
-                    List<BaseStats> tempList = new List<BaseStats>();    // Temporary placeholders for upcasting
-                    BaseStats tempContain;
                     for(int i = 0; i < _BM._ActiveEnemies.Count; i++)    // Upcast and put into placeholders
                     {
-                        tempContain = (_BM._ActiveEnemies[i]);
-                        tempList.Add(tempContain);
+                        targetCharacter = (_BM._ActiveEnemies[i]);
+                        _BS.ModulatedAction(actionUsed, this, targetCharacter);
                     }
-                    _BS.ModulatedSpell(spell, this, tempList);           // Send Polymorphed list to be used
+                }
+                else if(_BM._ActivePartyMembers.Contains(targetCharacter))
+                {
+                     for (int i = 0; i < _BM._ActivePartyMembers.Count; i++)
+                     {
+                        targetCharacter = (_BM._ActivePartyMembers[i]);
+                        _BS.ModulatedAction(actionUsed, this, targetCharacter);
+                     }
                 }
             }
             _ActionBarAmount = 0;
@@ -154,14 +159,35 @@ public class BaseStats : MonoBehaviour
         {
             _BUI.MessageOnScreen("Not Enough MP!");
         }
+                break;
+            case ActionType.Ability:
+                if (actionUsed._ActionTarget == ActionTarget.Single)        // Single Target Logic
+                {
+                    _BS.ModulatedAction(actionUsed, this, targetCharacter);
+                }
+                else if (actionUsed._ActionTarget == ActionTarget.Multi)    // Multi Target Logic
+                {
+                    if (_BM._ActiveEnemies.Contains(targetCharacter))
+                    {
+                        for (int i = 0; i < _BM._ActiveEnemies.Count; i++)    // Upcast and put into placeholders
+                        {
+                            targetCharacter = (_BM._ActiveEnemies[i]);
+                            _BS.ModulatedAction(actionUsed, this, targetCharacter);
+                        }
+                    }
+                    else if (_BM._ActivePartyMembers.Contains(targetCharacter))
+                    {
+                        for (int i = 0; i < _BM._ActivePartyMembers.Count; i++)
+                        {
+                            targetCharacter = (_BM._ActivePartyMembers[i]);
+                            _BS.ModulatedAction(actionUsed, this, targetCharacter);
+                        }
+                    }
+                }
+                break;
+        }
         _BM.UpdatePartyVariables();
-        return successful;
     }
-    public void Defend()
-    {
-        defense += (int)(defense * .4f);
-        Debug.Log("Increased Defence");
-    }                                             // Increase in defence for a turn
     public void UseItem(ConsumableInfo item, BaseStats targetCharacter)
     {
 
@@ -311,13 +337,14 @@ public class BaseStats : MonoBehaviour
         return _ActionBarAmount / 100;
     }
 }
-
 public class BasePartyMember : BaseStats
 {
     //VARIABLES
     public StatsDataAsset thisChara;                   // The data asset containing information on the character
     public Sprite characterPortrait;                   // Portrait image displayed in UI
     public int currentLimit;                           // Limit amount of charge for special move
+    public List<ActionInfo> availableSpells;
+    public List<ActionInfo> availableAbilities;
 
     #region Growth Stat Base
     [HideInInspector]
@@ -406,7 +433,7 @@ public class BasePartyMember : BaseStats
 }
 public class BaseEnemy : BaseStats
 {
-    public int x;
+    public int targetVariable;
     public BaseStats targetCharacter;
     //UPDATES
     new void Update()

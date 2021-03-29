@@ -48,8 +48,8 @@ public class ES_Bandit : BaseEnemy
         }
         else
         {
-            x = Random.Range(0, _BM._ActivePartyMembers.Count);
-            targetCharacter = _BM._ActivePartyMembers[x];
+            targetVariable = Random.Range(0, _BM._ActivePartyMembers.Count);
+            targetCharacter = _BM._ActivePartyMembers[targetVariable];
             Stab();
         }
     }

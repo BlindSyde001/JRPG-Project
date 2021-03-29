@@ -162,17 +162,23 @@ public class Menu : MonoBehaviour
     {
         _Gamestate = Gamestate.Battle;
     }
+    void OnBattleEnd()
+    {
+
+    }
     #endregion
     #region OnEnable/Disable
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnNewSceneLoaded;
         EventManager.BattleStarted += OnBattleStart;
+        EventManager.BattleEnded += OnBattleEnd;
     }
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnNewSceneLoaded;
         EventManager.BattleStarted -= OnBattleStart;
+        EventManager.BattleEnded -= OnBattleEnd;
     }
     #endregion
 }
